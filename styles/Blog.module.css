@@ -1,0 +1,359 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+.pageWrapper {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #f0ede8;
+  font-family: 'Georgia', serif;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1e1e1e;
+  padding: 0 2rem;
+}
+
+.headerInner {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #f0ede8;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.logo:hover {
+  opacity: 1;
+}
+
+.ctaButton {
+  background: #c8b560;
+  color: #0a0a0a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: #d4c270;
+}
+
+/* ===========================
+   BLOG INDEX - HERO
+=========================== */
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+
+.hero {
+  margin-bottom: 5rem;
+  border-left: 3px solid #c8b560;
+  padding-left: 2rem;
+}
+
+.heroLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #c8b560;
+  margin: 0 0 1.2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 1.2rem;
+  color: #f0ede8;
+}
+
+.heroSub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #8a8680;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* ===========================
+   BLOG INDEX - POST GRID
+=========================== */
+
+.postGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: #1e1e1e;
+  border: 1px solid #1e1e1e;
+}
+
+.postCard {
+  background: #0a0a0a;
+  padding: 2.5rem 2rem;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s ease;
+}
+
+.postCard:hover {
+  background: #111111;
+}
+
+.postDate {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #4a4a4a;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.postTitle {
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #f0ede8;
+  margin: 0 0 0.75rem;
+  line-height: 1.3;
+}
+
+.postDescription {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #6a6660;
+  margin: 0 0 1.2rem;
+}
+
+.readMore {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #c8b560;
+  letter-spacing: 0.05em;
+}
+
+/* ===========================
+   INDIVIDUAL POST
+=========================== */
+
+.postMain {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+.postHeader {
+  margin-bottom: 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.backLink {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #4a4a4a;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #c8b560;
+}
+
+.postPageTitle {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #f0ede8;
+  margin: 0.5rem 0 1rem;
+}
+
+.postPageDesc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #6a6660;
+  margin: 0;
+}
+
+/* ===========================
+   POST CONTENT (MARKDOWN)
+=========================== */
+
+.postContent {
+  color: #c8c4be;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.postContent h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f0ede8;
+  margin: 3rem 0 1rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.postContent h3 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #f0ede8;
+  margin: 2rem 0 0.75rem;
+}
+
+.postContent p {
+  margin: 0 0 1.5rem;
+}
+
+.postContent strong {
+  color: #f0ede8;
+  font-weight: 700;
+}
+
+.postContent ul {
+  margin: 0 0 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.postContent ul li {
+  margin-bottom: 0.5rem;
+}
+
+.postContent blockquote {
+  border-left: 3px solid #c8b560;
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: #111111;
+  color: #f0ede8;
+  font-style: italic;
+}
+
+.postContent hr {
+  border: none;
+  border-top: 1px solid #1e1e1e;
+  margin: 2.5rem 0;
+}
+
+/* ===========================
+   POST CTA
+=========================== */
+
+.postCta {
+  margin-top: 4rem;
+  padding: 2.5rem;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid #c8b560;
+}
+
+.ctaText {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #f0ede8;
+  margin: 0 0 0.75rem;
+}
+
+.ctaSubText {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #6a6660;
+  margin: 0 0 1.5rem;
+}
+
+.ctaButtonLarge {
+  display: inline-block;
+  background: #c8b560;
+  color: #0a0a0a;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButtonLarge:hover {
+  background: #d4c270;
+}
+
+.backLinkBottom {
+  margin-top: 3rem;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer {
+  border-top: 1px solid #1e1e1e;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #3a3a3a;
+  line-height: 2;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 1rem;
+  }
+
+  .main {
+    padding: 3rem 1rem 3rem;
+  }
+
+  .postMain {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .postCard {
+    padding: 1.75rem 1rem;
+  }
+
+  .hero {
+    padding-left: 1.25rem;
+  }
+
+  .postCta {
+    padding: 1.5rem;
+  }
+}
