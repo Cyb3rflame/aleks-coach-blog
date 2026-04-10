@@ -1,42 +1,127 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+*, *::before, *::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-a {
-  color: inherit;
+:root {
+  --bg:       #070d0a;
+  --bg2:      #0e1a12;
+  --bg3:      #162019;
+  --accent:   #c9f53e;
+  --accent2:  #a8d930;
+  --text:     #e8f0eb;
+  --muted:    #7a9482;
+  --border:   rgba(201,245,62,0.15);
+  --border2:  rgba(255,255,255,0.07);
+  --card:     #101a13;
+  --radius:   12px;
+  --radius-lg:20px;
+  --font-head:'Barlow Condensed', sans-serif;
+  --font-body:'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+a { color: inherit; }
+
+/* ── Shared Nav ───────────────────────────── */
+.ac-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(7,13,10,0.88);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border2);
+  padding: 0 28px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ac-nav-logo {
+  font-family: var(--font-head);
+  font-size: 22px; font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--text); text-decoration: none;
+}
+.ac-nav-logo span { color: var(--accent); }
+
+.ac-nav-links { display: flex; gap: 28px; list-style: none; }
+.ac-nav-links a {
+  font-size: 13px; font-weight: 500;
+  color: var(--muted); text-decoration: none;
+  letter-spacing: 0.02em; transition: color 0.2s;
+}
+.ac-nav-links a:hover { color: var(--text); }
+
+.ac-nav-cta {
+  background: var(--accent); color: #070d0a;
+  font-family: var(--font-head);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
   text-decoration: none;
+  padding: 9px 20px; border-radius: 6px;
+  transition: background 0.2s, transform 0.15s;
+}
+.ac-nav-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+@media (max-width: 680px) { .ac-nav-links { display: none; } }
+
+/* ── Shared Footer ────────────────────────── */
+.ac-footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border2);
+  padding: 44px 28px; text-align: center;
+}
+.ac-footer-logo {
+  font-family: var(--font-head);
+  font-size: 24px; font-weight: 900;
+  letter-spacing: 0.05em; color: var(--text); margin-bottom: 12px;
+}
+.ac-footer-logo span { color: var(--accent); }
+.ac-footer-links {
+  display: flex; gap: 24px;
+  justify-content: center; margin-bottom: 16px;
+  flex-wrap: wrap; list-style: none;
+}
+.ac-footer-links a {
+  font-size: 13px; color: var(--muted);
+  text-decoration: none; transition: color 0.2s;
+}
+.ac-footer-links a:hover { color: var(--text); }
+.ac-footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ── Shared Tag pill ──────────────────────── */
+.ac-tag {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 18px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* ── Shared reveal animation ──────────────── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+.reveal.visible { opacity: 1; transform: translateY(0); }
