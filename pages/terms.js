@@ -17,12 +17,7 @@ export default function Terms() {
             <Link href="/" className={styles.logo}>
               ALEKS COACH
             </Link>
-            
-              href="https://www.instagram.com/alekscoach"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaButton}
-            >
+            <a href="https://www.instagram.com/alekscoach" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
               Send Me Your Footage
             </a>
           </div>
@@ -30,9 +25,7 @@ export default function Terms() {
 
         <main className={styles.postMain}>
           <div className={styles.postHeader}>
-            <Link href="/blog" className={styles.backLink}>
-              &larr; Back to blog
-            </Link>
+            <Link href="/blog" className={styles.backLink}>Back to blog</Link>
             <h1 className={styles.postPageTitle}>Terms of Service</h1>
             <p className={styles.postPageDesc}>Last updated: April 2026</p>
           </div>
@@ -57,7 +50,7 @@ export default function Terms() {
             <p>All coaching content, analysis videos, training plans, drill templates, and written materials produced by Aleks Coach remain the intellectual property of Aleksandar Pandov. You are granted a personal, non-transferable licence to use these materials for your own tennis development.</p>
 
             <h2>6. Limitation of Liability</h2>
-            <p>Aleks Coach provides coaching guidance and analysis only. We are not liable for any physical injury sustained during training. You accept full responsibility for your own physical wellbeing when performing any drills or exercises recommended by Aleks Coach. Always consult a medical professional before beginning any new physical training programme if you have any existing injuries or health concerns.</p>
+            <p>Aleks Coach provides coaching guidance and analysis only. We are not liable for any physical injury sustained during training. You accept full responsibility for your own physical wellbeing when performing any drills or exercises recommended by Aleks Coach.</p>
 
             <h2>7. Changes to Terms</h2>
             <p>Aleks Coach reserves the right to update these terms at any time. Continued use of our services after any changes constitutes your acceptance of the updated terms. We will notify active clients of any material changes via email.</p>

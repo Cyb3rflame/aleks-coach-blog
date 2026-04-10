@@ -17,12 +17,7 @@ export default function Privacy() {
             <Link href="/" className={styles.logo}>
               ALEKS COACH
             </Link>
-            
-              href="https://www.instagram.com/alekscoach"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaButton}
-            >
+            <a href="https://www.instagram.com/alekscoach" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
               Send Me Your Footage
             </a>
           </div>
@@ -30,9 +25,7 @@ export default function Privacy() {
 
         <main className={styles.postMain}>
           <div className={styles.postHeader}>
-            <Link href="/blog" className={styles.backLink}>
-              &larr; Back to blog
-            </Link>
+            <Link href="/blog" className={styles.backLink}>Back to blog</Link>
             <h1 className={styles.postPageTitle}>Privacy Policy</h1>
             <p className={styles.postPageDesc}>Last updated: April 2026</p>
           </div>
@@ -45,7 +38,7 @@ export default function Privacy() {
             <p>We may collect the following personal data:</p>
             <ul>
               <li>Name and email address when you contact us or sign up</li>
-              <li>Payment information processed securely through Stripe — we never store your card details directly</li>
+              <li>Payment information processed securely through Stripe</li>
               <li>Video footage you submit for coaching analysis</li>
               <li>Usage data from our website collected via analytics tools</li>
               <li>Communications exchanged via email, Instagram, or coaching platforms</li>
@@ -57,18 +50,18 @@ export default function Privacy() {
               <li>Deliver your coaching service and personalised training plans</li>
               <li>Process payments through Stripe</li>
               <li>Communicate with you about your programme</li>
-              <li>Send you our newsletter if you have opted in — you can unsubscribe at any time</li>
+              <li>Send you our newsletter if you have opted in</li>
               <li>Improve our website and coaching service using anonymised analytics data</li>
             </ul>
             <p>We do not sell your personal data to any third party under any circumstances.</p>
 
             <h2>4. Third Parties We Work With</h2>
-            <p><strong>Stripe</strong> — payment processing. Their privacy policy is available at stripe.com/gb/privacy</p>
-            <p><strong>Google Analytics</strong> — anonymised website usage data. You can opt out via your browser settings.</p>
-            <p><strong>Email marketing platforms</strong> — if you subscribe to our newsletter your email is stored with our chosen email platform. You can unsubscribe at any time using the link in any email.</p>
+            <p>Stripe handles payment processing. Their privacy policy is available at stripe.com/gb/privacy</p>
+            <p>Google Analytics collects anonymised website usage data. You can opt out via your browser settings.</p>
+            <p>If you subscribe to our newsletter your email is stored with our chosen email platform. You can unsubscribe at any time.</p>
 
             <h2>5. Video Footage</h2>
-            <p>Footage you submit for coaching analysis is used solely for the purpose of producing your analysis. We will not share your footage publicly without your explicit written consent. If we wish to use any footage as a testimonial or example we will always ask you first.</p>
+            <p>Footage you submit for coaching analysis is used solely for the purpose of producing your analysis. We will not share your footage publicly without your explicit written consent.</p>
 
             <h2>6. How Long We Keep Your Data</h2>
             <p>We keep your personal data for as long as you are an active client and for up to 12 months after your subscription ends. You may request deletion of your data at any time by emailing alexpandov07@gmail.com</p>
@@ -90,7 +83,7 @@ export default function Privacy() {
             <p>We may update this policy from time to time. Any significant changes will be communicated to active clients by email.</p>
 
             <h2>10. Contact</h2>
-            <p>For any privacy related queries or to exercise your rights contact us at alexpandov07@gmail.com</p>
+            <p>For any privacy related queries contact us at alexpandov07@gmail.com</p>
           </article>
         </main>
 
