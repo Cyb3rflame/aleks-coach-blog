@@ -1,0 +1,401 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+.pageWrapper {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #f0ede8;
+  font-family: 'Georgia', serif;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1e1e1e;
+  padding: 0 2rem;
+}
+
+.headerInner {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #f0ede8;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.logo:hover {
+  opacity: 1;
+}
+
+.ctaButton {
+  background: #c8b560;
+  color: #0a0a0a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: #d4c270;
+}
+
+/* ===========================
+   MAIN
+=========================== */
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero {
+  margin-bottom: 5rem;
+  border-left: 3px solid #c8b560;
+  padding-left: 2rem;
+}
+
+.heroLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #c8b560;
+  margin: 0 0 1.2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 1.2rem;
+  color: #f0ede8;
+}
+
+.heroSub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #8a8680;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* ===========================
+   SECTIONS
+=========================== */
+
+.section {
+  margin-bottom: 5rem;
+}
+
+.sectionLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: #c8b560;
+  margin: 0 0 0.75rem;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #f0ede8;
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+.sectionSub {
+  font-size: 0.95rem;
+  color: #6a6660;
+  margin: 0 0 2rem;
+}
+
+/* ===========================
+   TESTIMONIAL GRID
+=========================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: #1e1e1e;
+  border: 1px solid #1e1e1e;
+}
+
+.card {
+  background: #0a0a0a;
+  padding: 2rem 1.75rem;
+  border-left: 3px solid #c8b560;
+  transition: background 0.2s ease;
+}
+
+.card:hover {
+  background: #111111;
+}
+
+.cardDim {
+  border-left-color: #3a3530;
+}
+
+.cardDim:hover {
+  border-left-color: #c8b560;
+}
+
+.quote {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #c8c4be;
+  margin: 0 0 1rem;
+  font-style: italic;
+}
+
+.author {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #f0ede8;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  color: #4a4a4a;
+  font-size: 0.7rem;
+}
+
+/* ===========================
+   VIDEO
+=========================== */
+
+.videoWrapper {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: 1px solid #1e1e1e;
+}
+
+.video {
+  display: block;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.videoLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #4a4a4a;
+  margin: 0.5rem 0 0;
+  text-align: center;
+}
+
+/* ===========================
+   CLIENT STORIES
+=========================== */
+
+.stories {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.story {
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid #c8b560;
+  background: #0d0d0d;
+}
+
+.storyHeader {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.storyName {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #f0ede8;
+  margin: 0 0 0.4rem;
+}
+
+.storyMeta {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.storySection {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.storySectionLabel {
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #c8b560;
+  margin: 0 0 0.75rem;
+}
+
+.storyText {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #8a8680;
+  margin: 0;
+}
+
+.storyQuote {
+  padding: 1.75rem 2rem;
+  background: #111111;
+}
+
+.storyQuote p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f0ede8;
+  font-style: italic;
+  margin: 0 0 0.5rem;
+}
+
+.storyQuote span {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: #4a4a4a;
+  letter-spacing: 0.1em;
+}
+
+/* ===========================
+   BOTTOM CTA
+=========================== */
+
+.bottomCta {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-left: 3px solid #c8b560;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #f0ede8;
+  margin: 0 0 1rem;
+}
+
+.ctaSub {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #6a6660;
+  margin: 0 auto 2rem;
+  max-width: 500px;
+}
+
+.ctaButtonLarge {
+  display: inline-block;
+  background: #c8b560;
+  color: #0a0a0a;
+  padding: 0.85rem 2.5rem;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButtonLarge:hover {
+  background: #d4c270;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer {
+  border-top: 1px solid #1e1e1e;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #3a3a3a;
+  line-height: 2;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 1rem;
+  }
+
+  .main {
+    padding: 3rem 1rem 3rem;
+  }
+
+  .hero {
+    padding-left: 1.25rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .videoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .storyHeader {
+    padding: 1.5rem 1.25rem 1rem;
+  }
+
+  .storySection {
+    padding: 1.25rem;
+  }
+
+  .storyQuote {
+    padding: 1.25rem;
+  }
+
+  .bottomCta {
+    padding: 1.5rem;
+  }
+}
