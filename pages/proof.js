@@ -133,7 +133,7 @@ export default function Proof() {
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.logo}>ALEKS COACH</Link>
-            <a href="https://www.instagram.com/aleks_coaches/?hl=en" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+            <a href="mailto:alexpandov07@gmail.com" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
               Send Me Your Footage
             </a>
           </div>
@@ -325,7 +325,7 @@ export default function Proof() {
           <div className={styles.bottomCta}>
             <h2 className={styles.ctaTitle}>Want results like these?</h2>
             <p className={styles.ctaSub}>Send me your footage on Instagram. I will give you a personal breakdown of exactly what is happening mechanically and what to fix first.</p>
-            <a href="https://www.instagram.com/alekscoach" target="_blank" rel="noopener noreferrer" className={styles.ctaButtonLarge}>
+            <a href="mailto:alexpandov07@gmail.com" target="_blank" rel="noopener noreferrer" className={styles.ctaButtonLarge}>
               Send Me Your Footage
             </a>
           </div>
