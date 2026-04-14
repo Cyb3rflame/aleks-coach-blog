@@ -133,7 +133,7 @@ export default function Proof() {
         <header className={styles.header}>
           <div className={styles.headerInner}>
             <Link href="/" className={styles.logo}>ALEKS COACH</Link>
-            <a href="https://www.instagram.com/alekscoach" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+            <a href="https://www.instagram.com/aleks_coaches/?hl=en" target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
               Send Me Your Footage
             </a>
           </div>
