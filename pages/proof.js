@@ -288,6 +288,39 @@ export default function Proof() {
             </div>
           </section>
 
+          {/* CLUBS WORKED WITH */}
+          <section className={styles.section}>
+            <p className={styles.sectionLabel}>CLUBS AND ACADEMIES</p>
+            <h2 className={styles.sectionTitle}>Worked with</h2>
+            <div className={styles.clubsGrid}>
+              <div className={styles.clubsColumn}>
+                <p className={styles.clubsRegion}>United Kingdom</p>
+                <ul className={styles.clubsList}>
+                  <li>Nottingham Tennis Centre (Lexus Tennis Centre)</li>
+                  <li>Activeaway</li>
+                  <li>Hazelwood Lawn Tennis Club</li>
+                  <li>Georginas Tennis Academy</li>
+                  <li>Waterfall Tennis Club</li>
+                  <li>David Lloyd Nottingham</li>
+                  <li>David Lloyd Finchley</li>
+                  <li>David Lloyd West Bridgford</li>
+                  <li>David Lloyd Kensington</li>
+                </ul>
+              </div>
+              <div className={styles.clubsColumn}>
+                <p className={styles.clubsRegion}>United States</p>
+                <ul className={styles.clubsList}>
+                  <li>Sutton East Tennis Club</li>
+                  <li>Rolling Hills Estates Tennis Club</li>
+                  <li>Broomfield Swim and Tennis Club</li>
+                  <li>Eastmoor Swim and Tennis Club</li>
+                  <li>Templeton Tennis Ranch</li>
+                  <li>CityView Racquet Club</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
           {/* BOTTOM CTA */}
           <div className={styles.bottomCta}>
             <h2 className={styles.ctaTitle}>Want results like these?</h2>
