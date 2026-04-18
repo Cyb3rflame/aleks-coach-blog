@@ -97,6 +97,26 @@ const communityReactions = [
   { quote: "Thank you so much for taking the time. I won't mess with anything right now but after the tournament I'll definitely start tweaking everything.", tag: "Club Player, USA" },
 ]
 
+const clubs = [
+  // United Kingdom
+  { name: "Nottingham Tennis Centre", logo: "/logos/nottingham-tennis-centre.png", region: "United Kingdom" },
+  { name: "Activeaway", logo: "/logos/activeaway.png", region: "United Kingdom" },
+  { name: "Hazelwood Lawn Tennis Club", logo: "/logos/hazelwood.png", region: "United Kingdom" },
+  { name: "Georginas Tennis Academy", logo: "/logos/georginas.png", region: "United Kingdom" },
+  { name: "Waterfall Tennis Club", logo: "/logos/waterfall.png", region: "United Kingdom" },
+  { name: "David Lloyd Nottingham", logo: "/logos/david-lloyd.png", region: "United Kingdom" },
+  { name: "David Lloyd Finchley", logo: "/logos/david-lloyd.png", region: "United Kingdom" },
+  { name: "David Lloyd West Bridgford", logo: "/logos/david-lloyd.png", region: "United Kingdom" },
+  { name: "David Lloyd Kensington", logo: "/logos/david-lloyd.png", region: "United Kingdom" },
+  // United States
+  { name: "Sutton East Tennis Club", logo: "/logos/sutton-east.png", region: "United States" },
+  { name: "Rolling Hills Estates Tennis Club", logo: "/logos/rolling-hills.png", region: "United States" },
+  { name: "Broomfield Swim and Tennis Club", logo: "/logos/broomfield.png", region: "United States" },
+  { name: "Eastmoor Swim and Tennis Club", logo: "/logos/eastmoor.png", region: "United States" },
+  { name: "Templeton Tennis Ranch", logo: "/logos/templeton.png", region: "United States" },
+  { name: "CityView Racquet Club", logo: "/logos/cityview.png", region: "United States" },
+]
+
 const stories = [
   {
     name: "Luis C.",
@@ -185,6 +205,30 @@ export default function Proof() {
                   height="400"
                   src="https://www.youtube.com/embed/pNjmZObJz4E"
                   title="Client Video Testimonial 2"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className={styles.video}
+                />
+              </div>
+              <div className={styles.videoWrapper}>
+                <iframe
+                  width="100%"
+                  height="400"
+                  src="https://www.youtube.com/embed/5k_lW5VloM0"
+                  title="Client Video Testimonial 3"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className={styles.video}
+                />
+              </div>
+              <div className={styles.videoWrapper}>
+                <iframe
+                  width="100%"
+                  height="400"
+                  src="https://www.loom.com/embed/bf02d6b4d5c24e14a7a28aa7a042776b"
+                  title="Client Video Testimonial 4"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -293,31 +337,23 @@ export default function Proof() {
             <p className={styles.sectionLabel}>CLUBS AND ACADEMIES</p>
             <h2 className={styles.sectionTitle}>Worked with</h2>
             <div className={styles.clubsGrid}>
-              <div className={styles.clubsColumn}>
-                <p className={styles.clubsRegion}>United Kingdom</p>
-                <ul className={styles.clubsList}>
-                  <li>Nottingham Tennis Centre (Lexus Tennis Centre)</li>
-                  <li>Activeaway</li>
-                  <li>Hazelwood Lawn Tennis Club</li>
-                  <li>Georginas Tennis Academy</li>
-                  <li>Waterfall Tennis Club</li>
-                  <li>David Lloyd Nottingham</li>
-                  <li>David Lloyd Finchley</li>
-                  <li>David Lloyd West Bridgford</li>
-                  <li>David Lloyd Kensington</li>
-                </ul>
-              </div>
-              <div className={styles.clubsColumn}>
-                <p className={styles.clubsRegion}>United States</p>
-                <ul className={styles.clubsList}>
-                  <li>Sutton East Tennis Club</li>
-                  <li>Rolling Hills Estates Tennis Club</li>
-                  <li>Broomfield Swim and Tennis Club</li>
-                  <li>Eastmoor Swim and Tennis Club</li>
-                  <li>Templeton Tennis Ranch</li>
-                  <li>CityView Racquet Club</li>
-                </ul>
-              </div>
+              {["United Kingdom", "United States"].map((region) => (
+                <div key={region} className={styles.clubsColumn}>
+                  <p className={styles.clubsRegion}>{region}</p>
+                  <div className={styles.logosGrid}>
+                    {clubs.filter((c) => c.region === region).map((club, i) => (
+                      <div key={i} className={styles.logoItem} title={club.name}>
+                        <img
+                          src={club.logo}
+                          alt={club.name}
+                          className={styles.logoImg}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
