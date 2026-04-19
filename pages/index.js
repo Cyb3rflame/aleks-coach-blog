@@ -1,8 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  // ── FORM STATE ──
+  const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [loomSubmitted, setLoomSubmitted] = useState(false)
+  const [loomSubmitting, setLoomSubmitting] = useState(false)
+  const [formError, setFormError] = useState('')
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -15,6 +22,64 @@ export default function Home() {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  // ── FORM SUBMISSION (Netlify Forms via AJAX) ──
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+      .join('&')
+  }
+
+  async function handleTrialSubmit(e) {
+    e.preventDefault()
+    setSubmitting(true)
+    setFormError('')
+    const form = e.target
+    const data = {
+      'form-name': form.getAttribute('name'),
+      name: form.name_field.value,
+      email: form.email.value,
+      level: form.level.value,
+      loom: form.loom ? form.loom.value : '',
+    }
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(data),
+      })
+      setSubmitted(true)
+      // If they provided a Loom link on the first form, mark that step done too
+      if (data.loom && data.loom.trim().length > 0) setLoomSubmitted(true)
+    } catch (err) {
+      setFormError('Something went wrong. Email contact@alekscoach.com and I\'ll sort it.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  async function handleLoomSubmit(e) {
+    e.preventDefault()
+    setLoomSubmitting(true)
+    const form = e.target
+    const data = {
+      'form-name': form.getAttribute('name'),
+      email: form.email.value,
+      loom: form.loom.value,
+    }
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(data),
+      })
+      setLoomSubmitted(true)
+    } catch (err) {
+      setFormError('Something went wrong sending your link. Just reply to the welcome email instead.')
+    } finally {
+      setLoomSubmitting(false)
+    }
+  }
 
   function toggleFaq(el) {
     const item = el.parentElement
@@ -31,6 +96,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
+      {/* ── HIDDEN NETLIFY FORMS ──
+          These sit in the DOM so Netlify's build-time scraper registers them.
+          The visible forms below submit via AJAX using the same `name` attributes. */}
+      <form name="trial-signup" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="text" name="bot-field" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="text" name="level" />
+        <input type="url" name="loom" />
+      </form>
+      <form name="footage-submission" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="text" name="bot-field" />
+        <input type="email" name="email" />
+        <input type="url" name="loom" />
+      </form>
+
       {/* ── NAV ─────────────────────────────── */}
       <nav className="ac-nav">
         <a className="ac-nav-logo" href="/">ALEKS<span>COACH</span></a>
@@ -41,7 +122,7 @@ export default function Home() {
           <li><a href="#pricing">Pricing</a></li>
           <li><Link href="/blog">Blog</Link></li>
         </ul>
-        <a className="ac-nav-cta" href="#cta">Start Free Trial</a>
+        <a className="ac-nav-cta" href="#trial">Start Free Trial</a>
       </nav>
 
       {/* ── HERO ─────────────────────────────── */}
@@ -58,7 +139,7 @@ export default function Home() {
             Online stroke analysis for 4.0–7.0 UTR players who are tired of hitting the same wall. I watch the footage, find what&apos;s actually wrong, and give you a specific plan — not a generic one.
           </p>
           <div className="hero-actions">
-            <a className="btn-primary" href="#cta">Start Your Free Week</a>
+            <a className="btn-primary" href="#trial">Start Your Free Week</a>
             <a className="btn-ghost" href="#process">See how it works →</a>
           </div>
           <div className="hero-stats">
@@ -159,7 +240,7 @@ export default function Home() {
           </div>
           <div className="steps">
             {[
-              { n:'01', title:'Send Your Footage', body:'Upload rally videos, points, and match footage through OnForm. The more I see, the more accurate the picture.' },
+              { n:'01', title:'Drop Your Email', body:'Get the free biomechanics guide instantly. Then send your footage when you\'re ready — Loom link, rally video, match clip, whatever you have.' },
               { n:'02', title:'Deep Stroke Analysis', body:"You get three detailed analysis videos — Forehand, Backhand, and Serve. Each one explains the specific mechanical issue, why it's happening, and what the long-term fix looks like." },
               { n:'03', title:'Your Drill Plan', body:"I build a drill file around what you actually have — ball machine, hitting partner, wall, or just your living room. One focus. No list of 15 things to think about." },
               { n:'04', title:'Ongoing Feedback', body:'Send progress clips whenever you want. I watch them, give you corrections, or tell you when you\'re ready to move on. You can also text me directly — any time.' },
@@ -262,7 +343,7 @@ export default function Home() {
               <ul className="price-features">
                 {['Single Stroke Review — £15','Full Match Review — £20','Bundle discounts available','Delivered within 48 hours','Video breakdown + written notes'].map((f,i)=><li key={i} className="price-feature">{f}</li>)}
               </ul>
-              <a className="price-cta" href="mailto:your@email.com">Get a Review</a>
+              <a className="price-cta" href="mailto:contact@alekscoach.com">Get a Review</a>
             </div>
 
             <div className="price-card price-featured reveal">
@@ -274,7 +355,7 @@ export default function Home() {
               <ul className="price-features">
                 {['Forehand, Backhand & Serve analysis videos','Custom drill plan built around your setup','Direct access to me — text anytime','Unlimited progress video feedback','Strategic & movement analysis if you send match footage','One change at a time. No cognitive overload.'].map((f,i)=><li key={i} className="price-feature">{f}</li>)}
               </ul>
-              <a className="price-cta price-cta-featured" href="mailto:your@email.com">Book a Free Call</a>
+              <a className="price-cta price-cta-featured" href="#trial">Start Free Trial</a>
             </div>
 
             <div className="price-card reveal">
@@ -285,7 +366,7 @@ export default function Home() {
               <ul className="price-features">
                 {['Everything in Monthly Subscription','Better rate vs. paying monthly','Priority onboarding','Quarterly progress review call','Covers at least 3 technical objectives'].map((f,i)=><li key={i} className="price-feature">{f}</li>)}
               </ul>
-              <a className="price-cta" href="mailto:your@email.com">Book a Free Call</a>
+              <a className="price-cta" href="#trial">Start Free Trial</a>
             </div>
           </div>
           <p className="pricing-note"><strong>1-week free trial included</strong> with all monthly plans. Only one person has ever left during the trial — and they came back.</p>
@@ -325,21 +406,136 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────── */}
-      <section id="cta" className="section-bg">
+      {/* ── TRIAL / EMAIL CAPTURE FORM ──────── */}
+      <section id="trial" className="section-bg">
         <div className="container">
-          <div className="cta-inner reveal">
-            <div className="ac-tag">Limited Spots Available</div>
-            <h2 className="cta-h2">Ready to Actually<br /><span className="accent-text">Fix Your Game?</span></h2>
-            <p className="cta-sub">Start with a free week. No credit card. I&apos;ll watch your footage and tell you exactly what&apos;s going wrong — and what to do about it.</p>
-            <div className="cta-actions">
-              <a className="btn-primary" href="mailto:your@email.com">Start Free Trial</a>
-              <a className="btn-ghost" href="mailto:your@email.com">Book a Discovery Call →</a>
+          <div className="trial-inner reveal">
+            <div className="trial-grid">
+              {/* LEFT: Pitch */}
+              <div className="trial-left">
+                <div className="ac-tag">Free Trial Access</div>
+                <h2 className="trial-h2">One Email.<br /><span className="accent-text">Two Things Fixed.</span></h2>
+                <p className="trial-sub">
+                  Drop your email and get <strong>the Biomechanics Fundamentals Guide</strong> instantly. Then send your footage when you&apos;re ready — I&apos;ll break down what&apos;s leaking power within 48 hours.
+                </p>
+                <ul className="trial-list">
+                  <li><span className="trial-check">✓</span> Instant PDF — the four principles every stroke relies on</li>
+                  <li><span className="trial-check">✓</span> Free stroke breakdown when you send footage</li>
+                  <li><span className="trial-check">✓</span> No credit card. No call required. No lock-in.</li>
+                </ul>
+              </div>
+
+              {/* RIGHT: Form */}
+              <div className="trial-right">
+                {!submitted ? (
+                  <form
+                    className="trial-form"
+                    name="trial-signup"
+                    method="POST"
+                    data-netlify="true"
+                    netlify-honeypot="bot-field"
+                    onSubmit={handleTrialSubmit}
+                  >
+                    <input type="hidden" name="form-name" value="trial-signup" />
+                    <p hidden><label>Don&apos;t fill this out: <input name="bot-field" /></label></p>
+
+                    <div className="trial-field">
+                      <label htmlFor="name_field">Name</label>
+                      <input type="text" id="name_field" name="name_field" required placeholder="First name" />
+                    </div>
+
+                    <div className="trial-field">
+                      <label htmlFor="email">Email</label>
+                      <input type="email" id="email" name="email" required placeholder="you@example.com" />
+                    </div>
+
+                    <div className="trial-field">
+                      <label htmlFor="level">Level (UTR)</label>
+                      <select id="level" name="level" required defaultValue="">
+                        <option value="" disabled>Select your level</option>
+                        <option value="Under 4.0">Under 4.0</option>
+                        <option value="4.0–4.9">4.0 – 4.9</option>
+                        <option value="5.0–5.9">5.0 – 5.9</option>
+                        <option value="6.0–6.9">6.0 – 6.9</option>
+                        <option value="7.0+">7.0+</option>
+                        <option value="Not sure">Not sure</option>
+                      </select>
+                    </div>
+
+                    <div className="trial-field">
+                      <label htmlFor="loom">Loom link <span className="trial-optional">(optional — you can send it later)</span></label>
+                      <input type="url" id="loom" name="loom" placeholder="https://www.loom.com/share/..." />
+                    </div>
+
+                    {formError && <div className="trial-error">{formError}</div>}
+
+                    <button type="submit" className="trial-submit" disabled={submitting}>
+                      {submitting ? 'Sending...' : 'Send Me The Guide'}
+                    </button>
+
+                    <p className="trial-legal">
+                      No spam. One email with the guide, plus occasional coaching insights. Unsubscribe anytime.
+                    </p>
+                  </form>
+                ) : (
+                  <div className="trial-thankyou">
+                    <div className="trial-success-icon">✓</div>
+                    <h3 className="trial-thankyou-h">Guide sent.</h3>
+                    <p className="trial-thankyou-sub">
+                      Check your inbox — <strong>the Biomechanics Fundamentals Guide</strong> is on its way. If you don&apos;t see it in 5 minutes, check spam.
+                    </p>
+
+                    {/* LOOM SUBMISSION - Only show if they didn't add one initially */}
+                    {!loomSubmitted ? (
+                      <form
+                        className="trial-form trial-form-stage2"
+                        name="footage-submission"
+                        method="POST"
+                        data-netlify="true"
+                        netlify-honeypot="bot-field"
+                        onSubmit={handleLoomSubmit}
+                      >
+                        <input type="hidden" name="form-name" value="footage-submission" />
+                        <p hidden><label>Don&apos;t fill this out: <input name="bot-field" /></label></p>
+
+                        <div className="trial-stage2-header">
+                          <div className="ac-tag">Step 2 · Optional</div>
+                          <h4 className="trial-stage2-h">Ready to send footage?</h4>
+                          <p className="trial-stage2-sub">Record a Loom of you hitting — forehand, backhand, serve, or rally — and paste the link below. Or reply to the welcome email when you&apos;ve got one.</p>
+                        </div>
+
+                        <div className="trial-field">
+                          <label htmlFor="loom-late">Loom link</label>
+                          <input type="url" id="loom-late" name="loom" required placeholder="https://www.loom.com/share/..." />
+                        </div>
+
+                        <div className="trial-field">
+                          <label htmlFor="email-late">Confirm email</label>
+                          <input type="email" id="email-late" name="email" required placeholder="you@example.com" />
+                        </div>
+
+                        <button type="submit" className="trial-submit" disabled={loomSubmitting}>
+                          {loomSubmitting ? 'Sending...' : 'Send My Footage'}
+                        </button>
+                      </form>
+                    ) : (
+                      <div className="trial-loom-done">
+                        <div className="trial-success-icon small">✓</div>
+                        <p><strong>Got your footage.</strong> I&apos;ll watch it and send back your breakdown within 48 hours.</p>
+                      </div>
+                    )}
+
+                    <p className="trial-legal" style={{marginTop:'28px'}}>
+                      Questions? Email <a href="mailto:contact@alekscoach.com">contact@alekscoach.com</a>
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="cta-guarantee">✓ 1-week free trial &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Cancel anytime</div>
-            <div className="cta-blog-link">
-              Want free coaching content first? <Link href="/blog">Read the blog →</Link>
-            </div>
+          </div>
+
+          <div className="cta-blog-link" style={{textAlign:'center', marginTop:'32px'}}>
+            Want to read more first? <Link href="/blog">Read the blog →</Link>
           </div>
         </div>
       </section>
@@ -485,10 +681,50 @@ export default function Home() {
         .faq-item.open .faq-toggle { transform:rotate(45deg); }
         .faq-a { display:none; padding-top:12px; font-size:14px; color:var(--muted); line-height:1.8; }
         .faq-item.open .faq-a { display:block; }
-        /* ── CTA ───────────────────── */
+        /* ── TRIAL / FORM ──────────── */
+        .trial-inner { background:var(--bg2); border:1px solid var(--border); border-radius:24px; padding:56px 44px; position:relative; overflow:hidden; }
+        .trial-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+        @media(max-width:900px){.trial-grid{grid-template-columns:1fr; gap:40px;}}
+        .trial-h2 { font-size:clamp(32px,4.2vw,48px); color:var(--text); margin-bottom:20px; line-height:1.05; font-family:var(--font-head); font-weight:900; letter-spacing:-0.02em; }
+        .trial-sub { font-size:16px; color:var(--muted); line-height:1.75; margin-bottom:26px; }
+        .trial-sub strong { color:var(--text); }
+        .trial-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
+        .trial-list li { display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--text); line-height:1.55; }
+        .trial-check { color:var(--accent); font-weight:700; flex-shrink:0; margin-top:1px; }
+        /* Form */
+        .trial-form { display:flex; flex-direction:column; gap:16px; background:var(--card); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:32px; }
+        .trial-field { display:flex; flex-direction:column; gap:7px; }
+        .trial-field label { font-family:var(--font-head); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+        .trial-optional { font-weight:400; text-transform:none; letter-spacing:0; font-size:11px; color:var(--muted); opacity:0.8; }
+        .trial-field input, .trial-field select { background:var(--bg); border:1px solid var(--border2); border-radius:8px; padding:12px 14px; font-size:14px; color:var(--text); font-family:inherit; transition:border-color 0.2s; }
+        .trial-field input:focus, .trial-field select:focus { outline:none; border-color:var(--accent); }
+        .trial-field input::placeholder { color:var(--muted); opacity:0.6; }
+        .trial-field select { cursor:pointer; appearance:none; background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%); background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%; background-size:5px 5px; background-repeat:no-repeat; padding-right:36px; }
+        .trial-submit { background:var(--accent); color:#070d0a; font-family:var(--font-head); font-size:14px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:15px 24px; border-radius:8px; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; margin-top:8px; }
+        .trial-submit:hover:not(:disabled) { background:var(--accent2); transform:translateY(-1px); }
+        .trial-submit:disabled { opacity:0.6; cursor:not-allowed; }
+        .trial-legal { font-size:12px; color:var(--muted); line-height:1.6; margin-top:4px; text-align:center; }
+        .trial-legal a { color:var(--accent); text-decoration:none; }
+        .trial-legal a:hover { text-decoration:underline; }
+        .trial-error { background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.3); color:#ff8080; padding:10px 14px; border-radius:8px; font-size:13px; line-height:1.5; }
+        /* Thank-you state */
+        .trial-thankyou { background:var(--card); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:36px 32px; }
+        .trial-success-icon { width:56px; height:56px; border-radius:50%; background:var(--accent); color:#070d0a; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:900; margin:0 auto 18px; font-family:var(--font-head); }
+        .trial-success-icon.small { width:40px; height:40px; font-size:20px; margin:0 auto 12px; }
+        .trial-thankyou-h { font-family:var(--font-head); font-size:28px; font-weight:900; color:var(--text); text-align:center; margin-bottom:10px; letter-spacing:-0.01em; }
+        .trial-thankyou-sub { font-size:14px; color:var(--muted); text-align:center; line-height:1.7; margin-bottom:24px; }
+        .trial-thankyou-sub strong { color:var(--text); }
+        .trial-form-stage2 { margin-top:8px; border:1px dashed var(--border2); background:var(--bg); }
+        .trial-stage2-header { text-align:center; margin-bottom:6px; }
+        .trial-stage2-h { font-family:var(--font-head); font-size:22px; font-weight:800; color:var(--text); margin:10px 0 8px; }
+        .trial-stage2-sub { font-size:13px; color:var(--muted); line-height:1.7; }
+        .trial-loom-done { text-align:center; padding:24px 0; border-top:1px solid var(--border2); margin-top:8px; }
+        .trial-loom-done p { font-size:14px; color:var(--muted); line-height:1.7; }
+        .trial-loom-done strong { color:var(--text); }
+        .accent-text { color:var(--accent); }
+        /* Legacy cta-inner styles kept for any lingering usage */
         .cta-inner { background:var(--bg2); border:1px solid var(--border); border-radius:24px; padding:80px 40px; text-align:center; position:relative; overflow:hidden; }
         .cta-h2 { font-size:clamp(36px,5vw,60px); color:var(--text); margin-bottom:18px; }
-        .accent-text { color:var(--accent); }
         .cta-sub { font-size:17px; color:var(--muted); max-width:480px; margin:0 auto 38px; }
         .cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
         .cta-guarantee { margin-top:24px; font-size:12px; color:var(--muted); }

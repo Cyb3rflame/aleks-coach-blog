@@ -667,11 +667,7 @@ body{padding-bottom:80px}
 
       <form
         class="form-fields"
-        name="free-technical-breakdown"
-        method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        action="/thanks"
+        id="analysis-form"
         novalidate>
 
         <!-- Hidden field Netlify needs to identify the form -->
@@ -848,7 +844,7 @@ function scrollToForm() {
 
 // ─── Client-side validation before Netlify submission
 (function(){
-  const form = document.querySelector('form.form-fields[data-netlify]');
+  const form = document.getElementById('analysis-form');
   if (!form) return;
 
   const emailInput = document.getElementById('f-email');
@@ -872,7 +868,8 @@ function scrollToForm() {
   emailInput.addEventListener('input', () => clearError(emailInput, emailError));
   footageInput.addEventListener('input', () => clearError(footageInput, footageError));
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     let valid = true;
 
     if (!emailRegex.test(emailInput.value.trim())) {
@@ -885,18 +882,45 @@ function scrollToForm() {
     }
 
     if (!valid) {
-      e.preventDefault();
       const firstError = form.querySelector('.form-error.visible');
       if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
-    // Valid: let Netlify handle submission. Show sending state.
+    // Valid - submit to API
     submitBtn.disabled = true;
     const btnText = submitBtn.childNodes[0];
     if (btnText) btnText.nodeValue = 'Sending... ';
+
+    try {
+      const formData = {
+        first_name: form.querySelector('[name="first_name"]').value,
+        email: form.querySelector('[name="email"]').value,
+        stroke: form.querySelector('[name="stroke"]').value,
+        footage_link: form.querySelector('[name="footage_link"]').value,
+        notes: form.querySelector('[name="notes"]').value || ''
+      };
+
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        window.location.href = '/thanks';
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      console.error('Form error:', error);
+      submitBtn.disabled = false;
+      if (btnText) btnText.nodeValue = 'Submit footage ';
+      alert('Something went wrong. Please try again or email contact@alekscoach.com');
+    }
   });
 })();
+</script>
 
 // ─── Video: click to load YouTube embed (lazy loading pattern)
 const videoWrap = document.getElementById('video-wrap');

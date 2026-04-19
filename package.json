@@ -13,10 +13,28 @@
     "next": "16.2.2",
     "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "resend": "^6.12.0"
   },
   "devDependencies": {
     "eslint": "^9",
     "eslint-config-next": "16.2.2"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).",
+  "main": "next.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyb3rflame/aleks-coach-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Cyb3rflame/aleks-coach-blog/issues"
+  },
+  "homepage": "https://github.com/Cyb3rflame/aleks-coach-blog#readme"
 }
