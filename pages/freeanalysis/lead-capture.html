@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find out exactly what is holding you back | Aleks Coach</title>
+<meta name="description" content="Get a 5-minute voiceover analysis of your stroke of choice. Visuals showing exactly what is happening mechanically, plus a brief plan on how to fix it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg: #191918;
+  --bg-2: #1e1e1d;
+  --bg-3: #242423;
+  --fg: #F2F2EC;
+  --muted: #737373;
+  --accent: #CCFF00;
+  --accent-dim: rgba(204,255,0,0.12);
+  --accent-glow: rgba(204,255,0,0.25);
+  --border: rgba(242,242,236,0.08);
+  --radius: 6px;
+  --radius-lg: 12px;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out: cubic-bezier(0.4,0,0.2,1);
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 var(--accent-glow)}
+  70%{box-shadow:0 0 0 14px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+@keyframes shimmer{
+  0%{background-position:-200% 0}
+  100%{background-position:200% 0}
+}
+@keyframes scan-line{
+  0%{top:0}
+  100%{top:100%}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+@keyframes dot-blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* ─── LAYOUT ─── */
+.container{
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── HEADER / NAV ─── */
+.site-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s var(--ease-in-out), border-color 0.3s var(--ease-in-out), backdrop-filter 0.3s;
+}
+.site-header.scrolled{
+  background: rgba(25,25,24,0.9);
+  border-color: var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.logo{
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--fg);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+.logo span{color: var(--accent)}
+.header-cta{
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: opacity 0.2s;
+}
+.header-cta:hover{opacity:0.75}
+
+/* ─── HERO ─── */
+.hero{
+  padding: 160px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-120px;left:50%;
+  transform:translateX(-50%);
+  width:600px;height:600px;
+  background:radial-gradient(circle, var(--accent-dim) 0%, transparent 65%);
+  pointer-events:none;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(204,255,0,0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+.eyebrow-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:dot-blink 1.8s ease-in-out infinite;
+}
+
+.hero-headline{
+  font-family: var(--font-head);
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: var(--fg);
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+.hero-headline .accent{
+  color: var(--accent);
+  position:relative;
+}
+
+.hero-sub{
+  font-family: var(--font-body);
+  font-size: clamp(16px, 2.5vw, 19px);
+  font-weight: 400;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 48px;
+  line-height: 1.6;
+}
+
+/* ─── VIDEO SECTION ─── */
+.video-section{
+  padding: 0 0 80px;
+}
+.video-label{
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.video-wrap{
+  position:relative;
+  aspect-ratio:16/9;
+  background: var(--bg-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow:hidden;
+  cursor:pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.video-wrap:hover{
+  border-color: rgba(204,255,0,0.3);
+  box-shadow: 0 0 40px rgba(204,255,0,0.08);
+}
+/* placeholder thumbnail */
+.video-thumb{
+  position:absolute;inset:0;
+  background: linear-gradient(135deg, #1e1e1d 0%, #2a2a28 50%, #1e1e1d 100%);
+  background-size:200% 200%;
+  animation:shimmer 3s linear infinite;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:16px;
+}
+.play-btn{
+  width:72px;height:72px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  animation:pulse-ring 2.5s ease-out infinite, float 3s ease-in-out infinite;
+  transition:transform 0.2s var(--ease-out);
+}
+.play-btn:hover{transform:scale(1.08)}
+.play-btn svg{
+  width:28px;height:28px;
+  fill:var(--bg);
+  margin-left:4px;
+}
+.video-duration{
+  font-family:var(--font-body);
+  font-size:13px;
+  font-weight:500;
+  color:var(--muted);
+  letter-spacing:0.5px;
+}
+/* scan line effect */
+.video-wrap::after{
+  content:'';
+  position:absolute;
+  left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent-glow),transparent);
+  top:0;
+  animation:scan-line 4s linear infinite;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.video-wrap:hover::after{opacity:1}
+
+/* ─── FORM SECTION ─── */
+.form-section{
+  padding: 0 0 60px;
+}
+.form-heading{
+  font-family:var(--font-head);
+  font-size:clamp(22px,4vw,30px);
+  font-weight:700;
+  letter-spacing:-0.5px;
+  color:var(--fg);
+  text-align:center;
+  margin-bottom:8px;
+}
+.form-sub{
+  font-size:15px;
+  color:var(--muted);
+  text-align:center;
+  margin-bottom:36px;
+}
+
+/* Tally embed wrapper */
+.tally-wrap{
+  background:var(--bg-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:40px 32px;
+  position:relative;
+  overflow:hidden;
+}
+.tally-wrap::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+
+/* Replace the iframe src with your actual Tally embed URL */
+.tally-iframe{
+  width:100%;
+  border:none;
+  min-height:300px;
+  background:transparent;
+  display:block;
+}
+
+/* Fallback fields shown when Tally isn't embedded yet */
+.form-fields{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.field-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.field-label{
+  font-size:13px;
+  font-weight:500;
+  color:var(--fg);
+  letter-spacing:0.2px;
+}
+.field-input{
+  background:var(--bg-3);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:13px 16px;
+  font-family:var(--font-body);
+  font-size:15px;
+  color:var(--fg);
+  outline:none;
+  transition:border-color 0.2s, box-shadow 0.2s;
+  width:100%;
+  -webkit-appearance:none;
+}
+.field-input::placeholder{color:var(--muted)}
+.field-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-dim);
+}
+textarea.field-input{
+  resize:vertical;
+  min-height:90px;
+  font-family:var(--font-body);
+}
+select.field-input{
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-right:42px;
+  cursor:pointer;
+}
+select.field-input:invalid{color:var(--muted)}
+.form-error{
+  font-size:13px;
+  color:#ff6b6b;
+  margin-top:6px;
+  display:none;
+}
+.form-error.visible{display:block}
+.field-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+
+/* ─── STICKY CTA ─── */
+.sticky-cta{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:200;
+  padding:16px 24px 20px;
+  background:linear-gradient(to top, rgba(25,25,24,0.98) 0%, rgba(25,25,24,0.6) 100%);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:center;
+  border-top:1px solid var(--border);
+  animation:fadeIn 0.5s var(--ease-out) 0.8s both;
+}
+.btn-submit{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:var(--accent);
+  color:var(--bg);
+  font-family:var(--font-head);
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-0.2px;
+  padding:16px 48px;
+  border-radius:var(--radius);
+  border:none;
+  cursor:pointer;
+  width:100%;
+  max-width:480px;
+  transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s;
+  animation:pulse-ring 3s ease-out infinite;
+}
+.btn-submit:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(204,255,0,0.35);
+  background:#d9ff1a;
+}
+.btn-submit:active{transform:translateY(0);box-shadow:none}
+.btn-submit svg{
+  width:18px;height:18px;
+  transition:transform 0.2s var(--ease-out);
+}
+.btn-submit:hover svg{transform:translateX(4px)}
+
+/* Inline submit (inside form, hidden on mobile so sticky takes over) */
+.form-submit-inline{
+  margin-top:8px;
+}
+.btn-inline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:var(--accent);
+  color:var(--bg);
+  font-family:var(--font-head);
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-0.2px;
+  padding:16px 36px;
+  border-radius:var(--radius);
+  border:none;
+  cursor:pointer;
+  width:100%;
+  transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s;
+}
+.btn-inline:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(204,255,0,0.35);
+  background:#d9ff1a;
+}
+.btn-inline:active{transform:translateY(0)}
+.btn-sub-label{
+  font-size:12px;
+  font-weight:400;
+  color:rgba(25,25,24,0.6);
+  margin-top:4px;
+  text-align:center;
+}
+
+/* ─── DIVIDER ─── */
+.section-divider{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:0;
+}
+
+/* ─── FOOTER / PROOF ─── */
+.footer{
+  padding:60px 0 120px;
+}
+.proof-headline{
+  font-family:var(--font-head);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+  margin-bottom:32px;
+}
+
+/* Testimonials row */
+.testimonials{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:48px;
+}
+@media(max-width:640px){
+  .testimonials{grid-template-columns:1fr}
+}
+
+.testimonial-card{
+  background:var(--bg-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:20px;
+  transition:border-color 0.25s;
+}
+.testimonial-card:hover{border-color:rgba(204,255,0,0.2)}
+.testimonial-stars{
+  color:var(--accent);
+  font-size:13px;
+  margin-bottom:10px;
+  letter-spacing:2px;
+}
+.testimonial-text{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--fg);
+  margin-bottom:14px;
+}
+.testimonial-author{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.avatar-placeholder{
+  width:32px;height:32px;
+  border-radius:50%;
+  background:var(--bg-3);
+  border:1px solid var(--border);
+  flex-shrink:0;
+}
+.author-name{
+  font-size:13px;
+  font-weight:600;
+  color:var(--fg);
+}
+.author-detail{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Proof stats */
+.stats-row{
+  display:flex;
+  justify-content:center;
+  gap:48px;
+  flex-wrap:wrap;
+  padding:32px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-bottom:32px;
+}
+.stat-item{text-align:center}
+.stat-number{
+  font-family:var(--font-head);
+  font-size:32px;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:-1px;
+  display:block;
+}
+.stat-label{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+/* Footer bottom */
+.footer-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  padding-top:24px;
+}
+.footer-logo{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:15px;
+  color:var(--fg);
+  opacity:0.5;
+}
+.footer-logo span{color:var(--accent);opacity:1}
+.footer-legal{
+  font-size:12px;
+  color:var(--muted);
+}
+.footer-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.footer-legal a:hover{color:var(--fg)}
+
+/* ─── RESPONSIVE BOTTOM PADDING ─── */
+body{padding-bottom:80px}
+</style>
+</head>
+<body>
+
+<!-- ─── STICKY HEADER ─── -->
+<header class="site-header" id="site-header">
+  <a href="https://alekscoach.com" class="logo">Aleks <span>Coach</span></a>
+  <a href="#form" class="header-cta">Get your analysis →</a>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="container">
+
+    <div class="eyebrow reveal">
+      <span class="eyebrow-dot"></span>
+      10 spots remaining. First come, first served.
+    </div>
+
+    <h1 class="hero-headline reveal reveal-delay-1">
+      Find out <span class="accent">exactly</span> what<br>is holding you back.
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-2">
+      Send your footage. Get a 5-minute voiceover breakdown of your chosen stroke with visuals, a precise mechanical diagnosis, and a short plan to fix it.
+    </p>
+
+  </div>
+</section>
+
+<!-- ─── VIDEO ─── -->
+<section class="video-section">
+  <div class="container">
+    <p class="video-label reveal">Example breakdown. See exactly what you will receive.</p>
+    <div class="video-wrap reveal reveal-delay-1" id="video-wrap" role="button" tabindex="0" aria-label="Play example breakdown video">
+      <div class="video-thumb" id="video-thumb">
+        <img src="https://i.ytimg.com/vi/o7Xf1qphCBM/maxresdefault.jpg" alt="Example breakdown thumbnail" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6" loading="lazy">
+        <div class="play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FORM ─── -->
+<section class="form-section" id="form">
+  <div class="container">
+
+    <h2 class="form-heading reveal">
+      Submit your footage.
+    </h2>
+    <p class="form-sub reveal reveal-delay-1">
+      Fill in your details and share a link to your footage. You will receive your full analysis within 24 to 48 hours.
+    </p>
+
+    <div class="tally-wrap reveal reveal-delay-2">
+
+      <!-- Hidden form used by Netlify to register the form at build time.
+           This is required for SPA-style or JS-heavy sites. Safe to keep. -->
+      <form name="free-technical-breakdown" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="first_name">
+        <input type="email" name="email">
+        <input type="text" name="stroke">
+        <input type="url" name="footage_link">
+        <textarea name="notes"></textarea>
+      </form>
+
+      <form
+        class="form-fields"
+        name="free-technical-breakdown"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        action="/thanks"
+        novalidate>
+
+        <!-- Hidden field Netlify needs to identify the form -->
+        <input type="hidden" name="form-name" value="free-technical-breakdown">
+
+        <!-- Honeypot (spam trap). Real users never see or fill this. -->
+        <p style="display:none">
+          <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </p>
+
+        <div class="field-group">
+          <label class="field-label" for="f-fname">First name <span style="color:var(--accent)">*</span></label>
+          <input class="field-input" type="text" id="f-fname" name="first_name" placeholder="Alex" autocomplete="given-name" required>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f-email">Email <span style="color:var(--accent)">*</span></label>
+          <input class="field-input" type="email" id="f-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+          <p class="form-error" id="err-email">Please enter a valid email address.</p>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f-stroke">Stroke to analyse <span style="color:var(--accent)">*</span></label>
+          <select class="field-input" id="f-stroke" name="stroke" required>
+            <option value="" disabled selected>Select a stroke</option>
+            <option value="Forehand">Forehand</option>
+            <option value="Backhand">Backhand</option>
+            <option value="Serve">Serve</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f-footage">Link to your footage <span style="color:var(--accent)">*</span></label>
+          <input class="field-input" type="url" id="f-footage" name="footage_link" placeholder="YouTube, Loom, or Google Drive link" required>
+          <p class="form-error" id="err-footage">Please paste a valid URL (YouTube, Loom, Google Drive, etc).</p>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="f-notes">Extra notes <span style="color:var(--muted); font-weight:400; font-size:12px;">(optional)</span></label>
+          <textarea class="field-input" id="f-notes" name="notes" placeholder="Anything specific you want me to look at? Context, court surface, injuries, playing style."></textarea>
+        </div>
+
+        <div class="form-submit-inline">
+          <button type="submit" class="btn-inline">
+            Submit footage
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <p class="btn-sub-label">Analysis delivered within 24 to 48 hours.</p>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ─── FOOTER / PROOF ─── -->
+<footer class="footer">
+  <div class="container">
+
+    <!-- Stats -->
+    <div class="stats-row reveal">
+      <div class="stat-item">
+        <span class="stat-number">200+</span>
+        <span class="stat-label">Players helped</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">10</span>
+        <span class="stat-label">Tennis clubs worked with</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24-48h</span>
+        <span class="stat-label">Analysis turnaround</span>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <p class="proof-headline reveal">What players are saying</p>
+    <div class="testimonials">
+
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Thank you Alex, that was a very detailed feedback. I have listed these points to change. I will try to change one at a time when I practice."</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder" aria-hidden="true"></div>
+          <div>
+            <div class="author-name">Reddit user</div>
+            <div class="author-detail">Club Player, Philippines</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Bro thank you for this! I already watched this like 3 times to take some notes. This is definitely gonna help me a ton. I'll be looking over my notes later today since I'm gonna be practising more. Thank you so much coach."</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder" aria-hidden="true"></div>
+          <div>
+            <div class="author-name">Reddit user</div>
+            <div class="author-detail">Club Player, USA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Wow, thank you so much! This was helpful. Hadn't noticed that I wasn't using my hips properly, as well as my wrist pronation occurring prior to uncoiling. Gonna try to keep those in mind."</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder" aria-hidden="true"></div>
+          <div>
+            <div class="author-name">Reddit user</div>
+            <div class="author-detail">Club Player, USA</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-logo">Aleks <span>Coach</span></div>
+      <p class="footer-legal">
+        &copy; 2026 Aleks Coach &nbsp;·&nbsp;
+        <a href="#">Privacy</a> &nbsp;·&nbsp;
+        <a href="#">Terms</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ─── ALWAYS-VISIBLE STICKY SUBMIT ─── -->
+<div class="sticky-cta" role="complementary" aria-label="Submit your details">
+  <button type="button" class="btn-submit" onclick="scrollToForm()" aria-label="Submit your footage — scroll to form">
+    Get my analysis
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+// ─── Sticky header on scroll
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// ─── Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ─── Sticky CTA: always scrolls to form (Netlify form handles its own submission)
+function scrollToForm() {
+  const form = document.getElementById('form');
+  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Focus the first field after scroll completes
+  setTimeout(() => {
+    const firstInput = form.querySelector('input[name="first_name"]');
+    if (firstInput) firstInput.focus({ preventScroll: true });
+  }, 600);
+}
+
+// ─── Client-side validation before Netlify submission
+(function(){
+  const form = document.querySelector('form.form-fields[data-netlify]');
+  if (!form) return;
+
+  const emailInput = document.getElementById('f-email');
+  const footageInput = document.getElementById('f-footage');
+  const emailError = document.getElementById('err-email');
+  const footageError = document.getElementById('err-footage');
+  const submitBtn = form.querySelector('.btn-inline');
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const urlRegex = /^https?:\/\/.+\..+/i;
+
+  function clearError(input, errorEl){
+    input.style.borderColor = '';
+    errorEl.classList.remove('visible');
+  }
+  function showError(input, errorEl){
+    input.style.borderColor = '#ff6b6b';
+    errorEl.classList.add('visible');
+  }
+
+  emailInput.addEventListener('input', () => clearError(emailInput, emailError));
+  footageInput.addEventListener('input', () => clearError(footageInput, footageError));
+
+  form.addEventListener('submit', (e) => {
+    let valid = true;
+
+    if (!emailRegex.test(emailInput.value.trim())) {
+      showError(emailInput, emailError);
+      valid = false;
+    }
+    if (!urlRegex.test(footageInput.value.trim())) {
+      showError(footageInput, footageError);
+      valid = false;
+    }
+
+    if (!valid) {
+      e.preventDefault();
+      const firstError = form.querySelector('.form-error.visible');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Valid: let Netlify handle submission. Show sending state.
+    submitBtn.disabled = true;
+    const btnText = submitBtn.childNodes[0];
+    if (btnText) btnText.nodeValue = 'Sending... ';
+  });
+})();
+
+// ─── Video: click to load YouTube embed (lazy loading pattern)
+const videoWrap = document.getElementById('video-wrap');
+const videoThumb = document.getElementById('video-thumb');
+function loadVideo() {
+  if (videoWrap.dataset.loaded) return;
+  videoWrap.dataset.loaded = '1';
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('src', 'https://www.youtube.com/embed/o7Xf1qphCBM?autoplay=1&rel=0');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('title', 'Aleks Coach example breakdown');
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none';
+  videoThumb.replaceWith(iframe);
+}
+videoWrap.addEventListener('click', loadVideo);
+videoWrap.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadVideo(); }
+});
+</script>
+</body>
+</html>
