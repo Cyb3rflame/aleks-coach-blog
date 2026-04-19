@@ -1,21 +1,25 @@
-const { Resend } = require('resend');
+// pages/api/submit-form.js
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
+  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { first_name, email, stroke, footage_link, notes } = req.body;
 
+  // Basic validation
   if (!first_name || !email || !stroke || !footage_link) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
+    // Send notification to you
     await resend.emails.send({
-      from: 'Aleks Coach <contact@alekscoach.com>',
+      from: 'Aleks Coach <contact@alekscoach.com>', // Must be verified domain
       to: 'alexpandov07@gmail.com',
       subject: `New footage submission: ${stroke} from ${first_name}`,
       html: `
@@ -28,6 +32,7 @@ module.exports = async function handler(req, res) {
       `,
     });
 
+    // Send confirmation to user
     await resend.emails.send({
       from: 'Aleks Coach <contact@alekscoach.com>',
       to: email,
@@ -63,4 +68,4 @@ module.exports = async function handler(req, res) {
     console.error('Email error:', error);
     return res.status(500).json({ error: 'Failed to send email' });
   }
-};
+}
