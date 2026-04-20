@@ -655,28 +655,10 @@ body{padding-bottom:80px}
 
     <div class="tally-wrap reveal reveal-delay-2">
 
-      <!-- Hidden form used by Netlify to register the form at build time.
-           This is required for SPA-style or JS-heavy sites. Safe to keep. -->
-      <form name="free-technical-breakdown" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="first_name">
-        <input type="email" name="email">
-        <input type="text" name="stroke">
-        <input type="url" name="footage_link">
-        <textarea name="notes"></textarea>
-      </form>
-
       <form
         class="form-fields"
         id="analysis-form"
         novalidate>
-
-        <!-- Hidden field Netlify needs to identify the form -->
-        <input type="hidden" name="form-name" value="free-technical-breakdown">
-
-        <!-- Honeypot (spam trap). Real users never see or fill this. -->
-        <p style="display:none">
-          <label>Don't fill this out if you're human: <input name="bot-field"></label>
-        </p>
 
         <div class="field-group">
           <label class="field-label" for="f-fname">First name <span style="color:var(--accent)">*</span></label>
@@ -842,7 +824,7 @@ function scrollToForm() {
   }, 600);
 }
 
-// ─── Client-side validation before Netlify submission
+// ─── Client-side validation + Vercel API submission
 (function(){
   const form = document.getElementById('analysis-form');
   if (!form) return;
@@ -887,7 +869,7 @@ function scrollToForm() {
       return;
     }
 
-    // Valid - submit to API
+    // Valid — submit to API
     submitBtn.disabled = true;
     const btnText = submitBtn.childNodes[0];
     if (btnText) btnText.nodeValue = 'Sending... ';
@@ -920,7 +902,6 @@ function scrollToForm() {
     }
   });
 })();
-</script>
 
 // ─── Video: click to load YouTube embed (lazy loading pattern)
 const videoWrap = document.getElementById('video-wrap');
