@@ -880,7 +880,8 @@ function scrollToForm() {
         email: form.querySelector('[name="email"]').value,
         stroke: form.querySelector('[name="stroke"]').value,
         footage_link: form.querySelector('[name="footage_link"]').value,
-        notes: form.querySelector('[name="notes"]').value || ''
+        notes: form.querySelector('[name="notes"]').value || '',
+        ref: new URLSearchParams(window.location.search).get('ref') || ''
       };
 
       const response = await fetch('/api/submit-form', {
