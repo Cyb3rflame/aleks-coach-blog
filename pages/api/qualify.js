@@ -7,15 +7,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email, name, stroke, goal, level } = req.body;
+  const { email, name, stroke, goal, level, coaching, frequency } = req.body;
 
   // Nothing useful to send? Just acknowledge.
-  if (!goal && !level) {
+  if (!goal && !level && !coaching && !frequency) {
     return res.status(200).json({ success: true });
   }
 
-  // Flag the high-intent ones so they stand out in your inbox
-  const isIntensiveLead = goal === 'Tournaments' || goal === 'Moving up a level';
+  // Flag the high-intent ones so they stand out in your inbox.
+  // Strongest signal: competitive goal, especially if they have no coach yet.
+  const competitiveGoal = goal === 'Tournaments' || goal === 'Moving up a level';
+  const isIntensiveLead = competitiveGoal && coaching !== 'In-person coach';
   const flag = isIntensiveLead ? ' ⭐ INTENSIVE LEAD' : '';
 
   try {
@@ -30,7 +32,9 @@ export default async function handler(req, res) {
         <p><strong>Stroke submitted:</strong> ${stroke || '(unknown)'}</p>
         <p><strong>Playing for:</strong> ${goal || '(skipped)'}</p>
         <p><strong>Level:</strong> ${level || '(skipped)'}</p>
-        ${isIntensiveLead ? '<p style="color:#1A5C38;"><strong>This one fits the intensive. Worth a tailored pitch after the analysis.</strong></p>' : ''}
+        <p><strong>Currently coached:</strong> ${coaching || '(skipped)'}</p>
+        <p><strong>Plays:</strong> ${frequency || '(skipped)'}</p>
+        ${isIntensiveLead ? '<p style="color:#1A5C38;"><strong>Competitive goal and no in-person coach. Strong fit for the intensive. Worth a tailored pitch after the analysis.</strong></p>' : ''}
       `,
     });
 

@@ -191,6 +191,24 @@ h1 .accent{color:var(--accent)}
           </div>
         </div>
 
+        <div class="qual-group">
+          <div class="qual-q">Are you working with a coach?</div>
+          <div class="qual-options" data-group="coaching">
+            <button type="button" class="qual-opt" data-val="In-person coach">In-person coach</button>
+            <button type="button" class="qual-opt" data-val="Online coach">Online coach</button>
+            <button type="button" class="qual-opt" data-val="On my own">On my own</button>
+          </div>
+        </div>
+
+        <div class="qual-group">
+          <div class="qual-q">How often do you play?</div>
+          <div class="qual-options" data-group="frequency">
+            <button type="button" class="qual-opt" data-val="Few times a week">Few times a week</button>
+            <button type="button" class="qual-opt" data-val="About weekly">About weekly</button>
+            <button type="button" class="qual-opt" data-val="Now and then">Now and then</button>
+          </div>
+        </div>
+
         <button type="button" class="qual-submit" id="qual-send" disabled>Send</button>
         <span class="qual-skip">No pressure. Your analysis comes either way.</span>
       </div>
@@ -264,7 +282,7 @@ document.getElementById('yr').textContent = new Date().getFullYear();
   // ⚙️ Endpoint that emails you the qualifying answers (create pages/api/qualify.js)
   const QUALIFY_ENDPOINT = '/api/qualify';
 
-  const selected = { goal: null, level: null };
+  const selected = { goal: null, level: null, coaching: null, frequency: null };
   const sendBtn = document.getElementById('qual-send');
 
   document.querySelectorAll('.qual-options').forEach(groupEl => {
@@ -274,8 +292,8 @@ document.getElementById('yr').textContent = new Date().getFullYear();
         groupEl.querySelectorAll('.qual-opt').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         selected[group] = btn.dataset.val;
-        // enable send once at least one answer is given
-        sendBtn.disabled = !(selected.goal || selected.level);
+        // enable send once any answer is given
+        sendBtn.disabled = !(selected.goal || selected.level || selected.coaching || selected.frequency);
       });
     });
   });
@@ -297,7 +315,9 @@ document.getElementById('yr').textContent = new Date().getFullYear();
           name: lead.name || '',
           stroke: lead.stroke || '',
           goal: selected.goal || '',
-          level: selected.level || ''
+          level: selected.level || '',
+          coaching: selected.coaching || '',
+          frequency: selected.frequency || ''
         })
       });
     } catch (err) {
