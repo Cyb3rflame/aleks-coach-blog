@@ -50,17 +50,13 @@ body{
   flex-direction: column;
 }
 
-/* Reveal animation */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse-ring{
   0%{box-shadow:0 0 0 0 var(--accent-glow)}
   70%{box-shadow:0 0 0 18px transparent}
   100%{box-shadow:0 0 0 0 transparent}
 }
-@keyframes check-in{
-  from{stroke-dashoffset:50}
-  to{stroke-dashoffset:0}
-}
+@keyframes check-in{from{stroke-dashoffset:50}to{stroke-dashoffset:0}}
 
 .fade-in{animation: fadeUp 0.8s var(--ease-out) both}
 .fade-in-1{animation: fadeUp 0.8s var(--ease-out) 0.15s both}
@@ -68,289 +64,99 @@ body{
 .fade-in-3{animation: fadeUp 0.8s var(--ease-out) 0.45s both}
 .fade-in-4{animation: fadeUp 0.8s var(--ease-out) 0.6s both}
 
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms !important}
-}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms !important}}
 
-/* Header */
-.site-header{
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-.logo{
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 17px;
-  color: var(--fg);
-  text-decoration: none;
-  letter-spacing: -0.3px;
-}
-.logo span{color: var(--accent)}
-.header-back{
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.header-back:hover{color: var(--fg)}
+.site-header{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.logo{font-family:var(--font-head);font-weight:700;font-size:17px;color:var(--fg);text-decoration:none;letter-spacing:-0.3px}
+.logo span{color:var(--accent)}
 
-/* Main */
-main{
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  position: relative;
-}
-main::before{
-  content:'';
-  position:absolute;
-  top:-120px;left:50%;
-  transform:translateX(-50%);
-  width:700px;height:700px;
-  background:radial-gradient(circle, var(--accent-dim) 0%, transparent 65%);
-  pointer-events:none;
-}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:56px 24px;position:relative}
+main::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle, var(--accent-dim) 0%, transparent 65%);pointer-events:none}
+.container{max-width:640px;width:100%;text-align:center;position:relative}
 
-.container{
-  max-width: 640px;
-  width: 100%;
-  text-align: center;
-  position: relative;
-}
+.check-circle{width:84px;height:84px;border-radius:50%;background:var(--accent);display:inline-flex;align-items:center;justify-content:center;margin-bottom:28px;animation:pulse-ring 2.5s ease-out infinite}
+.check-circle svg{width:36px;height:36px;stroke:var(--bg);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;animation:check-in 0.6s var(--ease-out) 0.2s both}
 
-/* Check icon */
-.check-circle{
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 32px;
-  animation: pulse-ring 2.5s ease-out infinite;
-}
-.check-circle svg{
-  width: 38px;
-  height: 38px;
-  stroke: var(--bg);
-  fill: none;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 50;
-  animation: check-in 0.6s var(--ease-out) 0.2s both;
-}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;background:var(--accent-dim);border:1px solid rgba(204,255,0,0.2);padding:6px 14px;border-radius:100px}
 
-/* Eyebrow */
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(204,255,0,0.2);
-  padding: 6px 14px;
-  border-radius: 100px;
-}
+h1{font-family:var(--font-head);font-size:clamp(34px, 6vw, 54px);font-weight:700;line-height:1.08;letter-spacing:-1.3px;color:var(--fg);margin-bottom:18px}
+h1 .accent{color:var(--accent)}
+.subhead{font-family:var(--font-body);font-size:clamp(16px, 2.2vw, 18px);color:var(--muted);max-width:500px;margin:0 auto 44px;line-height:1.6}
 
-/* Headline */
-h1{
-  font-family: var(--font-head);
-  font-size: clamp(36px, 6vw, 56px);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -1.3px;
-  color: var(--fg);
-  margin-bottom: 20px;
-}
-h1 .accent{color: var(--accent)}
+/* cards */
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:30px 28px;margin-bottom:24px;text-align:left}
+.card-label{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:18px;display:block}
 
-.subhead{
-  font-family: var(--font-body);
-  font-size: clamp(16px, 2.2vw, 18px);
-  color: var(--muted);
-  max-width: 500px;
-  margin: 0 auto 48px;
-  line-height: 1.6;
-}
+/* what happens next */
+.steps-list{list-style:none;display:flex;flex-direction:column;gap:18px}
+.step-item{display:flex;gap:16px;align-items:flex-start}
+.step-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--accent-dim);color:var(--accent);font-family:var(--font-head);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.step-body{font-family:var(--font-body);font-size:15px;color:var(--fg);line-height:1.55;padding-top:3px}
+.step-body strong{color:var(--fg);font-weight:600}
+.step-note{display:block;margin-top:4px;color:var(--muted);font-size:14px}
 
-/* What happens next */
-.next-steps{
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  margin-bottom: 40px;
-  text-align: left;
-}
-.next-label{
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 20px;
-  display: block;
-}
-.steps-list{
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-.step-item{
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.step-num{
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--accent-dim);
-  color: var(--accent);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.step-body{
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--fg);
-  line-height: 1.55;
-  padding-top: 3px;
-}
-.step-body strong{
-  color: var(--fg);
-  font-weight: 600;
-}
-.step-note{
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 14px;
-}
+/* qualifying form */
+.qual-intro{margin-bottom:22px}
+.qual-intro h2{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:-0.4px;color:var(--fg);margin-bottom:8px}
+.qual-intro p{font-size:14px;color:var(--muted);line-height:1.55}
+.qual-group{margin-bottom:22px}
+.qual-q{font-size:13px;font-weight:600;color:var(--fg);margin-bottom:12px}
+.qual-options{display:flex;flex-wrap:wrap;gap:9px}
+.qual-opt{background:var(--bg-3);border:1px solid var(--border);color:var(--fg);font-family:var(--font-body);font-size:14px;padding:10px 16px;border-radius:100px;cursor:pointer;transition:all 0.18s var(--ease-out)}
+.qual-opt:hover{border-color:rgba(204,255,0,0.4)}
+.qual-opt.selected{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600}
+.qual-submit{margin-top:6px;background:var(--accent);color:var(--bg);font-family:var(--font-head);font-size:15px;font-weight:700;border:none;border-radius:var(--radius);padding:13px 28px;cursor:pointer;transition:transform 0.15s var(--ease-out),box-shadow 0.2s,opacity 0.2s}
+.qual-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(204,255,0,0.25)}
+.qual-submit:disabled{opacity:0.4;cursor:default;transform:none;box-shadow:none}
+.qual-skip{display:block;margin-top:14px;font-size:13px;color:var(--muted);text-align:center}
+.qual-success{display:none;text-align:center;padding:8px 0}
+.qual-success.show{display:block}
+.qual-success .tick{width:46px;height:46px;border-radius:50%;background:var(--accent-dim);border:1px solid rgba(204,255,0,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.qual-success .tick svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.qual-success h3{font-family:var(--font-head);font-size:19px;color:var(--fg);margin-bottom:6px}
+.qual-success p{font-size:14px;color:var(--muted)}
 
-/* CTA row */
-.cta-row{
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-.btn{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 24px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-decoration: none;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  transition: all 0.2s var(--ease-out);
-  cursor: pointer;
-}
-.btn-primary{
-  background: var(--accent);
-  color: var(--bg);
-}
-.btn-primary:hover{
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(204,255,0,0.2);
-}
-.btn-secondary{
-  background: transparent;
-  color: var(--fg);
-  border-color: var(--border);
-}
-.btn-secondary:hover{
-  border-color: rgba(242,242,236,0.25);
-  background: var(--bg-2);
-}
+/* while you wait */
+.wait-card{text-align:center}
+.wait-card .card-label{text-align:center}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;font-family:var(--font-body);font-size:14px;font-weight:600;letter-spacing:0.2px;text-decoration:none;border-radius:var(--radius);border:1px solid transparent;transition:all 0.2s var(--ease-out);cursor:pointer}
+.btn-primary{background:var(--accent);color:var(--bg)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(204,255,0,0.2)}
+.btn-secondary{background:transparent;color:var(--fg);border-color:var(--border)}
+.btn-secondary:hover{border-color:rgba(242,242,236,0.25);background:var(--bg-3)}
 
-/* Meta info */
-.meta{
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 8px;
-}
-.meta a{
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1px;
-}
-.meta a:hover{border-color: var(--accent)}
+.meta{font-family:var(--font-body);font-size:13px;color:var(--muted);margin-top:20px}
+.meta a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:1px}
+.meta a:hover{border-color:var(--accent)}
 
-/* Footer */
-.site-footer{
-  padding: 24px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.footer-text{
-  font-family: var(--font-body);
-  font-size: 12px;
-  color: var(--muted);
-}
-.footer-text a{
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-text a:hover{color: var(--fg)}
+.site-footer{padding:24px;border-top:1px solid var(--border);text-align:center}
+.footer-text{font-family:var(--font-body);font-size:12px;color:var(--muted)}
+.footer-text a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-text a:hover{color:var(--fg)}
 
-@media (max-width: 520px){
-  main{padding: 40px 20px}
-  .next-steps{padding: 24px 20px}
-  .check-circle{width: 72px; height: 72px; margin-bottom: 24px}
-  .check-circle svg{width: 32px; height: 32px}
+@media (max-width:520px){
+  main{padding:40px 20px}
+  .card{padding:24px 20px}
+  .check-circle{width:72px;height:72px;margin-bottom:24px}
+  .check-circle svg{width:32px;height:32px}
 }
 </style>
 </head>
 <body>
 
 <header class="site-header">
-  <a href="https://alekscoach.com" class="logo">Aleks <span>Coach</span></a>
-  <a href="https://alekscoach.com" class="header-back">← Back to site</a>
+  <span class="logo">Aleks <span>Coach</span></span>
 </header>
 
 <main>
   <div class="container">
 
     <div class="check-circle fade-in" aria-hidden="true">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <polyline points="5 13 10 18 20 7"></polyline>
-      </svg>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="5 13 10 18 20 7"></polyline></svg>
     </div>
 
-    <div class="eyebrow fade-in-1">
-      <span>Footage received</span>
-    </div>
+    <div class="eyebrow fade-in-1"><span>Footage received</span></div>
 
     <h1 class="fade-in-1">Your analysis is <span class="accent">being built.</span></h1>
 
@@ -358,41 +164,81 @@ h1 .accent{color: var(--accent)}
       Confirmation sent to your inbox. Your full breakdown will follow within 24 to 48 hours.
     </p>
 
-    <div class="next-steps fade-in-3">
-      <span class="next-label">What happens next</span>
+    <!-- QUALIFYING FORM -->
+    <div class="card fade-in-3" id="qual-card">
+      <div id="qual-form">
+        <div class="qual-intro">
+          <h2>Want a sharper breakdown?</h2>
+          <p>Two quick taps. I'll tailor the analysis to where you're trying to take your game. Optional.</p>
+        </div>
+
+        <div class="qual-group">
+          <div class="qual-q">What are you playing for?</div>
+          <div class="qual-options" data-group="goal">
+            <button type="button" class="qual-opt" data-val="Tournaments">Tournaments</button>
+            <button type="button" class="qual-opt" data-val="League matches">League matches</button>
+            <button type="button" class="qual-opt" data-val="Moving up a level">Moving up a level</button>
+            <button type="button" class="qual-opt" data-val="Just for fun">Just for fun</button>
+          </div>
+        </div>
+
+        <div class="qual-group">
+          <div class="qual-q">Where's your game at?</div>
+          <div class="qual-options" data-group="level">
+            <button type="button" class="qual-opt" data-val="Still developing">Still developing</button>
+            <button type="button" class="qual-opt" data-val="Solid club player">Solid club player</button>
+            <button type="button" class="qual-opt" data-val="Advanced">Advanced</button>
+          </div>
+        </div>
+
+        <button type="button" class="qual-submit" id="qual-send" disabled>Send</button>
+        <span class="qual-skip">No pressure. Your analysis comes either way.</span>
+      </div>
+
+      <div class="qual-success" id="qual-done">
+        <div class="tick"><svg viewBox="0 0 24 24"><polyline points="5 13 10 18 20 7"></polyline></svg></div>
+        <h3>Got it.</h3>
+        <p>I'll factor that in when I build your breakdown.</p>
+      </div>
+    </div>
+
+    <!-- WHAT HAPPENS NEXT -->
+    <div class="card fade-in-3">
+      <span class="card-label">What happens next</span>
       <ol class="steps-list">
         <li class="step-item">
           <span class="step-num">1</span>
-          <p class="step-body">
-            <strong>I watch your footage.</strong>
-            <span class="step-note">Every submission is reviewed personally. No automation, no templates.</span>
-          </p>
+          <p class="step-body"><strong>I watch your footage.</strong>
+            <span class="step-note">Every submission is reviewed personally. No automation, no templates.</span></p>
         </li>
         <li class="step-item">
           <span class="step-num">2</span>
-          <p class="step-body">
-            <strong>I record a 5-minute voiceover breakdown.</strong>
-            <span class="step-note">Visuals, mechanical diagnosis, exactly what is happening on your stroke.</span>
-          </p>
+          <p class="step-body"><strong>I record a 5 minute voiceover breakdown.</strong>
+            <span class="step-note">Visuals, mechanical diagnosis, exactly what is happening on your stroke.</span></p>
         </li>
         <li class="step-item">
           <span class="step-num">3</span>
-          <p class="step-body">
-            <strong>You receive the video plus a short written plan.</strong>
-            <span class="step-note">Delivered to the email you submitted, usually within 24 to 48 hours.</span>
-          </p>
+          <p class="step-body"><strong>You get the video plus a short written plan.</strong>
+            <span class="step-note">Sent to the email you submitted, usually within 24 to 48 hours.</span></p>
         </li>
       </ol>
     </div>
 
-    <div class="cta-row fade-in-4">
-      <a href="https://www.instagram.com/aleks_coaches/?hl=en-gb" class="btn btn-primary" target="_blank" rel="noopener">
-        Follow on Instagram
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10M8 7h9v9"/></svg>
-      </a>
-      <a href="https://alekscoach.com" class="btn btn-secondary">
-        Back to homepage
-      </a>
+    <!-- WHILE YOU WAIT -->
+    <div class="card wait-card fade-in-4">
+      <span class="card-label">While you wait</span>
+      <p class="step-body" style="text-align:center;margin-bottom:18px;color:var(--muted)">
+        See what the analysis leads to, or grab the pusher guide.
+      </p>
+      <div class="cta-row">
+        <a href="/proof" class="btn btn-primary">
+          See real results
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l10-10M8 7h9v9"/></svg>
+        </a>
+        <a href="https://www.alekscoach.com/email/beat-the-pusher.pdf" class="btn btn-secondary" target="_blank" rel="noopener">
+          Beat the Pusher guide
+        </a>
+      </div>
     </div>
 
     <p class="meta fade-in-4">
@@ -412,6 +258,56 @@ h1 .accent{color: var(--accent)}
 
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ─── Qualifying form
+(function(){
+  // ⚙️ Endpoint that emails you the qualifying answers (create pages/api/qualify.js)
+  const QUALIFY_ENDPOINT = '/api/qualify';
+
+  const selected = { goal: null, level: null };
+  const sendBtn = document.getElementById('qual-send');
+
+  document.querySelectorAll('.qual-options').forEach(groupEl => {
+    const group = groupEl.dataset.group;
+    groupEl.querySelectorAll('.qual-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        groupEl.querySelectorAll('.qual-opt').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selected[group] = btn.dataset.val;
+        // enable send once at least one answer is given
+        sendBtn.disabled = !(selected.goal || selected.level);
+      });
+    });
+  });
+
+  sendBtn.addEventListener('click', async () => {
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending...';
+
+    // pull the lead's email saved on the previous page (no email in URL, privacy-safe)
+    let lead = {};
+    try { lead = JSON.parse(sessionStorage.getItem('aleksLead') || '{}'); } catch(e){}
+
+    try {
+      await fetch(QUALIFY_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: lead.email || '',
+          name: lead.name || '',
+          stroke: lead.stroke || '',
+          goal: selected.goal || '',
+          level: selected.level || ''
+        })
+      });
+    } catch (err) {
+      console.error('Qualify error:', err);
+      // fall through to success regardless — never block the user
+    }
+    document.getElementById('qual-form').style.display = 'none';
+    document.getElementById('qual-done').classList.add('show');
+  });
+})();
 </script>
 </body>
 </html>

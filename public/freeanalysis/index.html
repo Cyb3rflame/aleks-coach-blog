@@ -539,7 +539,15 @@ function scrollToForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      if (response.ok) { window.location.href = '/thanks'; }
+      if (response.ok) {
+        // Remember the lead for the thanks page (no email in URL — privacy-safe)
+        try {
+          sessionStorage.setItem('aleksLead', JSON.stringify({
+            email: formData.email, name: formData.first_name, stroke: formData.stroke
+          }));
+        } catch (e) {}
+        window.location.href = '/thanks';
+      }
       else { throw new Error('Submission failed'); }
     } catch (error) {
       console.error('Form error:', error);
