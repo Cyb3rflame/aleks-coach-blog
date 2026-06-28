@@ -95,7 +95,7 @@ export default async function handler(req, res) {
     // ── Notify you of the submission ────────────────────────────────
     await resend.emails.send({
       from: 'Aleks Coach <contact@alekscoach.com>',
-      to: 'alexpandov07@gmail.com',
+      to: 'contact@alekscoach.com',
       subject: `New footage submission: ${stroke} from ${first_name}${ref ? ` [via ${ref}]` : ''}`,
       html: `
         <h2>New footage submission</h2>
@@ -113,20 +113,49 @@ export default async function handler(req, res) {
       from: 'Aleks Coach <contact@alekscoach.com>',
       to: email,
       replyTo: 'contact@alekscoach.com',
-      subject: 'Footage received. Your analysis is being built.',
+      subject: 'Footage received',
       html: `
-        <p>Hey ${first_name},</p>
-        <p>Footage received. Thanks for sending it over.</p>
-        <p>Here is what happens now:</p>
-        <ol>
-          <li>I will watch your footage personally.</li>
-          <li>I will record a 5-minute voiceover breakdown with visuals and a mechanical diagnosis of your chosen stroke.</li>
-          <li>You will receive the video plus a short written plan at this email address, usually within 24 to 48 hours.</li>
-        </ol>
-        <p>No automation on my end. Every analysis is done by me.</p>
-        <p>If you have anything else you want me to look at on the footage, just reply to this email.</p>
-        <p>Good luck, and enjoy your tennis.</p>
-        <p>Aleks<br><a href="https://alekscoach.com">alekscoach.com</a></p>
+<body style="margin:0;padding:0;background:#0f0f0e;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f0e;">
+  <tr><td align="center" style="padding:32px 16px;">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#191918;border-radius:12px;overflow:hidden;">
+      <tr><td style="height:4px;background:#CCFF00;line-height:4px;font-size:0;">&nbsp;</td></tr>
+      <tr><td style="padding:30px 40px 6px;">
+        <span style="color:#F2F2EC;font-size:21px;font-weight:bold;letter-spacing:0.5px;">ALEKS<span style="color:#CCFF00;">COACH</span></span>
+      </td></tr>
+      <tr><td style="padding:14px 40px 0;">
+        <h1 style="margin:0;color:#F2F2EC;font-size:25px;line-height:1.25;font-weight:bold;">Footage received.</h1>
+        <p style="margin:9px 0 0;color:#CCFF00;font-size:13px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;">Your analysis is being built</p>
+      </td></tr>
+      <tr><td style="padding:22px 40px 0;"><div style="height:1px;background:#2c2c2a;line-height:1px;font-size:0;">&nbsp;</div></td></tr>
+      <tr><td style="padding:22px 40px 0;color:#F2F2EC;font-size:16px;line-height:1.6;">
+        <p style="margin:0 0 16px;">Hey ${first_name},</p>
+        <p style="margin:0 0 16px;">Thanks for sending your footage over. Your full breakdown will follow within 24 to 48 hours, sent right here to this inbox.</p>
+        <p style="margin:0 0 18px;">Here is what happens now:</p>
+      </td></tr>
+      <tr><td style="padding:0 40px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+          <tr><td valign="top" style="padding:0 14px 16px 0;color:#CCFF00;font-size:15px;font-weight:bold;width:22px;">1</td>
+              <td valign="top" style="padding:0 0 16px;color:#F2F2EC;font-size:15px;line-height:1.55;">I watch your footage myself. No automation, no templates.</td></tr>
+          <tr><td valign="top" style="padding:0 14px 16px 0;color:#CCFF00;font-size:15px;font-weight:bold;">2</td>
+              <td valign="top" style="padding:0 0 16px;color:#F2F2EC;font-size:15px;line-height:1.55;">I record a 5 minute voiceover breakdown. Visuals, and exactly what is happening on your stroke.</td></tr>
+          <tr><td valign="top" style="padding:0 14px 0 0;color:#CCFF00;font-size:15px;font-weight:bold;">3</td>
+              <td valign="top" style="padding:0;color:#F2F2EC;font-size:15px;line-height:1.55;">You get the video plus a short written plan.</td></tr>
+        </table>
+      </td></tr>
+      <tr><td style="padding:22px 40px 0;color:#F2F2EC;font-size:16px;line-height:1.6;">
+        <p style="margin:0;">If there is anything specific you want me to look at, just reply to this email. I read every one.</p>
+      </td></tr>
+      <tr><td style="padding:22px 40px 0;"><div style="height:1px;background:#2c2c2a;line-height:1px;font-size:0;">&nbsp;</div></td></tr>
+      <tr><td style="padding:18px 40px 30px;color:#F2F2EC;font-size:15px;line-height:1.5;">
+        <p style="margin:0;color:#CCFF00;font-weight:bold;font-style:italic;">Good luck, and enjoy your tennis.</p>
+        <p style="margin:13px 0 0;font-weight:bold;">Alex</p>
+        <p style="margin:2px 0 0;color:#9a9a92;font-size:13px;">Aleks Coach</p>
+      </td></tr>
+    </table>
+  </td></tr>
+  </table>
+</body>
       `,
     });
 

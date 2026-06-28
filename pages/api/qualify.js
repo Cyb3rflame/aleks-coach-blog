@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   try {
     await resend.emails.send({
       from: 'Aleks Coach <contact@alekscoach.com>',
-      to: 'alexpandov07@gmail.com',
+      to: 'contact@alekscoach.com',
       subject: `Qualifying info: ${name || email || 'submitter'}${flag}`,
       html: `
         <h2>Qualifying answers${flag}</h2>
