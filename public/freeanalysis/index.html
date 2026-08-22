@@ -20,15 +20,18 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg: #191918;
-  --bg-2: #1e1e1d;
-  --bg-3: #242423;
-  --fg: #F2F2EC;
-  --muted: #737373;
+  --bg: #F7F6F1;
+  --bg-2: #FFFFFF;
+  --bg-3: #EFEEE5;
+  --fg: #17170F;
+  --muted: #5C5B53;
   --accent: #CCFF00;
-  --accent-dim: rgba(204,255,0,0.12);
-  --accent-glow: rgba(204,255,0,0.25);
-  --border: rgba(242,242,236,0.08);
+  --accent-ink: #4F6900;
+  --accent-on: #14150D;
+  --accent-dim: rgba(79,105,0,0.09);
+  --accent-glow: rgba(153,199,0,0.35);
+  --border: rgba(23,23,15,0.10);
+  --error: #C1272D;
   --radius: 6px;
   --radius-lg: 12px;
   --font-head: 'Space Grotesk', sans-serif;
@@ -48,6 +51,14 @@ body{
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+::selection{background: rgba(79,105,0,0.18); color: var(--fg)}
+:focus-visible{outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 3px}
+::-webkit-scrollbar{width: 12px; height: 12px}
+::-webkit-scrollbar-track{background: var(--bg)}
+::-webkit-scrollbar-thumb{background: var(--bg-3); border: 3px solid var(--bg); border-radius: 100px}
+::-webkit-scrollbar-thumb:hover{background: var(--border)}
+html{scrollbar-color: var(--bg-3) var(--bg); scrollbar-width: thin}
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -76,24 +87,25 @@ body{
 
 /* ─── HEADER / NAV ─── */
 .site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background 0.3s var(--ease-in-out), border-color 0.3s var(--ease-in-out), backdrop-filter 0.3s}
-.site-header.scrolled{background:rgba(25,25,24,0.9);border-color:var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-header.scrolled{background:rgba(247,246,241,0.92);border-color:var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .logo{font-family:var(--font-head);font-weight:700;font-size:17px;color:var(--fg);text-decoration:none;letter-spacing:-0.3px}
-.logo span{color:var(--accent)}
-.header-cta{font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;letter-spacing:0.2px;transition:opacity 0.2s}
+.logo span{color:var(--accent-ink)}
+.header-cta{font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--accent-ink);text-decoration:none;letter-spacing:0.2px;transition:opacity 0.2s}
 .header-cta:hover{opacity:0.75}
 
 /* ─── HERO ─── */
 .hero{padding:160px 0 64px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle, var(--accent-dim) 0%, transparent 65%);pointer-events:none}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;background:var(--accent-dim);border:1px solid rgba(204,255,0,0.2);padding:6px 14px;border-radius:100px}
-.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dot-blink 1.8s ease-in-out infinite}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-ink);margin-bottom:24px;background:var(--accent-dim);border:1px solid rgba(79,105,0,0.22);padding:6px 14px;border-radius:100px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-ink);animation:dot-blink 1.8s ease-in-out infinite}
 .hero-headline{font-family:var(--font-head);font-size:clamp(36px, 7vw, 64px);font-weight:700;line-height:1.08;letter-spacing:-1.5px;color:var(--fg);max-width:700px;margin:0 auto 20px}
-.hero-headline .accent{color:var(--accent);position:relative}
+.hero-headline .accent{color:var(--accent-ink);position:relative}
 .hero-sub{font-family:var(--font-body);font-size:clamp(16px, 2.5vw, 19px);font-weight:400;color:var(--muted);max-width:520px;margin:0 auto 0;line-height:1.6}
+@media(max-width:420px){.hero-break{display:none}}
 
 /* ─── SECTION HEADINGS ─── */
 .section{padding:56px 0}
-.section-label{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:12px}
+.section-label{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent-ink);text-align:center;margin-bottom:12px}
 .section-title{font-family:var(--font-head);font-size:clamp(24px,4.5vw,34px);font-weight:700;letter-spacing:-0.6px;color:var(--fg);text-align:center;line-height:1.1;margin-bottom:10px}
 .section-lead{font-size:15px;color:var(--muted);text-align:center;max-width:480px;margin:0 auto 36px}
 
@@ -101,13 +113,13 @@ body{
 .video-wrap{position:relative;background:var(--bg-3);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color 0.25s, box-shadow 0.25s}
 .video-wrap.landscape{aspect-ratio:16/9}
 .video-wrap.vertical{aspect-ratio:9/16}
-.video-wrap:hover{border-color:rgba(204,255,0,0.3);box-shadow:0 0 40px rgba(204,255,0,0.08)}
-.video-thumb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e1e1d 0%,#2a2a28 50%,#1e1e1d 100%)}
+.video-wrap:hover{border-color:var(--accent-ink);box-shadow:0 16px 32px -16px rgba(23,23,15,0.22)}
+.video-thumb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#EFEEE5 0%,#E3E1D4 50%,#EFEEE5 100%)}
 .video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .video-thumb .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.35),rgba(0,0,0,0) 55%)}
 .play-btn{position:relative;z-index:2;width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;animation:pulse-ring 2.5s ease-out infinite, float 3s ease-in-out infinite;transition:transform 0.2s var(--ease-out)}
 .video-wrap:hover .play-btn{transform:scale(1.08)}
-.play-btn svg{width:26px;height:26px;fill:var(--bg);margin-left:4px}
+.play-btn svg{width:26px;height:26px;fill:var(--accent-on);margin-left:4px}
 .video-wrap::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent);top:0;animation:scan-line 4s linear infinite;pointer-events:none;opacity:0;transition:opacity 0.3s}
 .video-wrap:hover::after{opacity:1}
 .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
@@ -118,7 +130,7 @@ body{
 .transform-copy{max-width:380px}
 .transform-copy h3{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--fg);margin-bottom:12px;letter-spacing:-0.3px}
 .transform-copy p{font-size:15px;color:var(--muted);margin-bottom:8px}
-.transform-copy .tag{color:var(--accent);font-size:13px;font-weight:600}
+.transform-copy .tag{color:var(--accent-ink);font-size:13px;font-weight:600}
 @media(max-width:640px){.transform-copy{text-align:center}}
 
 /* ─── BREAKDOWN GRID ─── */
@@ -137,23 +149,23 @@ body{
 .field-input::placeholder{color:var(--muted)}
 .field-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
 textarea.field-input{resize:vertical;min-height:90px;font-family:var(--font-body)}
-select.field-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;cursor:pointer}
+select.field-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%235C5B53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;cursor:pointer}
 select.field-input:invalid{color:var(--muted)}
 .field-help{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
-.form-error{font-size:13px;color:#ff6b6b;margin-top:6px;display:none}
+.form-error{font-size:13px;color:var(--error);margin-top:6px;display:none}
 .form-error.visible{display:block}
 .form-submit-inline{margin-top:8px}
-.btn-inline{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--bg);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 36px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s}
-.btn-inline:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(204,255,0,0.35);background:#d9ff1a}
+.btn-inline{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-on);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 36px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s}
+.btn-inline:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(23,23,15,0.35);background:#d9ff1a}
 .btn-inline:active{transform:translateY(0)}
 .btn-inline svg{width:18px;height:18px;transition:transform 0.2s var(--ease-out)}
 .btn-inline:hover svg{transform:translateX(4px)}
-.btn-sub-label{font-size:12px;font-weight:400;color:rgba(25,25,24,0.6);margin-top:4px;text-align:center}
+.btn-sub-label{font-size:12px;font-weight:400;color:rgba(20,21,13,0.62);margin-top:4px;text-align:center}
 
 /* ─── STICKY CTA ─── */
-.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:16px 24px 20px;background:linear-gradient(to top, rgba(25,25,24,0.98) 0%, rgba(25,25,24,0.6) 100%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;justify-content:center;border-top:1px solid var(--border);animation:fadeIn 0.5s var(--ease-out) 0.8s both}
-.btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--bg);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 48px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;max-width:480px;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s;animation:pulse-ring 3s ease-out infinite}
-.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(204,255,0,0.35);background:#d9ff1a}
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:16px 24px 20px;background:linear-gradient(to top, rgba(247,246,241,0.98) 0%, rgba(247,246,241,0.55) 100%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;justify-content:center;border-top:1px solid var(--border);animation:fadeIn 0.5s var(--ease-out) 0.8s both}
+.btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-on);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 48px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;max-width:480px;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s;animation:pulse-ring 3s ease-out infinite}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(23,23,15,0.35);background:#d9ff1a}
 .btn-submit:active{transform:translateY(0);box-shadow:none}
 .btn-submit svg{width:18px;height:18px;transition:transform 0.2s var(--ease-out)}
 .btn-submit:hover svg{transform:translateX(4px)}
@@ -167,11 +179,11 @@ select.field-input:invalid{color:var(--muted)}
 .testi-anchor .cap{font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:0.5px}
 .testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 @media(max-width:640px){.testimonials{grid-template-columns:1fr}}
-.testimonial-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:border-color 0.25s}
-.testimonial-card:hover{border-color:rgba(204,255,0,0.2)}
-.testimonial-stars{color:var(--accent);font-size:13px;margin-bottom:10px;letter-spacing:2px}
+.testimonial-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:border-color 0.25s, box-shadow 0.25s}
+.testimonial-card:hover{border-color:rgba(79,105,0,0.3);box-shadow:0 12px 24px -14px rgba(23,23,15,0.18)}
+.testimonial-stars{color:var(--accent-ink);font-size:13px;margin-bottom:10px;letter-spacing:2px}
 .testimonial-text{font-size:14px;line-height:1.6;color:var(--fg);margin-bottom:14px}
-.testimonial-text b{color:var(--accent);font-weight:600}
+.testimonial-text b{color:var(--accent-ink);font-weight:600}
 .testimonial-author{display:flex;align-items:center;gap:10px}
 .author-name{font-size:13px;font-weight:600;color:var(--fg)}
 .author-detail{font-size:12px;color:var(--muted)}
@@ -179,46 +191,20 @@ select.field-input:invalid{color:var(--muted)}
 /* ─── STATS ─── */
 .stats-row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:36px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .stat-item{text-align:center}
-.stat-number{font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--accent);letter-spacing:-1px;display:block}
+.stat-number{font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--accent-ink);letter-spacing:-1px;display:block}
 .stat-label{font-size:13px;color:var(--muted);margin-top:2px}
 
 /* ─── FOOTER ─── */
 .footer{padding:48px 0 120px}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px}
 .footer-logo{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--fg);opacity:0.5}
-.footer-logo span{color:var(--accent);opacity:1}
-.footer-signoff{font-family:var(--font-head);font-style:italic;color:var(--accent);font-size:14px;text-align:center;margin-bottom:28px;opacity:0.9}
+.footer-logo span{color:var(--accent-ink);opacity:1}
+.footer-signoff{font-family:var(--font-head);font-style:italic;color:var(--accent-ink);font-size:14px;text-align:center;margin-bottom:28px;opacity:0.9}
 .footer-legal{font-size:12px;color:var(--muted)}
 .footer-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
 .footer-legal a:hover{color:var(--fg)}
 
 body{padding-bottom:80px}
-
-/* ─── EXIT-INTENT POPUP ─── */
-.exit-overlay{position:fixed;inset:0;z-index:1000;background:rgba(10,10,9,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px;animation:fadeIn 0.25s ease}
-.exit-overlay.open{display:flex}
-.exit-card{position:relative;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);max-width:440px;width:100%;padding:42px 32px 30px;overflow:hidden;animation:fadeUp 0.4s var(--ease-out)}
-.exit-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.exit-close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;padding:4px;transition:color 0.2s}
-.exit-close:hover{color:var(--fg)}
-.exit-kicker{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.exit-card h3{font-family:var(--font-head);font-size:26px;font-weight:700;letter-spacing:-0.5px;color:var(--fg);margin-bottom:10px;line-height:1.12}
-.exit-card p{font-size:15px;color:var(--muted);margin-bottom:22px;line-height:1.55}
-.exit-form{display:flex;flex-direction:column;gap:12px}
-.exit-form input{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;font-family:var(--font-body);font-size:15px;color:var(--fg);outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%}
-.exit-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
-.exit-form input::placeholder{color:var(--muted)}
-.exit-btn{background:var(--accent);color:var(--bg);font-family:var(--font-head);font-size:15px;font-weight:700;border:none;border-radius:var(--radius);padding:14px;cursor:pointer;transition:transform 0.15s var(--ease-out),box-shadow 0.2s,background 0.2s}
-.exit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(204,255,0,0.3);background:#d9ff1a}
-.exit-btn:disabled{opacity:0.6;cursor:default;transform:none;box-shadow:none}
-.exit-error{font-size:13px;color:#ff6b6b;display:none}
-.exit-error.visible{display:block}
-.exit-fine{font-size:12px;color:var(--muted);margin-top:14px;text-align:center}
-.exit-success{text-align:center;display:none}
-.exit-success.show{display:block}
-.exit-success .check{width:54px;height:54px;border-radius:50%;background:var(--accent-dim);border:1px solid rgba(204,255,0,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-.exit-success .check svg{width:26px;height:26px;stroke:var(--accent);fill:none}
-.exit-dl{display:inline-block;margin-top:16px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 </style>
 </head>
 <body>
@@ -237,7 +223,7 @@ body{padding-bottom:80px}
       8 spots left this week
     </div>
     <h1 class="hero-headline reveal reveal-delay-1">
-      Find out <span class="accent">exactly</span> what<br>is holding you back.
+      Find out <span class="accent">exactly</span> what<br class="hero-break">is holding you back.
     </h1>
     <p class="hero-sub reveal reveal-delay-2">
       Send your footage. Get a free 5 minute breakdown of the stroke you pick. You see what is going wrong, and the couple of changes that fix it.
@@ -440,30 +426,6 @@ body{padding-bottom:80px}
   </div>
 </footer>
 
-<!-- ─── EXIT-INTENT POPUP (Beat the Pusher lead magnet) ─── -->
-<div class="exit-overlay" id="exit-overlay" role="dialog" aria-modal="true" aria-labelledby="exit-title">
-  <div class="exit-card">
-    <button class="exit-close" id="exit-close" aria-label="Close">&times;</button>
-    <div id="exit-default">
-      <div class="exit-kicker">Free guide</div>
-      <h3 id="exit-title">Beaten by pushers?</h3>
-      <p>You know the type. They get everything back and wait for you to miss. Grab the free guide on how to take them apart.</p>
-      <form class="exit-form" id="exit-form" novalidate>
-        <input type="email" id="exit-email" placeholder="you@email.com" autocomplete="email" required>
-        <p class="exit-error" id="exit-err">Please enter a valid email.</p>
-        <button type="submit" class="exit-btn" id="exit-submit">Send me the guide</button>
-      </form>
-      <p class="exit-fine">One email with the guide. The odd tip after. Leave whenever you want.</p>
-    </div>
-    <div class="exit-success" id="exit-success">
-      <div class="check"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-      <h3>It is on its way.</h3>
-      <p>Check your inbox for the guide. If it is not there in a minute, look in spam.</p>
-      <a class="exit-dl" id="exit-dl" href="https://alekscoach.com/email/beat-the-pusher.pdf" target="_blank" rel="noopener">Or download it now</a>
-    </div>
-  </div>
-</div>
-
 <!-- ─── ALWAYS-VISIBLE STICKY SUBMIT ─── -->
 <div class="sticky-cta" role="complementary" aria-label="Submit your details">
   <button type="button" class="btn-submit" onclick="scrollToForm()" aria-label="Submit your footage — scroll to form">
@@ -509,7 +471,7 @@ function scrollToForm() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const urlRegex = /^https?:\/\/.+\..+/i;
   function clearError(input, errorEl){ input.style.borderColor = ''; errorEl.classList.remove('visible'); }
-  function showError(input, errorEl){ input.style.borderColor = '#ff6b6b'; errorEl.classList.add('visible'); }
+  function showError(input, errorEl){ input.style.borderColor = '#C1272D'; errorEl.classList.add('visible'); }
   emailInput.addEventListener('input', () => clearError(emailInput, emailError));
   footageInput.addEventListener('input', () => clearError(footageInput, footageError));
   form.addEventListener('submit', async (e) => {
@@ -577,85 +539,6 @@ document.querySelectorAll('.video-wrap[data-yt]').forEach(wrap => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); }
   });
 });
-
-// ─── Exit-intent popup (Beat the Pusher lead magnet)
-(function(){
-  // ⚙️ Wire this to your backend: an endpoint that adds the email to your nurture
-  // sequence tagged "PDF lead" (separate from footage submitters) and emails the guide.
-  const PDF_LEAD_ENDPOINT = '/api/lead-magnet';
-
-  const overlay   = document.getElementById('exit-overlay');
-  const closeBtn  = document.getElementById('exit-close');
-  const form      = document.getElementById('exit-form');
-  const emailIn   = document.getElementById('exit-email');
-  const errEl     = document.getElementById('exit-err');
-  const submitBtn = document.getElementById('exit-submit');
-  const defaultEl = document.getElementById('exit-default');
-  const successEl = document.getElementById('exit-success');
-  if (!overlay) return;
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  let shown = false;
-
-  function alreadyShown(){
-    try { return sessionStorage.getItem('exitShown') === '1'; } catch(e){ return false; }
-  }
-  function markShown(){
-    try { sessionStorage.setItem('exitShown', '1'); } catch(e){}
-  }
-  function open(){
-    if (shown || alreadyShown()) return;
-    shown = true; markShown();
-    overlay.classList.add('open');
-  }
-  function close(){ overlay.classList.remove('open'); }
-
-  // close interactions
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-
-  // DESKTOP: fire when the cursor leaves through the top of the window
-  document.addEventListener('mouseout', e => {
-    if (e.clientY <= 0 && !e.relatedTarget) open();
-  });
-
-  // MOBILE: no mouse leave, so use a fast scroll back up toward the top as the proxy
-  let lastY = window.scrollY, maxY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    maxY = Math.max(maxY, y);
-    if (maxY > 700 && y < lastY - 45 && y < 320) open();
-    lastY = y;
-  }, { passive: true });
-
-  // submit
-  function showErr(){ emailIn.style.borderColor = '#ff6b6b'; errEl.classList.add('visible'); }
-  emailIn.addEventListener('input', () => { emailIn.style.borderColor=''; errEl.classList.remove('visible'); });
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!emailRegex.test(emailIn.value.trim())) { showErr(); return; }
-    submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
-    try {
-      await fetch(PDF_LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: emailIn.value.trim(),
-          source: 'exit_intent',
-          tag: 'pdf_lead',
-          ref: new URLSearchParams(window.location.search).get('ref') || ''
-        })
-      });
-    } catch (err) {
-      console.error('Lead magnet error:', err);
-      // Even if the backend call fails, still give them the guide so the click is not wasted.
-    }
-    defaultEl.style.display = 'none';
-    successEl.classList.add('show');
-  });
-})();
 </script>
 </body>
 </html>
