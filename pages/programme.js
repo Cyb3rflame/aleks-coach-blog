@@ -1,6 +1,5 @@
-/* app/programme/page.js
-   App Router version. Server component, no client JS needed.
-   If you are on the Pages Router, use programme.js instead. */
+import Head from "next/head";
+import { useState } from "react";
 
 /* ------------------------------------------------------------------
    EDIT EVERYTHING IN THIS BLOCK. NOTHING ELSE NEEDS TOUCHING.
@@ -23,10 +22,47 @@ const CONFIG = {
   period: "for 6 months",
 };
 
-const BREAKDOWNS = [
-  { id: "REPLACE_ME", label: "Forehand breakdown" },
-  { id: "REPLACE_ME", label: "Backhand breakdown" },
-  { id: "REPLACE_ME", label: "Serve breakdown" },
+const STEPS = [
+  {
+    n: "01",
+    title: "Send a video",
+    body:
+      "Rallying, points, a set, a ball machine, even against a wall. Phone propped on your bag is fine.",
+  },
+  {
+    n: "02",
+    title: "Get your breakdowns",
+    body:
+      "Forehand, backhand and serve, each broken down properly, with one clear focus to take on court.",
+  },
+  {
+    n: "03",
+    title: "Keep sending, keep changing",
+    body:
+      "You train, you film, I review. We hold each focus until it survives a real match, then move to the next one.",
+  },
+];
+
+// Video testimonials. Unlisted YouTube IDs.
+const VIDEO_TESTIMONIALS = [
+  { id: "REPLACE_ME", name: "Name", detail: "6 months in" },
+  { id: "REPLACE_ME", name: "Name", detail: "4 months in" },
+];
+
+// Before and afters. Drop the images in /public/images/ and point at them.
+const BEFORE_AFTERS = [
+  {
+    before: "/images/ba-1-before.jpg",
+    after: "/images/ba-1-after.jpg",
+    label: "Serve, take back and trophy position",
+    note: "Eight weeks apart.",
+  },
+  {
+    before: "/images/ba-2-before.jpg",
+    after: "/images/ba-2-after.jpg",
+    label: "Forehand, contact point and spacing",
+    note: "Six weeks apart.",
+  },
 ];
 
 const TESTIMONIALS = [
@@ -54,6 +90,12 @@ const TESTIMONIALS = [
     name: "Name",
     detail: "Returning after a long break",
   },
+];
+
+const BREAKDOWNS = [
+  { id: "REPLACE_ME", label: "Forehand breakdown" },
+  { id: "REPLACE_ME", label: "Backhand breakdown" },
+  { id: "REPLACE_ME", label: "Serve breakdown" },
 ];
 
 const INCLUDED = [
@@ -99,27 +141,6 @@ const INCLUDED = [
   },
 ];
 
-const STEPS = [
-  {
-    n: "01",
-    title: "Send a video",
-    body:
-      "Rallying, points, a set, a ball machine, even against a wall. Phone propped on your bag is fine.",
-  },
-  {
-    n: "02",
-    title: "Get your breakdowns",
-    body:
-      "Forehand, backhand and serve, each broken down properly, with one clear focus to take on court.",
-  },
-  {
-    n: "03",
-    title: "Keep sending, keep changing",
-    body:
-      "You train, you film, I review. We hold each focus until it survives a real match, then move to the next one.",
-  },
-];
-
 const FAQS = [
   {
     q: "What level is this for?",
@@ -149,16 +170,9 @@ const FAQS = [
 
 /* ------------------------------------------------------------------ */
 
-export const metadata = {
-  title: "The Programme | Aleks Coach",
-  description:
-    "Six months of online tennis coaching. Full technical breakdowns, unlimited video reviews and match preparation, all through WhatsApp.",
-  robots: { index: false, follow: false },
-};
-
 function Video({ id, title }) {
   return (
-    <div className="ac-frame">
+    <div className="frame">
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
         title={title}
@@ -166,66 +180,73 @@ function Video({ id, title }) {
         allowFullScreen
         loading="lazy"
       />
-    </div>
-  );
-}
-
-function Cta({ note = true }) {
-  return (
-    <div className="ac-cta">
-      <a className="ac-btn" href={CONFIG.stripeLink}>
-        Start the programme
-      </a>
-      <p className="ac-price">
-        <strong>{CONFIG.price}</strong> {CONFIG.period}. Pause it any time.
-      </p>
-      {note && (
-        <p className="ac-alt">
-          Questions first? <a href={CONFIG.whatsapp}>Message me on WhatsApp</a>
-        </p>
-      )}
+      <style jsx>{`
+        .frame {
+          position: relative;
+          width: 100%;
+          padding-top: 56.25%;
+          background: #0d2137;
+          border-radius: 4px;
+          overflow: hidden;
+          box-shadow: 0 18px 44px -22px rgba(13, 33, 55, 0.45);
+        }
+        .frame :global(iframe) {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+      `}</style>
     </div>
   );
 }
 
 export default function Programme() {
+  const [open, setOpen] = useState(null);
+
   return (
-    <div className="ac-page">
-      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+    <>
+      <Head>
+        <title>The Programme | Aleks Coach</title>
+        <meta
+          name="description"
+          content="Six months of online tennis coaching. Full technical breakdowns, unlimited video reviews and match preparation, all through WhatsApp."
+        />
+        <meta name="robots" content="noindex" />
+      </Head>
 
       <main>
-        <header className="ac-top">
-          <span className="ac-mark">ALEKS COACH</span>
-          <span className="ac-rule" />
-          <span className="ac-tag">Online tennis coaching</span>
+        <header className="top">
+          <span className="mark">ALEKS COACH</span>
+          <span className="rule" />
+          <span className="tag">Online tennis coaching</span>
         </header>
 
-        <section className="ac-hero">
+        {/* 1. HERO + VIDEO */}
+        <section className="hero">
           <h1>
             Whatever training you already do,
             <br />
             <em>I make it better.</em>
           </h1>
-          <p className="ac-lede">
+          <p className="lede">
             Six months of coaching that fits around the tennis you already play.
             Watch the video, it goes through the whole thing.
           </p>
         </section>
 
-        <section className="ac-video">
+        <section className="video-wrap">
           <Video id={CONFIG.mainVideoId} title="The Aleks Coach programme" />
         </section>
 
-        <section className="ac-ctablock">
-          <Cta />
-        </section>
-
+        {/* 2. HOW IT WORKS */}
         <section>
           <h2>How it works</h2>
-          <div className="ac-grid-3">
+          <div className="grid-3">
             {STEPS.map((s) => (
-              <div key={s.n} className="ac-step">
-                <span className="ac-n">{s.n}</span>
+              <div key={s.n} className="step">
+                <span className="n">{s.n}</span>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
               </div>
@@ -233,24 +254,69 @@ export default function Programme() {
           </div>
         </section>
 
+        {/* 3. VIDEO TESTIMONIALS */}
         <section>
-          <h2>What you get</h2>
-          <div className="ac-grid-2">
-            {INCLUDED.map((i) => (
-              <div key={i.title} className="ac-inc">
-                <h3>{i.title}</h3>
-                <p>{i.body}</p>
-              </div>
+          <h2>Players in their own words</h2>
+          <div className="grid-2">
+            {VIDEO_TESTIMONIALS.map((v, idx) => (
+              <figure key={idx}>
+                <Video id={v.id} title={`${v.name} testimonial`} />
+                <figcaption>
+                  <span className="name">{v.name}</span>
+                  <span className="detail">{v.detail}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </section>
 
+        {/* 4. BEFORE AND AFTERS */}
+        <section>
+          <h2>Before and after</h2>
+          <div className="ba-list">
+            {BEFORE_AFTERS.map((b, idx) => (
+              <figure key={idx} className="ba">
+                <div className="ba-pair">
+                  <div className="ba-img">
+                    <img src={b.before} alt={`${b.label}, before`} />
+                    <span>Before</span>
+                  </div>
+                  <div className="ba-img">
+                    <img src={b.after} alt={`${b.label}, after`} />
+                    <span className="is-after">After</span>
+                  </div>
+                </div>
+                <figcaption>
+                  <strong>{b.label}</strong> {b.note}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. WRITTEN REVIEWS */}
+        <section>
+          <h2>Reviews</h2>
+          <div className="grid-2 revs">
+            {TESTIMONIALS.map((t, idx) => (
+              <blockquote key={idx}>
+                <p>{t.quote}</p>
+                <footer>
+                  <span className="name">{t.name}</span>
+                  <span className="detail">{t.detail}</span>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </section>
+
+        {/* 6. TASTER BREAKDOWNS */}
         <section>
           <h2>Example breakdowns</h2>
-          <p className="ac-sub">
+          <p className="sub">
             This is what lands in your WhatsApp after you send a video.
           </p>
-          <div className="ac-grid-3">
+          <div className="grid-3">
             {BREAKDOWNS.map((b, idx) => (
               <figure key={idx}>
                 <Video id={b.id} title={b.label} />
@@ -260,163 +326,500 @@ export default function Programme() {
           </div>
         </section>
 
+        {/* 7. WHAT YOU GET */}
         <section>
-          <h2>What players say</h2>
-          <div className="ac-grid-2 ac-revs">
-            {TESTIMONIALS.map((t, idx) => (
-              <blockquote key={idx}>
-                <p>{t.quote}</p>
-                <footer>
-                  <span className="ac-name">{t.name}</span>
-                  <span className="ac-detail">{t.detail}</span>
-                </footer>
-              </blockquote>
+          <h2>What you get</h2>
+          <div className="grid-2">
+            {INCLUDED.map((i) => (
+              <div key={i.title} className="inc">
+                <h3>{i.title}</h3>
+                <p>{i.body}</p>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="ac-faq">
+        {/* 8. FAQ */}
+        <section className="faq">
           <h2>Questions</h2>
-          <div className="ac-faqlist">
+          <ul>
             {FAQS.map((f, idx) => (
-              <details key={idx}>
-                <summary>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
+              <li key={idx} className={open === idx ? "open" : ""}>
+                <button
+                  onClick={() => setOpen(open === idx ? null : idx)}
+                  aria-expanded={open === idx}
+                >
+                  <span>{f.q}</span>
+                  <i />
+                </button>
+                {open === idx && <p>{f.a}</p>}
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
-        <section className="ac-final">
+        <section className="final">
           <h2>Ready to start?</h2>
-          <p className="ac-sub">
+          <p className="sub">
             Pay below and you land straight in my WhatsApp. Send me a video and
             I will get your first breakdowns built.
           </p>
-          <Cta note={false} />
+          <a className="btn big" href={CONFIG.stripeLink}>
+            Start the programme
+          </a>
+          <p className="price">
+            <strong>{CONFIG.price}</strong> {CONFIG.period}. Pause it any time.
+          </p>
+          <p className="alt">
+            Questions first? <a href={CONFIG.whatsapp}>Message me on WhatsApp</a>
+          </p>
         </section>
 
-        <footer className="ac-bottom">
+        <footer className="bottom">
           <span>Aleks Coach</span>
           <span>Aleksandar Pandov, LTA Level 3</span>
         </footer>
       </main>
-    </div>
+
+      {/* STICKY CTA, VISIBLE THE WHOLE TIME */}
+      <div className="bar">
+        <div className="bar-in">
+          <span className="bar-price">
+            <strong>{CONFIG.price}</strong>
+            <em>{CONFIG.period}</em>
+          </span>
+          <a className="btn" href={CONFIG.stripeLink}>
+            Start the programme
+          </a>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        :root {
+          --navy: #0d2137;
+          --red: #c0392b;
+          --paper: #fbfaf8;
+          --line: #e2ddd6;
+          --muted: #5d6a78;
+          --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+          --serif: Georgia, "Times New Roman", serif;
+        }
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          background: var(--paper);
+          color: var(--navy);
+          font-family: var(--serif);
+          font-size: 18px;
+          -webkit-font-smoothing: antialiased;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        a {
+          color: var(--red);
+        }
+      `}</style>
+
+      <style jsx>{`
+        main {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 1.5rem 7rem;
+        }
+
+        h2 {
+          font-family: var(--sans);
+          font-size: 0.9375rem;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--red);
+          margin: 0 0 1.5rem;
+        }
+
+        section {
+          padding: 2.75rem 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        /* header */
+        .top {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1.5rem 0 2rem;
+        }
+        .mark {
+          font-family: var(--sans);
+          font-weight: 700;
+          font-size: 0.875rem;
+          letter-spacing: 0.22em;
+        }
+        .rule {
+          flex: 1;
+          height: 1px;
+          background: var(--line);
+        }
+        .tag {
+          font-size: 0.9375rem;
+          color: var(--muted);
+        }
+
+        /* hero */
+        .hero {
+          text-align: center;
+          padding: 0 0 1.75rem;
+          border-bottom: 0;
+        }
+        h1 {
+          font-family: var(--sans);
+          font-size: clamp(2.3rem, 6vw, 3.6rem);
+          line-height: 1.05;
+          font-weight: 700;
+          letter-spacing: -0.025em;
+          margin: 0 0 1rem;
+        }
+        h1 em {
+          font-family: var(--serif);
+          font-style: italic;
+          font-weight: 400;
+          color: var(--red);
+        }
+        .lede {
+          font-size: 1.25rem;
+          line-height: 1.5;
+          color: var(--muted);
+          max-width: 36rem;
+          margin: 0 auto;
+        }
+
+        .video-wrap {
+          padding: 0;
+          border-bottom: 0;
+        }
+
+        /* grids */
+        .grid-3 {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.75rem;
+        }
+        .grid-2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.75rem 2.25rem;
+        }
+
+        /* steps */
+        .n {
+          font-family: var(--sans);
+          font-size: 0.8125rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          color: var(--red);
+        }
+        .step h3 {
+          font-family: var(--sans);
+          font-size: 1.25rem;
+          margin: 0.4rem 0 0.35rem;
+        }
+        .step p {
+          margin: 0;
+          font-size: 1.0625rem;
+          line-height: 1.5;
+          color: var(--muted);
+        }
+
+        /* figures */
+        figure {
+          margin: 0;
+        }
+        figcaption {
+          font-family: var(--sans);
+          font-size: 0.9375rem;
+          color: var(--muted);
+          margin-top: 0.55rem;
+        }
+        .name {
+          font-weight: 700;
+          color: var(--navy);
+        }
+        .detail {
+          color: var(--muted);
+        }
+        .detail:before {
+          content: " / ";
+          color: var(--line);
+        }
+
+        /* before and after */
+        .ba-list {
+          display: grid;
+          gap: 1.75rem;
+        }
+        .ba-pair {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.75rem;
+        }
+        .ba-img {
+          position: relative;
+          border-radius: 4px;
+          overflow: hidden;
+          background: #0d2137;
+        }
+        .ba-img img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+        .ba-img span {
+          position: absolute;
+          top: 0.6rem;
+          left: 0.6rem;
+          background: rgba(13, 33, 55, 0.92);
+          color: #fff;
+          font-family: var(--sans);
+          font-size: 0.6875rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          padding: 0.3rem 0.6rem;
+          border-radius: 2px;
+        }
+        .ba-img span.is-after {
+          background: var(--red);
+        }
+        .ba figcaption strong {
+          font-family: var(--sans);
+          color: var(--navy);
+        }
+
+        /* reviews */
+        .revs blockquote {
+          margin: 0;
+          padding-left: 1.15rem;
+          border-left: 2px solid var(--red);
+        }
+        .revs blockquote p {
+          margin: 0 0 0.6rem;
+          font-size: 1.1875rem;
+          line-height: 1.5;
+        }
+        .revs blockquote footer {
+          font-family: var(--sans);
+          font-size: 0.9375rem;
+        }
+
+        .sub {
+          margin: -1rem 0 1.5rem;
+          color: var(--muted);
+          font-size: 1.125rem;
+        }
+
+        /* what you get */
+        .inc h3 {
+          font-family: var(--sans);
+          font-size: 1.25rem;
+          margin: 0 0 0.4rem;
+          padding-top: 0.75rem;
+          border-top: 2px solid var(--navy);
+        }
+        .inc p {
+          margin: 0;
+          font-size: 1.0625rem;
+          line-height: 1.55;
+          color: var(--muted);
+        }
+
+        /* faq */
+        .faq ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          border-top: 1px solid var(--line);
+        }
+        .faq li {
+          border-bottom: 1px solid var(--line);
+        }
+        .faq button {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          background: none;
+          border: 0;
+          padding: 0.95rem 0;
+          cursor: pointer;
+          text-align: left;
+          font-family: var(--sans);
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: var(--navy);
+        }
+        .faq i {
+          flex: none;
+          width: 11px;
+          height: 11px;
+          border-right: 2px solid var(--red);
+          border-bottom: 2px solid var(--red);
+          transform: rotate(45deg) translate(-3px, -3px);
+          transition: transform 0.2s ease;
+        }
+        .faq li.open i {
+          transform: rotate(225deg) translate(-3px, -3px);
+        }
+        .faq li p {
+          margin: -0.2rem 0 1rem;
+          font-size: 1.0625rem;
+          line-height: 1.55;
+          color: var(--muted);
+          max-width: 48rem;
+        }
+
+        /* final */
+        .final {
+          text-align: center;
+          border-bottom: 0;
+          padding-bottom: 2rem;
+        }
+        .final .sub {
+          margin: -1rem auto 1.5rem;
+          max-width: 32rem;
+        }
+        .btn {
+          display: inline-block;
+          background: var(--red);
+          color: #fff;
+          font-family: var(--sans);
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          text-decoration: none;
+          border-radius: 2px;
+          transition: transform 0.15s ease, background 0.15s ease;
+        }
+        .btn.big {
+          font-size: 1.125rem;
+          padding: 1.1rem 3rem;
+          box-shadow: 0 10px 28px -12px rgba(192, 57, 43, 0.75);
+        }
+        .btn:hover {
+          background: #a93226;
+          transform: translateY(-2px);
+        }
+        .price {
+          margin: 1rem 0 0;
+          font-size: 1.125rem;
+        }
+        .price strong {
+          font-family: var(--sans);
+        }
+        .alt {
+          margin: 0.35rem 0 0;
+          font-size: 1rem;
+          color: var(--muted);
+        }
+        .alt a {
+          color: var(--muted);
+        }
+
+        .bottom {
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--line);
+          font-family: var(--sans);
+          font-size: 0.8125rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--muted);
+        }
+
+        /* sticky bar */
+        .bar {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 50;
+          background: rgba(251, 250, 248, 0.94);
+          backdrop-filter: blur(8px);
+          border-top: 1px solid var(--line);
+          box-shadow: 0 -8px 24px -16px rgba(13, 33, 55, 0.35);
+        }
+        .bar-in {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0.7rem 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+        .bar-price {
+          display: flex;
+          align-items: baseline;
+          gap: 0.4rem;
+          font-family: var(--sans);
+          white-space: nowrap;
+        }
+        .bar-price strong {
+          font-size: 1.375rem;
+          font-weight: 700;
+        }
+        .bar-price em {
+          font-style: normal;
+          font-size: 0.9375rem;
+          color: var(--muted);
+        }
+        .bar .btn {
+          font-size: 1rem;
+          padding: 0.85rem 2rem;
+        }
+
+        @media (max-width: 720px) {
+          main {
+            padding-bottom: 6rem;
+          }
+          section {
+            padding: 2.25rem 0;
+          }
+          .grid-3,
+          .grid-2 {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+          .tag {
+            display: none;
+          }
+          .bottom {
+            flex-direction: column;
+            gap: 0.3rem;
+            text-align: center;
+          }
+          .bar-in {
+            padding: 0.6rem 1rem;
+            gap: 0.75rem;
+          }
+          .bar-price strong {
+            font-size: 1.25rem;
+          }
+          .bar-price em {
+            display: none;
+          }
+          .bar .btn {
+            flex: 1;
+            text-align: center;
+            font-size: 0.9375rem;
+            padding: 0.85rem 1rem;
+          }
+        }
+      `}</style>
+    </>
   );
 }
-
-const CSS = `
-.ac-page{
-  --navy:#0d2137; --red:#c0392b; --paper:#fbfaf8; --line:#e2ddd6; --muted:#6b7784;
-  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --serif:Georgia,"Times New Roman",serif;
-  background:var(--paper); color:var(--navy); font-family:var(--serif);
-  min-height:100vh; -webkit-font-smoothing:antialiased;
-}
-.ac-page *{box-sizing:border-box;}
-.ac-page a{color:var(--red);}
-.ac-page main{max-width:860px; margin:0 auto; padding:0 1.5rem 5rem;}
-
-.ac-page h2{
-  font-family:var(--sans); font-size:.8125rem; font-weight:700;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--red); margin:0 0 2rem;
-}
-.ac-page section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
-
-.ac-top{display:flex; align-items:center; gap:1rem; padding:2.25rem 0 3.5rem;}
-.ac-mark{font-family:var(--sans); font-weight:700; font-size:.8125rem; letter-spacing:.22em;}
-.ac-rule{flex:1; height:1px; background:var(--line);}
-.ac-tag{font-size:.875rem; color:var(--muted);}
-
-.ac-hero{text-align:center; margin-bottom:2.75rem; padding:0 !important; border-bottom:0 !important;}
-.ac-page h1{
-  font-family:var(--sans); font-size:clamp(2rem,5.5vw,3.15rem); line-height:1.08;
-  font-weight:700; letter-spacing:-.02em; margin:0 0 1.25rem;
-}
-.ac-page h1 em{font-family:var(--serif); font-style:italic; font-weight:400; color:var(--red);}
-.ac-lede{font-size:1.125rem; line-height:1.6; color:var(--muted); max-width:34rem; margin:0 auto;}
-
-.ac-video{padding:0 !important; border-bottom:0 !important; margin-bottom:2.75rem;}
-.ac-ctablock{padding:0 0 4.5rem !important;}
-
-.ac-frame{
-  position:relative; width:100%; padding-top:56.25%; background:#0d2137;
-  border-radius:4px; overflow:hidden; box-shadow:0 24px 60px -24px rgba(13,33,55,.45);
-}
-.ac-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-
-.ac-cta{text-align:center;}
-.ac-btn{
-  display:inline-block; background:var(--red); color:#fff; font-family:var(--sans);
-  font-weight:700; font-size:1.0625rem; letter-spacing:.04em; text-transform:uppercase;
-  text-decoration:none; padding:1.15rem 3rem; border-radius:2px;
-  box-shadow:0 10px 28px -12px rgba(192,57,43,.75);
-  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-}
-.ac-btn:hover{background:#a93226; transform:translateY(-2px); box-shadow:0 16px 34px -12px rgba(192,57,43,.8);}
-.ac-price{margin:1.1rem 0 0; font-size:1.0625rem; color:var(--navy);}
-.ac-price strong{font-family:var(--sans); letter-spacing:.01em;}
-.ac-alt{margin:.4rem 0 0; font-size:.9375rem; color:var(--muted);}
-.ac-alt a{color:var(--muted);}
-
-.ac-grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:2.25rem;}
-.ac-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:2.25rem 2.75rem;}
-
-.ac-n{font-family:var(--sans); font-size:.75rem; font-weight:700; letter-spacing:.15em; color:var(--red);}
-.ac-step h3{font-family:var(--sans); font-size:1.0625rem; margin:.55rem 0 .5rem;}
-.ac-step p{margin:0; font-size:.9375rem; line-height:1.6; color:var(--muted);}
-
-.ac-inc h3{
-  font-family:var(--sans); font-size:1.0625rem; margin:0 0 .5rem;
-  padding-top:.9rem; border-top:2px solid var(--navy);
-}
-.ac-inc p{margin:0; font-size:.9375rem; line-height:1.65; color:var(--muted);}
-
-.ac-sub{margin:-1.4rem 0 2rem; color:var(--muted); font-size:1rem;}
-.ac-page figure{margin:0;}
-.ac-page figcaption{font-family:var(--sans); font-size:.8125rem; color:var(--muted); margin-top:.7rem;}
-
-.ac-revs blockquote{margin:0; padding-left:1.25rem; border-left:2px solid var(--red);}
-.ac-revs blockquote p{margin:0 0 .85rem; font-size:1.0625rem; line-height:1.6;}
-.ac-revs blockquote footer{font-family:var(--sans); font-size:.8125rem;}
-.ac-name{font-weight:700;}
-.ac-detail{color:var(--muted);}
-.ac-detail:before{content:" / "; color:var(--line);}
-
-.ac-faqlist{border-top:1px solid var(--line);}
-.ac-faqlist details{border-bottom:1px solid var(--line);}
-.ac-faqlist summary{
-  list-style:none; cursor:pointer; padding:1.15rem 0;
-  font-family:var(--sans); font-size:1rem; font-weight:700; color:var(--navy);
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-}
-.ac-faqlist summary::-webkit-details-marker{display:none;}
-.ac-faqlist summary:after{
-  content:""; flex:none; width:11px; height:11px;
-  border-right:2px solid var(--red); border-bottom:2px solid var(--red);
-  transform:rotate(45deg) translate(-3px,-3px); transition:transform .2s ease;
-}
-.ac-faqlist details[open] summary:after{transform:rotate(225deg) translate(-3px,-3px);}
-.ac-faqlist details p{
-  margin:-.3rem 0 1.3rem; font-size:.9375rem; line-height:1.65;
-  color:var(--muted); max-width:46rem;
-}
-
-.ac-final{text-align:center; border-bottom:0 !important; padding-bottom:3rem !important;}
-.ac-final .ac-sub{margin:-1.4rem auto 2.25rem; max-width:30rem;}
-
-.ac-bottom{
-  display:flex; justify-content:space-between; gap:1rem; padding-top:2rem;
-  border-top:1px solid var(--line); font-family:var(--sans); font-size:.75rem;
-  letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-}
-
-@media (max-width:720px){
-  .ac-page main{padding-bottom:3.5rem;}
-  .ac-page section{padding:3.25rem 0;}
-  .ac-ctablock{padding-bottom:3.25rem !important;}
-  .ac-grid-3,.ac-grid-2{grid-template-columns:1fr; gap:1.75rem;}
-  .ac-tag{display:none;}
-  .ac-bottom{flex-direction:column; gap:.4rem; text-align:center;}
-}
-`;
