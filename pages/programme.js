@@ -6,17 +6,12 @@ import { useState } from "react";
 ------------------------------------------------------------------- */
 
 const CONFIG = {
-  // Stripe payment link. Set the success redirect inside Stripe to the
-  // WHATSAPP url below so they land in your chat the second they pay.
-  stripeLink: "https://buy.stripe.com/REPLACE_ME",
+  stripeLink: "https://buy.stripe.com/eVq5kC7c303feJKaWMenS0C",
 
-  // Your WhatsApp, international format, no plus, no spaces.
   whatsapp:
-    "https://wa.me/447000000000?text=Hi%20Alex%2C%20I%20have%20a%20question%20about%20the%20programme",
+    "https://wa.me/447512834077?text=Hi%20Alex%2C%20I%20have%20a%20question%20about%20the%20programme",
 
-  // The 11 character YouTube ID from the unlisted video URL.
-  // youtube.com/watch?v=THIS_BIT
-  mainVideoId: "REPLACE_ME",
+  mainVideoId: "zjgIpx-UJdc",
 
   price: "£300",
   period: "for 6 months",
@@ -43,59 +38,52 @@ const STEPS = [
   },
 ];
 
-// Video testimonials. Unlisted YouTube IDs.
+// Vertical Shorts.
 const VIDEO_TESTIMONIALS = [
-  { id: "REPLACE_ME", name: "Name", detail: "6 months in" },
-  { id: "REPLACE_ME", name: "Name", detail: "4 months in" },
+  { id: "5GEh3TWnh_g", name: "", detail: "" },
+  { id: "3OWSd3whlNk", name: "", detail: "" },
+  { id: "2XLLqCL_qoY", name: "", detail: "" },
 ];
 
-// Before and afters. Drop the images in /public/images/ and point at them.
+// vertical: true for Shorts, false for normal landscape videos.
 const BEFORE_AFTERS = [
-  {
-    before: "/images/ba-1-before.jpg",
-    after: "/images/ba-1-after.jpg",
-    label: "Serve, take back and trophy position",
-    note: "Eight weeks apart.",
-  },
-  {
-    before: "/images/ba-2-before.jpg",
-    after: "/images/ba-2-after.jpg",
-    label: "Forehand, contact point and spacing",
-    note: "Six weeks apart.",
-  },
+  { id: "Cfe3_X385yM", label: "", vertical: true },
+  { id: "DMGCSDou58g", label: "", vertical: true },
+  { id: "9n6oPAJkAko", label: "", vertical: false },
 ];
 
+// Wrap any phrase in **double asterisks** to highlight it in red.
 const TESTIMONIALS = [
   {
     quote:
-      "Replace this with a real review. Two or three sentences is plenty. Specific beats glowing.",
-    name: "Name",
-    detail: "Club player, London",
+      "Wow, thank you so much! This was helpful. **Hadn't noticed that I wasn't using my hips properly**, as well as my wrist pronation occurring prior to uncoiling. Gonna try to keep those in mind.",
+    name: "Luis Moore",
+    detail: "Club player",
   },
   {
     quote:
-      "Replace this with a real review. Two or three sentences is plenty. Specific beats glowing.",
-    name: "Name",
-    detail: "4.0 NTRP, remote",
+      "The tips you gave me were excellent. Went to the court to work on opening my body earlier instead of all at once. **Felt a lot more power in my shots.**",
+    name: "Dimi Petrov",
+    detail: "Club player",
   },
   {
     quote:
-      "Replace this with a real review. Two or three sentences is plenty. Specific beats glowing.",
-    name: "Name",
-    detail: "County league",
+      "Bro thank you for this! I already **watched this like 3 times** to take some notes. This is definitely gonna help me a ton. Thank you so much coach.",
+    name: "Gavin Mens",
+    detail: "Club player",
   },
   {
     quote:
-      "Replace this with a real review. Two or three sentences is plenty. Specific beats glowing.",
-    name: "Name",
-    detail: "Returning after a long break",
+      "That was very detailed feedback. I have listed these points to change. **I will change one at a time** when I practice.",
+    name: "Martin Gerard",
+    detail: "Club player",
   },
 ];
 
 const BREAKDOWNS = [
-  { id: "REPLACE_ME", label: "Forehand breakdown" },
-  { id: "REPLACE_ME", label: "Backhand breakdown" },
-  { id: "REPLACE_ME", label: "Serve breakdown" },
+  { id: "rU2BJA_pkoA", label: "Forehand breakdown" },
+  { id: "STXDn7y5P7Y", label: "Backhand breakdown" },
+  { id: "NELe2pN8D0w", label: "Serve breakdown" },
 ];
 
 const INCLUDED = [
@@ -170,11 +158,49 @@ const FAQS = [
 
 /* ------------------------------------------------------------------ */
 
-function Video({ id, title }) {
+function Highlight({ text }) {
   return (
-    <div className="frame">
+    <>
+      {text.split("**").map((part, i) =>
+        i % 2 === 1 ? (
+          <strong key={i} className="hl">
+            {part}
+          </strong>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+      <style jsx>{`
+        .hl {
+          color: var(--red);
+          font-weight: 700;
+        }
+      `}</style>
+    </>
+  );
+}
+
+function Stars() {
+  return (
+    <div className="stars" aria-label="5 out of 5">
+      {"\u2605\u2605\u2605\u2605\u2605"}
+      <style jsx>{`
+        .stars {
+          color: var(--red);
+          font-size: 1rem;
+          letter-spacing: 0.15em;
+          margin-bottom: 0.6rem;
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function Video({ id, title, vertical = false }) {
+  return (
+    <div className={vertical ? "frame tall" : "frame"}>
       <iframe
-        src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
+        src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`}
         title={title}
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
@@ -190,6 +216,9 @@ function Video({ id, title }) {
           overflow: hidden;
           box-shadow: 0 18px 44px -22px rgba(13, 33, 55, 0.45);
         }
+        .frame.tall {
+          padding-top: 177.78%;
+        }
         .frame :global(iframe) {
           position: absolute;
           inset: 0;
@@ -204,6 +233,9 @@ function Video({ id, title }) {
 
 export default function Programme() {
   const [open, setOpen] = useState(null);
+
+  const baVertical = BEFORE_AFTERS.filter((b) => b.vertical);
+  const baWide = BEFORE_AFTERS.filter((b) => !b.vertical);
 
   return (
     <>
@@ -257,14 +289,16 @@ export default function Programme() {
         {/* 3. VIDEO TESTIMONIALS */}
         <section>
           <h2>Players in their own words</h2>
-          <div className="grid-2">
+          <div className="grid-3 shorts">
             {VIDEO_TESTIMONIALS.map((v, idx) => (
               <figure key={idx}>
-                <Video id={v.id} title={`${v.name} testimonial`} />
-                <figcaption>
-                  <span className="name">{v.name}</span>
-                  <span className="detail">{v.detail}</span>
-                </figcaption>
+                <Video id={v.id} title="Player testimonial" vertical />
+                {(v.name || v.detail) && (
+                  <figcaption>
+                    {v.name && <span className="name">{v.name}</span>}
+                    {v.detail && <span className="detail">{v.detail}</span>}
+                  </figcaption>
+                )}
               </figure>
             ))}
           </div>
@@ -273,34 +307,36 @@ export default function Programme() {
         {/* 4. BEFORE AND AFTERS */}
         <section>
           <h2>Before and after</h2>
-          <div className="ba-list">
-            {BEFORE_AFTERS.map((b, idx) => (
-              <figure key={idx} className="ba">
-                <div className="ba-pair">
-                  <div className="ba-img">
-                    <img src={b.before} alt={`${b.label}, before`} />
-                    <span>Before</span>
-                  </div>
-                  <div className="ba-img">
-                    <img src={b.after} alt={`${b.label}, after`} />
-                    <span className="is-after">After</span>
-                  </div>
-                </div>
-                <figcaption>
-                  <strong>{b.label}</strong> {b.note}
-                </figcaption>
+          <p className="sub">Same player, same shot, a few weeks apart.</p>
+          <div className="grid-3 shorts">
+            {baVertical.map((b, idx) => (
+              <figure key={idx}>
+                <Video id={b.id} title={b.label || "Before and after"} vertical />
+                {b.label && <figcaption>{b.label}</figcaption>}
               </figure>
             ))}
           </div>
+          {baWide.map((b, idx) => (
+            <figure key={idx} className="wide">
+              <Video id={b.id} title={b.label || "Before and after"} />
+              {b.label && <figcaption>{b.label}</figcaption>}
+            </figure>
+          ))}
         </section>
 
         {/* 5. WRITTEN REVIEWS */}
         <section>
           <h2>Reviews</h2>
+          <p className="sub">
+            Sent straight after players got their first breakdowns and plans.
+          </p>
           <div className="grid-2 revs">
             {TESTIMONIALS.map((t, idx) => (
               <blockquote key={idx}>
-                <p>{t.quote}</p>
+                <Stars />
+                <p>
+                  <Highlight text={t.quote} />
+                </p>
                 <footer>
                   <span className="name">{t.name}</span>
                   <span className="detail">{t.detail}</span>
@@ -381,7 +417,7 @@ export default function Programme() {
         </footer>
       </main>
 
-      {/* STICKY CTA, VISIBLE THE WHOLE TIME */}
+      {/* STICKY CTA */}
       <div className="bar">
         <div className="bar-in">
           <span className="bar-price">
@@ -444,7 +480,6 @@ export default function Programme() {
           border-bottom: 1px solid var(--line);
         }
 
-        /* header */
         .top {
           display: flex;
           align-items: center;
@@ -467,7 +502,6 @@ export default function Programme() {
           color: var(--muted);
         }
 
-        /* hero */
         .hero {
           text-align: center;
           padding: 0 0 1.75rem;
@@ -500,7 +534,6 @@ export default function Programme() {
           border-bottom: 0;
         }
 
-        /* grids */
         .grid-3 {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -511,8 +544,13 @@ export default function Programme() {
           grid-template-columns: 1fr 1fr;
           gap: 1.75rem 2.25rem;
         }
+        .shorts {
+          gap: 1rem;
+        }
+        .wide {
+          margin-top: 1.75rem;
+        }
 
-        /* steps */
         .n {
           font-family: var(--sans);
           font-size: 0.8125rem;
@@ -532,7 +570,6 @@ export default function Programme() {
           color: var(--muted);
         }
 
-        /* figures */
         figure {
           margin: 0;
         }
@@ -549,68 +586,28 @@ export default function Programme() {
         .detail {
           color: var(--muted);
         }
-        .detail:before {
-          content: " / ";
-          color: var(--line);
-        }
 
-        /* before and after */
-        .ba-list {
-          display: grid;
-          gap: 1.75rem;
-        }
-        .ba-pair {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.75rem;
-        }
-        .ba-img {
-          position: relative;
-          border-radius: 4px;
-          overflow: hidden;
-          background: #0d2137;
-        }
-        .ba-img img {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
-        .ba-img span {
-          position: absolute;
-          top: 0.6rem;
-          left: 0.6rem;
-          background: rgba(13, 33, 55, 0.92);
-          color: #fff;
-          font-family: var(--sans);
-          font-size: 0.6875rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          padding: 0.3rem 0.6rem;
-          border-radius: 2px;
-        }
-        .ba-img span.is-after {
-          background: var(--red);
-        }
-        .ba figcaption strong {
-          font-family: var(--sans);
-          color: var(--navy);
-        }
-
-        /* reviews */
         .revs blockquote {
           margin: 0;
           padding-left: 1.15rem;
-          border-left: 2px solid var(--red);
+          border-left: 2px solid var(--line);
         }
         .revs blockquote p {
-          margin: 0 0 0.6rem;
-          font-size: 1.1875rem;
+          margin: 0 0 0.7rem;
+          font-size: 1.125rem;
           line-height: 1.5;
         }
         .revs blockquote footer {
           font-family: var(--sans);
           font-size: 0.9375rem;
+          line-height: 1.35;
+        }
+        .revs .name {
+          display: block;
+        }
+        .revs .detail {
+          display: block;
+          font-size: 0.875rem;
         }
 
         .sub {
@@ -619,7 +616,6 @@ export default function Programme() {
           font-size: 1.125rem;
         }
 
-        /* what you get */
         .inc h3 {
           font-family: var(--sans);
           font-size: 1.25rem;
@@ -634,7 +630,6 @@ export default function Programme() {
           color: var(--muted);
         }
 
-        /* faq */
         .faq ul {
           list-style: none;
           margin: 0;
@@ -680,7 +675,6 @@ export default function Programme() {
           max-width: 48rem;
         }
 
-        /* final */
         .final {
           text-align: center;
           border-bottom: 0;
@@ -740,7 +734,6 @@ export default function Programme() {
           color: var(--muted);
         }
 
-        /* sticky bar */
         .bar {
           position: fixed;
           left: 0;
@@ -793,6 +786,10 @@ export default function Programme() {
           .grid-2 {
             grid-template-columns: 1fr;
             gap: 1.5rem;
+          }
+          .shorts {
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
           }
           .tag {
             display: none;
