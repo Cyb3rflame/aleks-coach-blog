@@ -1,5 +1,6 @@
-import Head from "next/head";
-import { useState } from "react";
+/* app/programme/page.js
+   App Router version. Server component, no client JS needed.
+   If you are on the Pages Router, use programme.js instead. */
 
 /* ------------------------------------------------------------------
    EDIT EVERYTHING IN THIS BLOCK. NOTHING ELSE NEEDS TOUCHING.
@@ -11,7 +12,8 @@ const CONFIG = {
   stripeLink: "https://buy.stripe.com/REPLACE_ME",
 
   // Your WhatsApp, international format, no plus, no spaces.
-  whatsapp: "https://wa.me/447000000000?text=Hi%20Alex%2C%20I%20have%20a%20question%20about%20the%20programme",
+  whatsapp:
+    "https://wa.me/447000000000?text=Hi%20Alex%2C%20I%20have%20a%20question%20about%20the%20programme",
 
   // The 11 character YouTube ID from the unlisted video URL.
   // youtube.com/watch?v=THIS_BIT
@@ -147,9 +149,16 @@ const FAQS = [
 
 /* ------------------------------------------------------------------ */
 
+export const metadata = {
+  title: "The Programme | Aleks Coach",
+  description:
+    "Six months of online tennis coaching. Full technical breakdowns, unlimited video reviews and match preparation, all through WhatsApp.",
+  robots: { index: false, follow: false },
+};
+
 function Video({ id, title }) {
   return (
-    <div className="frame">
+    <div className="ac-frame">
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1`}
         title={title}
@@ -157,137 +166,66 @@ function Video({ id, title }) {
         allowFullScreen
         loading="lazy"
       />
-      <style jsx>{`
-        .frame {
-          position: relative;
-          width: 100%;
-          padding-top: 56.25%;
-          background: #0d2137;
-          border-radius: 4px;
-          overflow: hidden;
-          box-shadow: 0 24px 60px -24px rgba(13, 33, 55, 0.45);
-        }
-        .frame :global(iframe) {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          border: 0;
-        }
-      `}</style>
     </div>
   );
 }
 
 function Cta({ note = true }) {
   return (
-    <div className="cta">
-      <a className="btn" href={CONFIG.stripeLink}>
+    <div className="ac-cta">
+      <a className="ac-btn" href={CONFIG.stripeLink}>
         Start the programme
       </a>
-      <p className="price">
+      <p className="ac-price">
         <strong>{CONFIG.price}</strong> {CONFIG.period}. Pause it any time.
       </p>
       {note && (
-        <p className="alt">
-          Questions first?{" "}
-          <a href={CONFIG.whatsapp}>Message me on WhatsApp</a>
+        <p className="ac-alt">
+          Questions first? <a href={CONFIG.whatsapp}>Message me on WhatsApp</a>
         </p>
       )}
-      <style jsx>{`
-        .cta {
-          text-align: center;
-        }
-        .btn {
-          display: inline-block;
-          background: var(--red);
-          color: #fff;
-          font-family: var(--sans);
-          font-weight: 700;
-          font-size: 1.0625rem;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          text-decoration: none;
-          padding: 1.15rem 3rem;
-          border-radius: 2px;
-          box-shadow: 0 10px 28px -12px rgba(192, 57, 43, 0.75);
-          transition: transform 0.15s ease, box-shadow 0.15s ease,
-            background 0.15s ease;
-        }
-        .btn:hover {
-          background: #a93226;
-          transform: translateY(-2px);
-          box-shadow: 0 16px 34px -12px rgba(192, 57, 43, 0.8);
-        }
-        .price {
-          margin: 1.1rem 0 0;
-          font-size: 1.0625rem;
-          color: var(--navy);
-        }
-        .price strong {
-          font-family: var(--sans);
-          letter-spacing: 0.01em;
-        }
-        .alt {
-          margin: 0.4rem 0 0;
-          font-size: 0.9375rem;
-          color: var(--muted);
-        }
-        .alt a {
-          color: var(--muted);
-        }
-      `}</style>
     </div>
   );
 }
 
 export default function Programme() {
-  const [open, setOpen] = useState(null);
-
   return (
-    <>
-      <Head>
-        <title>The Programme | Aleks Coach</title>
-        <meta
-          name="description"
-          content="Six months of online tennis coaching. Full technical breakdowns, unlimited video reviews and match preparation, all through WhatsApp."
-        />
-        <meta name="robots" content="noindex" />
-      </Head>
+    <div className="ac-page">
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       <main>
-        <header className="top">
-          <span className="mark">ALEKS COACH</span>
-          <span className="rule" />
-          <span className="tag">Online tennis coaching</span>
+        <header className="ac-top">
+          <span className="ac-mark">ALEKS COACH</span>
+          <span className="ac-rule" />
+          <span className="ac-tag">Online tennis coaching</span>
         </header>
 
-        <section className="hero">
+        <section className="ac-hero">
           <h1>
             Whatever training you already do,
             <br />
             <em>I make it better.</em>
           </h1>
-          <p className="lede">
+          <p className="ac-lede">
             Six months of coaching that fits around the tennis you already play.
             Watch the video, it goes through the whole thing.
           </p>
         </section>
 
-        <section className="video-wrap">
+        <section className="ac-video">
           <Video id={CONFIG.mainVideoId} title="The Aleks Coach programme" />
         </section>
 
-        <section className="cta-block">
+        <section className="ac-ctablock">
           <Cta />
         </section>
 
-        <section className="steps">
+        <section>
           <h2>How it works</h2>
-          <div className="step-grid">
+          <div className="ac-grid-3">
             {STEPS.map((s) => (
-              <div key={s.n} className="step">
-                <span className="n">{s.n}</span>
+              <div key={s.n} className="ac-step">
+                <span className="ac-n">{s.n}</span>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
               </div>
@@ -295,11 +233,11 @@ export default function Programme() {
           </div>
         </section>
 
-        <section className="included">
+        <section>
           <h2>What you get</h2>
-          <div className="inc-grid">
+          <div className="ac-grid-2">
             {INCLUDED.map((i) => (
-              <div key={i.title} className="inc">
+              <div key={i.title} className="ac-inc">
                 <h3>{i.title}</h3>
                 <p>{i.body}</p>
               </div>
@@ -307,12 +245,12 @@ export default function Programme() {
           </div>
         </section>
 
-        <section className="breakdowns">
+        <section>
           <h2>Example breakdowns</h2>
-          <p className="sub">
+          <p className="ac-sub">
             This is what lands in your WhatsApp after you send a video.
           </p>
-          <div className="bd-grid">
+          <div className="ac-grid-3">
             {BREAKDOWNS.map((b, idx) => (
               <figure key={idx}>
                 <Video id={b.id} title={b.label} />
@@ -322,366 +260,163 @@ export default function Programme() {
           </div>
         </section>
 
-        <section className="reviews">
+        <section>
           <h2>What players say</h2>
-          <div className="rev-grid">
+          <div className="ac-grid-2 ac-revs">
             {TESTIMONIALS.map((t, idx) => (
               <blockquote key={idx}>
                 <p>{t.quote}</p>
                 <footer>
-                  <span className="name">{t.name}</span>
-                  <span className="detail">{t.detail}</span>
+                  <span className="ac-name">{t.name}</span>
+                  <span className="ac-detail">{t.detail}</span>
                 </footer>
               </blockquote>
             ))}
           </div>
         </section>
 
-        <section className="faq">
+        <section className="ac-faq">
           <h2>Questions</h2>
-          <ul>
+          <div className="ac-faqlist">
             {FAQS.map((f, idx) => (
-              <li key={idx} className={open === idx ? "open" : ""}>
-                <button
-                  onClick={() => setOpen(open === idx ? null : idx)}
-                  aria-expanded={open === idx}
-                >
-                  <span>{f.q}</span>
-                  <i />
-                </button>
-                {open === idx && <p>{f.a}</p>}
-              </li>
+              <details key={idx}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
             ))}
-          </ul>
+          </div>
         </section>
 
-        <section className="final">
+        <section className="ac-final">
           <h2>Ready to start?</h2>
-          <p className="sub">
+          <p className="ac-sub">
             Pay below and you land straight in my WhatsApp. Send me a video and
             I will get your first breakdowns built.
           </p>
           <Cta note={false} />
         </section>
 
-        <footer className="bottom">
+        <footer className="ac-bottom">
           <span>Aleks Coach</span>
           <span>Aleksandar Pandov, LTA Level 3</span>
         </footer>
       </main>
-
-      <style jsx global>{`
-        :root {
-          --navy: #0d2137;
-          --red: #c0392b;
-          --paper: #fbfaf8;
-          --line: #e2ddd6;
-          --muted: #6b7784;
-          --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-          --serif: Georgia, "Times New Roman", serif;
-        }
-        html,
-        body {
-          margin: 0;
-          padding: 0;
-          background: var(--paper);
-          color: var(--navy);
-          font-family: var(--serif);
-          -webkit-font-smoothing: antialiased;
-        }
-        * {
-          box-sizing: border-box;
-        }
-        a {
-          color: var(--red);
-        }
-      `}</style>
-
-      <style jsx>{`
-        main {
-          max-width: 860px;
-          margin: 0 auto;
-          padding: 0 1.5rem 5rem;
-        }
-
-        h2 {
-          font-family: var(--sans);
-          font-size: 0.8125rem;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: var(--red);
-          margin: 0 0 2rem;
-        }
-
-        /* header */
-        .top {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 2.25rem 0 3.5rem;
-        }
-        .mark {
-          font-family: var(--sans);
-          font-weight: 700;
-          font-size: 0.8125rem;
-          letter-spacing: 0.22em;
-        }
-        .rule {
-          flex: 1;
-          height: 1px;
-          background: var(--line);
-        }
-        .tag {
-          font-size: 0.875rem;
-          color: var(--muted);
-        }
-
-        /* hero */
-        .hero {
-          text-align: center;
-          margin-bottom: 2.75rem;
-        }
-        h1 {
-          font-family: var(--sans);
-          font-size: clamp(2rem, 5.5vw, 3.15rem);
-          line-height: 1.08;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          margin: 0 0 1.25rem;
-        }
-        h1 em {
-          font-family: var(--serif);
-          font-style: italic;
-          font-weight: 400;
-          color: var(--red);
-        }
-        .lede {
-          font-size: 1.125rem;
-          line-height: 1.6;
-          color: var(--muted);
-          max-width: 34rem;
-          margin: 0 auto;
-        }
-
-        .video-wrap {
-          margin-bottom: 2.75rem;
-        }
-
-        .cta-block {
-          padding: 0 0 4.5rem;
-          border-bottom: 1px solid var(--line);
-        }
-
-        section {
-          padding: 4.5rem 0;
-          border-bottom: 1px solid var(--line);
-        }
-        .cta-block,
-        .video-wrap,
-        .hero {
-          padding-top: 0;
-        }
-        .video-wrap,
-        .hero {
-          border-bottom: 0;
-          padding-bottom: 0;
-        }
-
-        /* steps */
-        .step-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2.25rem;
-        }
-        .step .n {
-          font-family: var(--sans);
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          color: var(--red);
-        }
-        .step h3 {
-          font-family: var(--sans);
-          font-size: 1.0625rem;
-          margin: 0.55rem 0 0.5rem;
-        }
-        .step p {
-          margin: 0;
-          font-size: 0.9375rem;
-          line-height: 1.6;
-          color: var(--muted);
-        }
-
-        /* included */
-        .inc-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2.25rem 2.75rem;
-        }
-        .inc h3 {
-          font-family: var(--sans);
-          font-size: 1.0625rem;
-          margin: 0 0 0.5rem;
-          padding-top: 0.9rem;
-          border-top: 2px solid var(--navy);
-        }
-        .inc p {
-          margin: 0;
-          font-size: 0.9375rem;
-          line-height: 1.65;
-          color: var(--muted);
-        }
-
-        /* breakdowns */
-        .sub {
-          margin: -1.4rem 0 2rem;
-          color: var(--muted);
-          font-size: 1rem;
-        }
-        .bd-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-        }
-        figure {
-          margin: 0;
-        }
-        figcaption {
-          font-family: var(--sans);
-          font-size: 0.8125rem;
-          color: var(--muted);
-          margin-top: 0.7rem;
-        }
-
-        /* reviews */
-        .rev-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2rem 2.75rem;
-        }
-        blockquote {
-          margin: 0;
-          padding-left: 1.25rem;
-          border-left: 2px solid var(--red);
-        }
-        blockquote p {
-          margin: 0 0 0.85rem;
-          font-size: 1.0625rem;
-          line-height: 1.6;
-        }
-        blockquote footer {
-          font-family: var(--sans);
-          font-size: 0.8125rem;
-        }
-        .name {
-          font-weight: 700;
-        }
-        .detail {
-          color: var(--muted);
-        }
-        .detail:before {
-          content: " / ";
-          color: var(--line);
-        }
-
-        /* faq */
-        .faq ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          border-top: 1px solid var(--line);
-        }
-        .faq li {
-          border-bottom: 1px solid var(--line);
-        }
-        .faq button {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-          background: none;
-          border: 0;
-          padding: 1.15rem 0;
-          cursor: pointer;
-          text-align: left;
-          font-family: var(--sans);
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--navy);
-        }
-        .faq i {
-          flex: none;
-          width: 11px;
-          height: 11px;
-          border-right: 2px solid var(--red);
-          border-bottom: 2px solid var(--red);
-          transform: rotate(45deg) translate(-3px, -3px);
-          transition: transform 0.2s ease;
-        }
-        .faq li.open i {
-          transform: rotate(225deg) translate(-3px, -3px);
-        }
-        .faq li p {
-          margin: -0.3rem 0 1.3rem;
-          font-size: 0.9375rem;
-          line-height: 1.65;
-          color: var(--muted);
-          max-width: 46rem;
-        }
-
-        /* final */
-        .final {
-          text-align: center;
-          border-bottom: 0;
-          padding-bottom: 3rem;
-        }
-        .final .sub {
-          margin: -1.4rem auto 2.25rem;
-          max-width: 30rem;
-        }
-
-        .bottom {
-          display: flex;
-          justify-content: space-between;
-          gap: 1rem;
-          padding-top: 2rem;
-          border-top: 1px solid var(--line);
-          font-family: var(--sans);
-          font-size: 0.75rem;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: var(--muted);
-        }
-
-        @media (max-width: 720px) {
-          main {
-            padding-bottom: 3.5rem;
-          }
-          section {
-            padding: 3.25rem 0;
-          }
-          .cta-block {
-            padding-bottom: 3.25rem;
-          }
-          .step-grid,
-          .inc-grid,
-          .bd-grid,
-          .rev-grid {
-            grid-template-columns: 1fr;
-            gap: 1.75rem;
-          }
-          .tag {
-            display: none;
-          }
-          .bottom {
-            flex-direction: column;
-            gap: 0.4rem;
-            text-align: center;
-          }
-        }
-      `}</style>
-    </>
+    </div>
   );
 }
+
+const CSS = `
+.ac-page{
+  --navy:#0d2137; --red:#c0392b; --paper:#fbfaf8; --line:#e2ddd6; --muted:#6b7784;
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+  background:var(--paper); color:var(--navy); font-family:var(--serif);
+  min-height:100vh; -webkit-font-smoothing:antialiased;
+}
+.ac-page *{box-sizing:border-box;}
+.ac-page a{color:var(--red);}
+.ac-page main{max-width:860px; margin:0 auto; padding:0 1.5rem 5rem;}
+
+.ac-page h2{
+  font-family:var(--sans); font-size:.8125rem; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--red); margin:0 0 2rem;
+}
+.ac-page section{padding:4.5rem 0; border-bottom:1px solid var(--line);}
+
+.ac-top{display:flex; align-items:center; gap:1rem; padding:2.25rem 0 3.5rem;}
+.ac-mark{font-family:var(--sans); font-weight:700; font-size:.8125rem; letter-spacing:.22em;}
+.ac-rule{flex:1; height:1px; background:var(--line);}
+.ac-tag{font-size:.875rem; color:var(--muted);}
+
+.ac-hero{text-align:center; margin-bottom:2.75rem; padding:0 !important; border-bottom:0 !important;}
+.ac-page h1{
+  font-family:var(--sans); font-size:clamp(2rem,5.5vw,3.15rem); line-height:1.08;
+  font-weight:700; letter-spacing:-.02em; margin:0 0 1.25rem;
+}
+.ac-page h1 em{font-family:var(--serif); font-style:italic; font-weight:400; color:var(--red);}
+.ac-lede{font-size:1.125rem; line-height:1.6; color:var(--muted); max-width:34rem; margin:0 auto;}
+
+.ac-video{padding:0 !important; border-bottom:0 !important; margin-bottom:2.75rem;}
+.ac-ctablock{padding:0 0 4.5rem !important;}
+
+.ac-frame{
+  position:relative; width:100%; padding-top:56.25%; background:#0d2137;
+  border-radius:4px; overflow:hidden; box-shadow:0 24px 60px -24px rgba(13,33,55,.45);
+}
+.ac-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+.ac-cta{text-align:center;}
+.ac-btn{
+  display:inline-block; background:var(--red); color:#fff; font-family:var(--sans);
+  font-weight:700; font-size:1.0625rem; letter-spacing:.04em; text-transform:uppercase;
+  text-decoration:none; padding:1.15rem 3rem; border-radius:2px;
+  box-shadow:0 10px 28px -12px rgba(192,57,43,.75);
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.ac-btn:hover{background:#a93226; transform:translateY(-2px); box-shadow:0 16px 34px -12px rgba(192,57,43,.8);}
+.ac-price{margin:1.1rem 0 0; font-size:1.0625rem; color:var(--navy);}
+.ac-price strong{font-family:var(--sans); letter-spacing:.01em;}
+.ac-alt{margin:.4rem 0 0; font-size:.9375rem; color:var(--muted);}
+.ac-alt a{color:var(--muted);}
+
+.ac-grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:2.25rem;}
+.ac-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:2.25rem 2.75rem;}
+
+.ac-n{font-family:var(--sans); font-size:.75rem; font-weight:700; letter-spacing:.15em; color:var(--red);}
+.ac-step h3{font-family:var(--sans); font-size:1.0625rem; margin:.55rem 0 .5rem;}
+.ac-step p{margin:0; font-size:.9375rem; line-height:1.6; color:var(--muted);}
+
+.ac-inc h3{
+  font-family:var(--sans); font-size:1.0625rem; margin:0 0 .5rem;
+  padding-top:.9rem; border-top:2px solid var(--navy);
+}
+.ac-inc p{margin:0; font-size:.9375rem; line-height:1.65; color:var(--muted);}
+
+.ac-sub{margin:-1.4rem 0 2rem; color:var(--muted); font-size:1rem;}
+.ac-page figure{margin:0;}
+.ac-page figcaption{font-family:var(--sans); font-size:.8125rem; color:var(--muted); margin-top:.7rem;}
+
+.ac-revs blockquote{margin:0; padding-left:1.25rem; border-left:2px solid var(--red);}
+.ac-revs blockquote p{margin:0 0 .85rem; font-size:1.0625rem; line-height:1.6;}
+.ac-revs blockquote footer{font-family:var(--sans); font-size:.8125rem;}
+.ac-name{font-weight:700;}
+.ac-detail{color:var(--muted);}
+.ac-detail:before{content:" / "; color:var(--line);}
+
+.ac-faqlist{border-top:1px solid var(--line);}
+.ac-faqlist details{border-bottom:1px solid var(--line);}
+.ac-faqlist summary{
+  list-style:none; cursor:pointer; padding:1.15rem 0;
+  font-family:var(--sans); font-size:1rem; font-weight:700; color:var(--navy);
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+.ac-faqlist summary::-webkit-details-marker{display:none;}
+.ac-faqlist summary:after{
+  content:""; flex:none; width:11px; height:11px;
+  border-right:2px solid var(--red); border-bottom:2px solid var(--red);
+  transform:rotate(45deg) translate(-3px,-3px); transition:transform .2s ease;
+}
+.ac-faqlist details[open] summary:after{transform:rotate(225deg) translate(-3px,-3px);}
+.ac-faqlist details p{
+  margin:-.3rem 0 1.3rem; font-size:.9375rem; line-height:1.65;
+  color:var(--muted); max-width:46rem;
+}
+
+.ac-final{text-align:center; border-bottom:0 !important; padding-bottom:3rem !important;}
+.ac-final .ac-sub{margin:-1.4rem auto 2.25rem; max-width:30rem;}
+
+.ac-bottom{
+  display:flex; justify-content:space-between; gap:1rem; padding-top:2rem;
+  border-top:1px solid var(--line); font-family:var(--sans); font-size:.75rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+}
+
+@media (max-width:720px){
+  .ac-page main{padding-bottom:3.5rem;}
+  .ac-page section{padding:3.25rem 0;}
+  .ac-ctablock{padding-bottom:3.25rem !important;}
+  .ac-grid-3,.ac-grid-2{grid-template-columns:1fr; gap:1.75rem;}
+  .ac-tag{display:none;}
+  .ac-bottom{flex-direction:column; gap:.4rem; text-align:center;}
+}
+`;
