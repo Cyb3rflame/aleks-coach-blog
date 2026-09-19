@@ -6,7 +6,7 @@ import { useState } from "react";
 ------------------------------------------------------------------- */
 
 const CONFIG = {
-  stripeLink: "https://buy.stripe.com/eVq5kC7c303feJKaWMenS0C",
+  stripeLink: "https://buy.stripe.com/dRm5kCgMD2bn0SU1mcenS0D",
 
   whatsapp:
     "https://wa.me/447512834077?text=Hi%20Alex%2C%20I%20have%20a%20question%20about%20the%20programme",
