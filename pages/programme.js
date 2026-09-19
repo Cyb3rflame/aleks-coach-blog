@@ -129,6 +129,24 @@ const INCLUDED = [
   },
 ];
 
+const FIRST_48 = [
+  {
+    when: "The moment you pay",
+    body:
+      "You land on a page with my WhatsApp on it. One tap, the message is already written, you just send it. Takes about five seconds.",
+  },
+  {
+    when: "Same day",
+    body:
+      "I reply. A few questions about your game, your schedule, what you are working towards and what kit you have access to. That is what makes everything custom rather than generic.",
+  },
+  {
+    when: "Within 48 hours",
+    body:
+      "You send me a video whenever suits you. The second it lands I start building your forehand, backhand and serve breakdowns.",
+  },
+];
+
 const FAQS = [
   {
     q: "What level is this for?",
@@ -375,7 +393,38 @@ export default function Programme() {
           </div>
         </section>
 
-        {/* 8. FAQ */}
+        {/* 8. FIRST 48 HOURS */}
+        <section>
+          <h2>Your first 48 hours</h2>
+          <div className="grid-3">
+            {FIRST_48.map((f) => (
+              <div key={f.when} className="step">
+                <span className="n">{f.when.toUpperCase()}</span>
+                <p>{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 9. GUARANTEE */}
+        <section className="guarantee">
+          <div className="gbox">
+            <h2>The first week guarantee</h2>
+            <p className="big">
+              Send me a video in your first week. You get your forehand,
+              backhand and serve breakdowns and your first plan. Look at all of
+              it. If you do not think it is worth the money, say so and I refund
+              you in full.
+            </p>
+            <p>
+              No forms, no back and forth, no awkward conversation. You keep the
+              breakdowns either way. I would rather refund you than have you six
+              months into something you are not into.
+            </p>
+          </div>
+        </section>
+
+        {/* 10. FAQ */}
         <section className="faq">
           <h2>Questions</h2>
           <ul>
@@ -406,6 +455,9 @@ export default function Programme() {
           <p className="price">
             <strong>{CONFIG.price}</strong> {CONFIG.period}. Pause it any time.
           </p>
+          <p className="secure">
+            Secure payment by Stripe. Refundable in the first week.
+          </p>
           <p className="alt">
             Questions first? <a href={CONFIG.whatsapp}>Message me on WhatsApp</a>
           </p>
@@ -423,6 +475,7 @@ export default function Programme() {
           <span className="bar-price">
             <strong>{CONFIG.price}</strong>
             <em>{CONFIG.period}</em>
+            <em className="bar-note">Refundable first week</em>
           </span>
           <a className="btn" href={CONFIG.stripeLink}>
             Start the programme
@@ -608,6 +661,45 @@ export default function Programme() {
         .revs .detail {
           display: block;
           font-size: 0.875rem;
+        }
+
+        .guarantee {
+          padding-top: 2.75rem;
+        }
+        .gbox {
+          border: 2px solid var(--navy);
+          border-radius: 4px;
+          padding: 1.75rem 2rem;
+        }
+        .gbox h2 {
+          margin-bottom: 1rem;
+        }
+        .gbox p {
+          margin: 0 0 0.8rem;
+          font-size: 1.0625rem;
+          line-height: 1.55;
+          color: var(--muted);
+        }
+        .gbox p.big {
+          font-size: 1.25rem;
+          line-height: 1.45;
+          color: var(--navy);
+        }
+        .gbox p:last-child {
+          margin-bottom: 0;
+        }
+        .secure {
+          margin: 0.5rem 0 0;
+          font-family: var(--sans);
+          font-size: 0.875rem;
+          color: var(--muted);
+        }
+        .bar-note {
+          color: var(--muted);
+        }
+        .bar-note:before {
+          content: "/ ";
+          color: var(--line);
         }
 
         .sub {
@@ -808,6 +900,12 @@ export default function Programme() {
           }
           .bar-price em {
             display: none;
+          }
+          .gbox {
+            padding: 1.25rem 1.25rem;
+          }
+          .gbox p.big {
+            font-size: 1.125rem;
           }
           .bar .btn {
             flex: 1;

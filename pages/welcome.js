@@ -12,24 +12,21 @@ const CONFIG = {
   email: "alex@alekscoach.com", // change if this is wrong
 };
 
-const NEXT = [
+const FIRST_48 = [
   {
-    n: "01",
-    title: "Message me now",
+    when: "Right now",
     body:
-      "Tap the button below. The message is already written, you just need to send it. That opens our chat and I will know who you are.",
+      "Tap the button above. The message is already written, you just need to send it. That opens our chat and I will know who you are.",
   },
   {
-    n: "02",
-    title: "Send me a video",
+    when: "Today",
     body:
-      "Any video of you playing. Rallying, points, a set, a ball machine, even against a wall. Phone on your bag is fine. Doesn't need to be today.",
+      "I reply. A few questions about your game, your schedule, what you are working towards and what kit you have access to. That is what makes everything custom rather than generic.",
   },
   {
-    n: "03",
-    title: "Your breakdowns land within a few days",
+    when: "Within 48 hours",
     body:
-      "Forehand, backhand and serve, each one 15 to 20 minutes, plus your first focus for each. Then we get to work.",
+      "You send me a video whenever suits. Rallying, points, a set, a ball machine, even against a wall. Phone on your bag is fine. As soon as it lands I start on your forehand, backhand and serve breakdowns.",
   },
 ];
 
@@ -66,26 +63,33 @@ export default function Welcome() {
         </section>
 
         <section>
-          <h2>What happens next</h2>
+          <h2>Your first 48 hours</h2>
           <div className="grid">
-            {NEXT.map((s) => (
-              <div key={s.n} className="step">
-                <span className="n">{s.n}</span>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
+            {FIRST_48.map((f) => (
+              <div key={f.when} className="step">
+                <span className="n">{f.when.toUpperCase()}</span>
+                <p>{f.body}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section className="assure">
-          <h2>If anything goes wrong</h2>
-          <p>
-            Send me a video within the first 14 days. If the breakdowns are not
-            useful to you, tell me and I will refund you in full. No awkward
-            conversation needed.
-          </p>
-          <p>
+          <div className="gbox">
+            <h2>The first week guarantee</h2>
+            <p className="big">
+              Send me a video in your first week. You get your forehand,
+              backhand and serve breakdowns and your first plan. Look at all of
+              it. If you do not think it is worth the money, say so and I refund
+              you in full.
+            </p>
+            <p>
+              No forms, no back and forth, no awkward conversation. You keep the
+              breakdowns either way. I would rather refund you than have you six
+              months into something you are not into.
+            </p>
+          </div>
+          <p className="chase">
             If you do not hear from me within a day, chase me. Message{" "}
             <strong>{CONFIG.whatsappDisplay}</strong> or email{" "}
             <a href={`mailto:${CONFIG.email}`}>{CONFIG.email}</a>. I would
@@ -250,15 +254,34 @@ export default function Welcome() {
           color: var(--muted);
         }
 
-        .assure p {
+        .gbox {
+          border: 2px solid var(--navy);
+          border-radius: 4px;
+          padding: 1.75rem 2rem;
+        }
+        .gbox h2 {
+          margin-bottom: 1rem;
+        }
+        .gbox p {
+          margin: 0 0 0.8rem;
           font-size: 1.0625rem;
+          line-height: 1.55;
+          color: var(--muted);
+        }
+        .gbox p.big {
+          font-size: 1.25rem;
+          line-height: 1.45;
+          color: var(--navy);
+        }
+        .gbox p:last-child {
+          margin-bottom: 0;
+        }
+        .chase {
+          margin: 1.25rem 0 0;
+          font-size: 1rem;
           line-height: 1.6;
           color: var(--muted);
-          margin: 0 0 0.9rem;
           max-width: 40rem;
-        }
-        .assure p:last-child {
-          margin-bottom: 0;
         }
         .assure strong {
           font-family: var(--sans);
@@ -285,6 +308,12 @@ export default function Welcome() {
           .grid {
             grid-template-columns: 1fr;
             gap: 1.5rem;
+          }
+          .gbox {
+            padding: 1.25rem;
+          }
+          .gbox p.big {
+            font-size: 1.125rem;
           }
           .btn {
             display: block;
