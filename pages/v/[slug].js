@@ -16,12 +16,12 @@ const CONFIG = {
   initials: 'AP',
   photo: '', // e.g. '/images/aleks.jpg' (leave '' to show initials)
 
-  contact: '', // e.g. 'https://wa.me/447000000000' or 'mailto:you@email.com'
+  contact: 'https://wa.me/447512834077', // e.g. 'https://wa.me/447000000000' or 'mailto:you@email.com'
   about: '/about',
   freeAnalysis: '/freeanalysis',
 
   instagram: { handle: '@alekscoach', href: '' }, // e.g. 'https://instagram.com/alekscoach'
-  youtube: '', // e.g. 'https://youtube.com/@alekscoach'
+  youtube: 'https://www.youtube.com/@alekscoaches', // e.g. 'https://youtube.com/@alekscoach'
   tiktok: '', // e.g. 'https://tiktok.com/@alekscoach'
 
   cards: [
@@ -264,7 +264,7 @@ const s = {
   h1: { fontFamily: 'Georgia, serif', fontSize: 28, fontWeight: 'normal', margin: '0 0 4px' },
   sub: { fontSize: 14, color: '#6b7585', margin: '0 0 16px' },
   playerWrap: { position: 'relative', width: '100%', paddingTop: '56.25%', background: '#000', borderRadius: 10, overflow: 'hidden' },
-  playerWrapVertical: { position: 'relative', width: '100%', maxWidth: 420, margin: '0 auto', paddingTop: 'min(177.78%, 80vh)', background: '#000', borderRadius: 10, overflow: 'hidden' },
+  playerWrapVertical: { position: 'relative', width: 'min(100%, 420px, calc(80vh * 0.5625))', aspectRatio: '9 / 16', margin: '0 auto', background: '#000', borderRadius: 10, overflow: 'hidden' },
   iframe: { position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 },
   underVideo: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginTop: 12 },
   small: { fontSize: 14, color: '#6b7585' },
