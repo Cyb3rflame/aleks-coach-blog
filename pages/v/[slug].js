@@ -20,8 +20,8 @@ const CONFIG = {
   about: '/about',
   freeAnalysis: '/freeanalysis',
 
-  instagram: { handle: '@alekscoach', href: '' }, // e.g. 'https://instagram.com/alekscoach'
-  youtube: 'https://www.youtube.com/@alekscoaches', // e.g. 'https://youtube.com/@alekscoach'
+  instagram: { handle: '@alekscoach', href: 'https://www.instagram.com/alekscoach' },
+  youtube: 'https://www.youtube.com/@alekscoaches',
   tiktok: '', // e.g. 'https://tiktok.com/@alekscoach'
 
   cards: [
@@ -30,9 +30,10 @@ const CONFIG = {
     { icon: 'trophy', title: 'Results', sub: "Players I've worked with", href: '/proof' },
     { icon: 'file', title: 'How to beat the pusher', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/how-to-beat-the-pusher.pdf'
     { icon: 'file', title: 'Stroke coaching plan', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/coaching-plan.pdf'
-    { icon: 'youtube', title: 'More breakdowns', sub: 'YouTube channel', href: '' }, // same as your YouTube link
   ],
 };
+// YouTube card always uses the youtube link above
+if (CONFIG.youtube) CONFIG.cards.push({ icon: 'youtube', title: 'More breakdowns', sub: 'YouTube channel', href: CONFIG.youtube });
 // ==========================================
 
 const NAVY = '#0d2137';
@@ -169,7 +170,10 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
                 </a>
               )}
               {CONFIG.youtube && (
-                <a className="vp-soc" href={CONFIG.youtube} {...ext} aria-label="YouTube"><Icon name="youtube" size={18} /></a>
+                <a className="vp-ig" href={CONFIG.youtube} {...ext} aria-label="YouTube">
+                  <Icon name="youtube" size={16} />
+                  <span className="vp-ig-handle">YouTube</span>
+                </a>
               )}
               {CONFIG.tiktok && (
                 <a className="vp-soc" href={CONFIG.tiktok} {...ext} aria-label="TikTok"><Icon name="tiktok" size={18} /></a>
