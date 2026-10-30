@@ -20,7 +20,7 @@ const CONFIG = {
   about: '/about',
   freeAnalysis: '/freeanalysis',
 
-  instagram: { handle: '@alekscoach', href: 'https://www.instagram.com/alekscoach' },
+  instagram: { handle: '@aleks_coaches', href: 'https://www.instagram.com/aleks_coaches' },
   youtube: 'https://www.youtube.com/@alekscoaches',
   tiktok: '', // e.g. 'https://tiktok.com/@alekscoach'
 
@@ -100,6 +100,30 @@ function Icon({ name, size = 16 }) {
       return (<svg {...p}><rect x="4" y="4" width="16" height="16" rx="4" /><circle cx="12" cy="12" r="3.5" /><circle cx="16.5" cy="7.5" r="0.5" /></svg>);
     case 'tiktok':
       return (<svg {...p}><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5" /><path d="M14 4a5 5 0 0 0 5 5" /></svg>);
+    case 'ig-brand':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stopColor="#feda75" />
+              <stop offset="0.35" stopColor="#fa7e1e" />
+              <stop offset="0.6" stopColor="#d62976" />
+              <stop offset="1" stopColor="#4f5bd5" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#igGrad)" />
+          <rect x="5.5" y="5.5" width="13" height="13" rx="4" fill="none" stroke="#fff" strokeWidth="1.8" />
+          <circle cx="12" cy="12" r="3.2" fill="none" stroke="#fff" strokeWidth="1.8" />
+          <circle cx="16.3" cy="7.7" r="1" fill="#fff" />
+        </svg>
+      );
+    case 'yt-brand':
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="1" y="4.5" width="22" height="15" rx="4.5" fill="#ff0000" />
+          <path d="M10 8.8l5.6 3.2-5.6 3.2z" fill="#fff" />
+        </svg>
+      );
     case 'copy':
       return (<svg {...p}><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>);
     case 'check':
@@ -143,8 +167,9 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
       <style>{`
         .vp-link { color: ${RED}; text-decoration: none; }
         .vp-link:hover { text-decoration: underline; }
-        .vp-ig { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #fff; border: 1px solid #3a4d66; border-radius: 999px; padding: 5px 12px; text-decoration: none; }
-        .vp-ig:hover { border-color: #6b7f99; }
+        .vp-social { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 5px 13px 5px 6px; text-decoration: none; white-space: nowrap; transition: background .15s, border-color .15s; }
+        .vp-social:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.4); }
+        .vp-social-sub { font-weight: 400; color: #b7c3d4; }
         .vp-soc { color: #9fb0c7; display: inline-flex; }
         .vp-soc:hover { color: #fff; }
         .vp-contact { background: ${RED}; color: #fff; font-size: 13px; padding: 7px 14px; border-radius: 6px; text-decoration: none; white-space: nowrap; }
@@ -153,7 +178,7 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
         .vp-card:hover { border-color: #c5cbd5; background: #fafbfc; }
         .vp-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #5b6678; background: #fff; border: 1px solid ${BORDER}; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-family: inherit; }
         .vp-btn:hover { border-color: #c5cbd5; }
-        @media (max-width: 480px) { .vp-ig-handle { display: none; } }
+        @media (max-width: 520px) { .vp-social-sub { display: none; } }
       `}</style>
 
       <div style={s.page}>
@@ -164,15 +189,15 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
             </a>
             <div style={s.headerRight}>
               {CONFIG.instagram.href && (
-                <a className="vp-ig" href={CONFIG.instagram.href} {...ext} aria-label="Instagram">
-                  <Icon name="instagram" size={16} />
-                  <span className="vp-ig-handle">{CONFIG.instagram.handle}</span>
+                <a className="vp-social" href={CONFIG.instagram.href} {...ext} aria-label={`Instagram ${CONFIG.instagram.handle}`}>
+                  <Icon name="ig-brand" size={22} />
+                  <span>Instagram <span className="vp-social-sub">{CONFIG.instagram.handle}</span></span>
                 </a>
               )}
               {CONFIG.youtube && (
-                <a className="vp-ig" href={CONFIG.youtube} {...ext} aria-label="YouTube">
-                  <Icon name="youtube" size={16} />
-                  <span className="vp-ig-handle">YouTube</span>
+                <a className="vp-social" href={CONFIG.youtube} {...ext} aria-label="YouTube channel">
+                  <Icon name="yt-brand" size={22} />
+                  <span>YouTube</span>
                 </a>
               )}
               {CONFIG.tiktok && (
