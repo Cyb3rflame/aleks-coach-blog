@@ -26,9 +26,9 @@ const CONFIG = {
 
   cards: [
     { icon: 'target', title: 'Free analysis', sub: 'Send a clip, get feedback', href: '/freeanalysis' },
-    { icon: 'calendar', title: 'Coaching programme', sub: '6 months over WhatsApp', href: '/programme' },
-    { icon: 'play', title: 'One-off breakdowns', sub: 'A stroke or a full match', href: '/offers' },
-    { icon: 'trophy', title: 'Results', sub: "Players I've worked with", href: '/proof' },
+    { icon: 'calendar', title: 'Coaching programme', sub: '6 months over WhatsApp', href: '/programme', highlight: true },
+    { icon: 'play', title: 'One-off breakdowns', sub: 'A stroke or a full match', href: '/offers', highlight: true },
+    { icon: 'trophy', title: 'Results', sub: "Players I've worked with", href: '/proof', highlight: true },
     { icon: 'file', title: 'How to beat the pusher', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/how-to-beat-the-pusher.pdf'
     { icon: 'file', title: 'Stroke coaching plan', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/coaching-plan.pdf'
   ],
@@ -146,7 +146,8 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
     `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}` +
     `?autoplay=false&preload=true&responsive=true`;
 
-  const cards = CONFIG.cards.filter((c) => c.href);
+  const cards = CONFIG.cards.filter((c) => c.href && !c.highlight);
+  const hlCards = CONFIG.cards.filter((c) => c.href && c.highlight);
 
   async function copyLink() {
     try {
@@ -179,6 +180,13 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
         .vp-contact:hover { background: #a93226; }
         .vp-card { display: block; border: 1px solid ${BORDER}; border-radius: 8px; padding: 10px 12px; text-decoration: none; transition: border-color .15s, background .15s; }
         .vp-card:hover { border-color: #c5cbd5; background: #fafbfc; }
+        .vp-hl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 10px; }
+        .vp-hl { display: flex; align-items: center; gap: 12px; background: ${NAVY}; border-radius: 10px; padding: 14px 16px; text-decoration: none; border-left: 4px solid ${RED}; transition: transform .15s, background .15s, box-shadow .15s; }
+        .vp-hl:hover { background: #142e4d; transform: translateY(-2px); box-shadow: 0 8px 20px -10px rgba(13,33,55,.6); }
+        .vp-hl-ico { width: 36px; height: 36px; border-radius: 50%; background: ${RED}; color: #fff; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .vp-hl-title { color: #fff; font-size: 15px; font-weight: 600; margin: 0; }
+        .vp-hl-sub { color: #b7c3d4; font-size: 12px; margin: 2px 0 0; }
+        .vp-hl-arrow { margin-left: auto; color: ${RED_LIGHT}; font-size: 18px; }
         .vp-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #5b6678; background: #fff; border: 1px solid ${BORDER}; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-family: inherit; }
         .vp-btn:hover { border-color: #c5cbd5; }
         @media (max-width: 520px) { .vp-social-sub { display: none; } }
@@ -241,10 +249,24 @@ export default function VideoPage({ videoId, libraryId, isVertical }) {
             </button>
           </div>
 
-          {cards.length > 0 && (
+          {(cards.length > 0 || hlCards.length > 0) && (
             <>
               <div style={s.divider} />
               <p style={s.sectionLabel}>More from Aleks Coach</p>
+              {hlCards.length > 0 && (
+                <div className="vp-hl-grid">
+                  {hlCards.map((c) => (
+                    <a key={c.title} className="vp-hl" href={c.href} {...(isExternal(c.href) ? ext : {})}>
+                      <span className="vp-hl-ico"><Icon name={c.icon} size={18} /></span>
+                      <span>
+                        <p className="vp-hl-title">{c.title}</p>
+                        <p className="vp-hl-sub">{c.sub}</p>
+                      </span>
+                      <span className="vp-hl-arrow" aria-hidden="true">→</span>
+                    </a>
+                  ))}
+                </div>
+              )}
               <div style={s.grid}>
                 {cards.map((c) => (
                   <a key={c.title} className="vp-card" href={c.href} {...(isExternal(c.href) ? ext : {})}>
