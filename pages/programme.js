@@ -38,18 +38,26 @@ const STEPS = [
   },
 ];
 
-// Vertical Shorts.
+// Portrait testimonials, hosted on Bunny (paste the ID from the Bunny play link).
 const VIDEO_TESTIMONIALS = [
-  { id: "5GEh3TWnh_g", name: "", detail: "" },
-  { id: "3OWSd3whlNk", name: "", detail: "" },
-  { id: "2XLLqCL_qoY", name: "", detail: "" },
+  { id: "67932339-c26d-4a5d-bd2a-928db146224a", name: "Elior", detail: "" },
+  { id: "9ae5d0ed-a39d-4d8a-82b1-67f34b7ed5c5", name: "Dimi", detail: "" },
+  { id: "d37ab98a-9872-4d0f-a15f-7821928cc90b", name: "Marc", detail: "" },
+  { id: "74e833cd-465d-4655-95dc-6c96dfbaadbd", name: "Tristan", detail: "" },
+  { id: "44b15704-a8a2-457a-a800-a78c2a93b768", name: "Ricardo", detail: "" },
+  { id: "37991723-302f-4186-8d60-edff237a1253", name: "Gabe", detail: "" },
+  { id: "3a13ccee-766d-438a-8d8e-bb76d757ba53", name: "Ludovico", detail: "" },
+  { id: "12e697c1-a98c-4be1-ba45-fe6dff9b507e", name: "Jacob", detail: "" },
 ];
 
-// vertical: true for Shorts, false for normal landscape videos.
+// vertical: true for portrait videos, false for landscape. Hosted on Bunny.
 const BEFORE_AFTERS = [
-  { id: "Cfe3_X385yM", label: "", vertical: true },
-  { id: "DMGCSDou58g", label: "", vertical: true },
-  { id: "9n6oPAJkAko", label: "", vertical: false },
+  { id: "195c78d9-fe63-4151-ae49-01b494a980e6", label: "Forehand, two weeks apart", vertical: true },
+  { id: "e6b4b789-11a9-442b-9bbc-4461dc4db3ac", label: "Serve, before and after", vertical: true },
+  { id: "eb533d55-e25a-41a9-9063-f37eca21c4a3", label: "Forehand, what changed", vertical: true },
+  { id: "b3bda0f2-8711-403e-bf3c-d0f664cc56a1", label: "Serve rebuild", vertical: false },
+  { id: "f4b39aaa-b2b7-4a73-94f9-890b3cb90dfa", label: "Rally, Elior", vertical: false },
+  { id: "b4cfc211-0bf0-47c7-9efa-924a4e4cbf13", label: "Rally, Gabe", vertical: false },
 ];
 
 // Wrap any phrase in **double asterisks** to highlight it in red.
@@ -81,9 +89,10 @@ const TESTIMONIALS = [
 ];
 
 const BREAKDOWNS = [
-  { id: "rU2BJA_pkoA", label: "Forehand breakdown" },
-  { id: "STXDn7y5P7Y", label: "Backhand breakdown" },
-  { id: "NELe2pN8D0w", label: "Serve breakdown" },
+  { id: "eb2ef0e1-f462-41a1-9166-ef66398e4ba3", label: "Forehand breakdown" },
+  { id: "1d2ddd55-ffdd-477c-a385-36a59afa1f94", label: "Backhand breakdown" },
+  { id: "ff1d4726-fcc3-4acd-8849-cec6f916a13f", label: "Serve breakdown" },
+  { id: "fb4682ea-0817-496b-9f4c-89ceacb8d7cf", label: "Footwork breakdown" },
 ];
 
 const INCLUDED = [
@@ -214,11 +223,17 @@ function Stars() {
   );
 }
 
+const BUNNY_LIBRARY = "788439";
+
 function Video({ id, title, vertical = false }) {
+  const isBunny = id.length === 36;
+  const src = isBunny
+    ? `https://iframe.mediadelivery.net/embed/${BUNNY_LIBRARY}/${id}?autoplay=false&preload=false&responsive=true`
+    : `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
   return (
     <div className={vertical ? "frame tall" : "frame"}>
       <iframe
-        src={`https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`}
+        src={src}
         title={title}
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
@@ -307,7 +322,7 @@ export default function Programme() {
         {/* 3. VIDEO TESTIMONIALS */}
         <section>
           <h2>Players in their own words</h2>
-          <div className="grid-3 shorts">
+          <div className="grid-4 shorts">
             {VIDEO_TESTIMONIALS.map((v, idx) => (
               <figure key={idx}>
                 <Video id={v.id} title="Player testimonial" vertical />
@@ -334,12 +349,16 @@ export default function Programme() {
               </figure>
             ))}
           </div>
-          {baWide.map((b, idx) => (
-            <figure key={idx} className="wide">
-              <Video id={b.id} title={b.label || "Before and after"} />
-              {b.label && <figcaption>{b.label}</figcaption>}
-            </figure>
-          ))}
+          {baWide.length > 0 && (
+            <div className="grid-3 wide">
+              {baWide.map((b, idx) => (
+                <figure key={idx}>
+                  <Video id={b.id} title={b.label || "Before and after"} />
+                  {b.label && <figcaption>{b.label}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* 5. WRITTEN REVIEWS */}
@@ -370,7 +389,7 @@ export default function Programme() {
           <p className="sub">
             This is what lands in your WhatsApp after you send a video.
           </p>
-          <div className="grid-3">
+          <div className="grid-2">
             {BREAKDOWNS.map((b, idx) => (
               <figure key={idx}>
                 <Video id={b.id} title={b.label} />
@@ -591,6 +610,11 @@ export default function Programme() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.75rem;
+        }
+        .grid-4 {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
         }
         .grid-2 {
           display: grid;
@@ -875,6 +899,7 @@ export default function Programme() {
             padding: 2.25rem 0;
           }
           .grid-3,
+          .grid-4,
           .grid-2 {
             grid-template-columns: 1fr;
             gap: 1.5rem;
