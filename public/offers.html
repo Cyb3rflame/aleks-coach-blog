@@ -184,6 +184,11 @@
 
   .ig-vert { max-width: 340px; margin: 0 auto; width: 100%; }
 
+  .portraits { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; margin-top: 30px; }
+  .pcard { width: 240px; }
+  .pcard h3 { font-size: 17px; color: var(--navy); margin-top: 10px; }
+  .pcard p { color: var(--muted); font-size: 14px; margin-top: 2px; }
+
   .ig-title { font-size: 22px; color: var(--navy); text-align: center; margin: 44px 0 20px; }
   .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start; }
   .ig-grid .instagram-media { min-width: 0 !important; width: 100% !important; margin: 0 !important; border-radius: 10px !important; }
@@ -317,23 +322,7 @@
     <div class="videos">
 
       <div class="video">
-        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/195c78d9-fe63-4151-ae49-01b494a980e6?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-        <div class="cap">
-          <h3>Forehand, two weeks apart</h3>
-          <p>Same player. The forehand on the right is the one we built.</p>
-        </div>
-      </div>
-
-      <div class="video">
-        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/e6b4b789-11a9-442b-9bbc-4461dc4db3ac?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-        <div class="cap">
-          <h3>Serve, before and after</h3>
-          <p>The trophy position and the drop, side by side.</p>
-        </div>
-      </div>
-
-      <div class="video">
-        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/b3bda0f2-8711-403e-bf3c-d0f664cc56a1?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/b3bda0f2-8711-403e-bf3c-d0f664cc56a1?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Serve rebuild"></iframe></div>
         <div class="cap">
           <h3>Serve rebuild</h3>
           <p>Better load on the back leg. A real explode up to contact.</p>
@@ -341,7 +330,7 @@
       </div>
 
       <div class="video">
-        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/f4b39aaa-b2b7-4a73-94f9-890b3cb90dfa?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/f4b39aaa-b2b7-4a73-94f9-890b3cb90dfa?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Rally, Elior"></iframe></div>
         <div class="cap">
           <h3>Rally, Elior</h3>
           <p>Earlier turn, better base, accelerating through the ball.</p>
@@ -349,32 +338,35 @@
       </div>
 
       <div class="video">
-        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/b4cfc211-0bf0-47c7-9efa-924a4e4cbf13?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/b4cfc211-0bf0-47c7-9efa-924a4e4cbf13?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Rally, Gabe"></iframe></div>
         <div class="cap">
           <h3>Rally, Gabe</h3>
           <p>Heavier ball, held position, no getting pushed back.</p>
         </div>
       </div>
 
-      <div class="video">
-        <div class="yt" data-id="tJ3g61NFsT0"><button class="play" aria-label="Play video"></button></div>
-        <div class="cap">
-          <h3>Serve progress</h3>
-          <p>Before and after, same player.</p>
-        </div>
-      </div>
-
-      <!-- Add new YouTube before/afters here: copy one .video block and change data-id, title and caption -->
-
     </div>
 
-    <h3 class="ig-title">From Instagram</h3>
-    <div class="ig-grid">
-      <!-- Edited: forehand before and after with labels -->
-      <div class="vert ig-vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/eb533d55-e25a-41a9-9063-f37eca21c4a3?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand before and after"></iframe></div>
-      <!-- Unedited before and afters -->
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DaMAIxLqufN/" data-instgrm-version="14"></blockquote>
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DZikUGDsBkE/" data-instgrm-version="14"></blockquote>
+    <div class="portraits">
+
+      <div class="pcard">
+        <div class="vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/195c78d9-fe63-4151-ae49-01b494a980e6?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand, two weeks apart"></iframe></div>
+        <h3>Forehand, two weeks apart</h3>
+        <p>Same player. The forehand on the right is the one we built.</p>
+      </div>
+
+      <div class="pcard">
+        <div class="vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/e6b4b789-11a9-442b-9bbc-4461dc4db3ac?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Serve, before and after"></iframe></div>
+        <h3>Serve, before and after</h3>
+        <p>The trophy position and the drop, side by side.</p>
+      </div>
+
+      <div class="pcard">
+        <div class="vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/eb533d55-e25a-41a9-9063-f37eca21c4a3?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand, what changed"></iframe></div>
+        <h3>Forehand, what changed</h3>
+        <p>Late, half turn before. Early, full turn after.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -448,17 +440,6 @@
   Aleks Coach &middot; Online tennis coaching and video analysis
 </footer>
 
-<script>
-  document.querySelectorAll('.yt').forEach(function (el) {
-    var id = el.dataset.id;
-    el.style.backgroundImage = 'url(https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg)';
-    el.addEventListener('click', function () {
-      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
-        '?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    });
-  });
-</script>
-<script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
