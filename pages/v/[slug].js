@@ -27,6 +27,7 @@ const CONFIG = {
   cards: [
     { icon: 'target', title: 'Free analysis', sub: 'Send a clip, get feedback', href: '/freeanalysis' },
     { icon: 'calendar', title: 'Coaching programme', sub: '6 months over WhatsApp', href: '/programme' },
+    { icon: 'play', title: 'One-off breakdowns', sub: 'A stroke or a full match', href: '/offers' },
     { icon: 'trophy', title: 'Results', sub: "Players I've worked with", href: '/proof' },
     { icon: 'file', title: 'How to beat the pusher', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/how-to-beat-the-pusher.pdf'
     { icon: 'file', title: 'Stroke coaching plan', sub: 'Free PDF', href: '' }, // e.g. '/pdfs/coaching-plan.pdf'
@@ -124,6 +125,8 @@ function Icon({ name, size = 16 }) {
           <path d="M10 8.8l5.6 3.2-5.6 3.2z" fill="#fff" />
         </svg>
       );
+    case 'play':
+      return (<svg {...p}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M10 9.5l4.5 2.5-4.5 2.5z" /></svg>);
     case 'copy':
       return (<svg {...p}><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>);
     case 'check':
