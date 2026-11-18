@@ -110,7 +110,7 @@ html{scrollbar-color: var(--bg-3) var(--bg); scrollbar-width: thin}
 .section-lead{font-size:15px;color:var(--muted);text-align:center;max-width:480px;margin:0 auto 36px}
 
 /* ─── VIDEO FACADE (shared) ─── */
-.video-wrap{position:relative;background:var(--bg-3);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color 0.25s, box-shadow 0.25s}
+.video-wrap{position:relative;background:var(--bg-3);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;transition:border-color 0.25s, box-shadow 0.25s}
 .video-wrap.landscape{aspect-ratio:16/9}
 .video-wrap.vertical{aspect-ratio:9/16}
 .video-wrap:hover{border-color:var(--accent-ink);box-shadow:0 16px 32px -16px rgba(23,23,15,0.22)}
@@ -134,7 +134,7 @@ html{scrollbar-color: var(--bg-3) var(--bg); scrollbar-width: thin}
 @media(max-width:640px){.transform-copy{text-align:center}}
 
 /* ─── BREAKDOWN GRID ─── */
-.breakdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.breakdown-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 @media(max-width:720px){.breakdown-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .breakdown-card h3{font-family:var(--font-head);font-size:16px;font-weight:600;color:var(--fg);margin-top:14px}
 .breakdown-card p{font-size:13px;color:var(--muted);margin-top:2px}
@@ -238,13 +238,7 @@ body{padding-bottom:80px}
     <h2 class="section-title reveal">One change. Visible difference.</h2>
     <div class="transform-row reveal reveal-delay-1" style="margin-top:32px">
       <div class="short-frame">
-        <div class="video-wrap vertical" data-yt="Cfe3_X385yM" role="button" tabindex="0" aria-label="Play before and after transformation">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/Cfe3_X385yM/maxresdefault.jpg" alt="Before and after transformation" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/Cfe3_X385yM/hqdefault.jpg'">
-            <div class="scrim"></div>
-            <div class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>
+        <div class="video-wrap vertical"><iframe src="https://iframe.mediadelivery.net/embed/788439/195c78d9-fe63-4151-ae49-01b494a980e6?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Before and after transformation"></iframe></div>
       </div>
       <div class="transform-copy">
         <h3>This is what a couple of changes looks like.</h3>
@@ -316,37 +310,24 @@ body{padding-bottom:80px}
     <p class="section-lead reveal reveal-delay-1">This is exactly what lands in your inbox. Pick the stroke you came to fix and watch a real analysis.</p>
     <div class="breakdown-grid">
       <div class="breakdown-card reveal reveal-delay-1">
-        <div class="video-wrap landscape" data-yt="rU2BJA_pkoA" role="button" tabindex="0" aria-label="Play forehand breakdown">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/rU2BJA_pkoA/maxresdefault.jpg" alt="Forehand breakdown" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/rU2BJA_pkoA/hqdefault.jpg'">
-            <div class="scrim"></div>
-            <div class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>
+        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/eb2ef0e1-f462-41a1-9166-ef66398e4ba3?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand breakdown"></iframe></div>
         <h3>Forehand</h3>
         <p>A couple of changes to stop the power leaking.</p>
       </div>
       <div class="breakdown-card reveal reveal-delay-2">
-        <div class="video-wrap landscape" data-yt="STXDn7y5P7Y" role="button" tabindex="0" aria-label="Play backhand breakdown">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/STXDn7y5P7Y/maxresdefault.jpg" alt="Backhand breakdown" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/STXDn7y5P7Y/hqdefault.jpg'">
-            <div class="scrim"></div>
-            <div class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>
+        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/1d2ddd55-ffdd-477c-a385-36a59afa1f94?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Backhand breakdown"></iframe></div>
         <h3>Backhand</h3>
         <p>The two fixes that hold up under pressure.</p>
       </div>
       <div class="breakdown-card reveal reveal-delay-3">
-        <div class="video-wrap landscape" data-yt="NELe2pN8D0w" role="button" tabindex="0" aria-label="Play serve breakdown">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/NELe2pN8D0w/maxresdefault.jpg" alt="Serve breakdown" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/NELe2pN8D0w/hqdefault.jpg'">
-            <div class="scrim"></div>
-            <div class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>
+        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/ff1d4726-fcc3-4acd-8849-cec6f916a13f?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Serve breakdown"></iframe></div>
         <h3>Serve</h3>
         <p>A couple of changes to the coil and contact point.</p>
+      </div>
+      <div class="breakdown-card reveal reveal-delay-1">
+        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/fb4682ea-0817-496b-9f4c-89ceacb8d7cf?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Footwork breakdown"></iframe></div>
+        <h3>Footwork</h3>
+        <p>Moving earlier so every shot starts from a balanced base.</p>
       </div>
     </div>
   </div>
@@ -363,13 +344,7 @@ body{padding-bottom:80px}
 
     <div class="testi-anchor reveal">
       <div class="short-frame">
-        <div class="video-wrap vertical" data-yt="5GEh3TWnh_g" role="button" tabindex="0" aria-label="Play player testimonial">
-          <div class="video-thumb">
-            <img src="https://i.ytimg.com/vi/5GEh3TWnh_g/maxresdefault.jpg" alt="Player testimonial" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/5GEh3TWnh_g/hqdefault.jpg'">
-            <div class="scrim"></div>
-            <div class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>
+        <div class="video-wrap vertical"><iframe src="https://iframe.mediadelivery.net/embed/788439/67932339-c26d-4a5d-bd2a-928db146224a?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Player testimonial"></iframe></div>
       </div>
       <div class="cap">Hear it from a player</div>
     </div>
