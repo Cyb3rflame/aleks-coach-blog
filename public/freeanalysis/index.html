@@ -12,429 +12,270 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Find out exactly what is holding you back | Aleks Coach</title>
-<meta name="description" content="Get a 5-minute voiceover analysis of your stroke of choice. Visuals showing exactly what is happening mechanically, plus a brief plan on how to fix it.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Get a free 5-minute voiceover breakdown of the stroke you pick. See what is going wrong mechanically, plus a short plan on how to fix it.">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root {
+    --navy: #0f2341;
+    --navy-light: #1b3560;
+    --red: #c8102e;
+    --red-dark: #a00d25;
+    --bg: #f5f6f8;
+    --text: #1c1f24;
+    --muted: #5b6472;
+    --line: #dde1e7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: Helvetica, Arial, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: normal; }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; }
 
-:root{
-  --bg: #F7F6F1;
-  --bg-2: #FFFFFF;
-  --bg-3: #EFEEE5;
-  --fg: #17170F;
-  --muted: #5C5B53;
-  --accent: #CCFF00;
-  --accent-ink: #4F6900;
-  --accent-on: #14150D;
-  --accent-dim: rgba(79,105,0,0.09);
-  --accent-glow: rgba(153,199,0,0.35);
-  --border: rgba(23,23,15,0.10);
-  --error: #C1272D;
-  --radius: 6px;
-  --radius-lg: 12px;
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --ease-out: cubic-bezier(0.16,1,0.3,1);
-  --ease-in-out: cubic-bezier(0.4,0,0.2,1);
-}
+  header { background: var(--navy); color: #fff; padding: 12px 24px; position: sticky; top: 0; z-index: 20; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: Georgia, serif; font-size: 22px; text-decoration: none; }
+  .logo span { color: var(--red); }
+  .hbtn { background: var(--red); color: #fff; text-decoration: none; font-size: 14px; font-weight: bold; padding: 8px 14px; border-radius: 6px; }
+  .hbtn:hover { background: var(--red-dark); }
 
-html{scroll-behavior:smooth}
+  /* HERO: video first */
+  .hero { background: var(--navy); color: #fff; padding: 22px 24px 40px; }
+  .hero h1 { font-size: 30px; text-align: center; margin-bottom: 16px; }
+  .hero-video { max-width: 820px; margin: 0 auto; }
+  .hero-cap { text-align: center; font-size: 13px; opacity: .7; margin-top: 8px; }
+  .hero p.lead { text-align: center; font-size: 18px; max-width: 620px; margin: 18px auto 0; opacity: .92; }
+  .hero .go { display: block; width: fit-content; margin: 20px auto 0; }
 
-body{
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+  .bunny { position: relative; aspect-ratio: 16 / 9; background: #08162b; border-radius: 10px; overflow: hidden; }
+  .vert { position: relative; aspect-ratio: 9 / 16; background: var(--navy); border-radius: 10px; overflow: hidden; }
+  .bunny iframe, .vert iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-::selection{background: rgba(79,105,0,0.18); color: var(--fg)}
-:focus-visible{outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 3px}
-::-webkit-scrollbar{width: 12px; height: 12px}
-::-webkit-scrollbar-track{background: var(--bg)}
-::-webkit-scrollbar-thumb{background: var(--bg-3); border: 3px solid var(--bg); border-radius: 100px}
-::-webkit-scrollbar-thumb:hover{background: var(--border)}
-html{scrollbar-color: var(--bg-3) var(--bg); scrollbar-width: thin}
+  .btn { display: inline-block; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: bold; font-size: 16px; border: 0; cursor: pointer; font-family: inherit; }
+  .btn-red { background: var(--red); color: #fff; }
+  .btn-red:hover { background: var(--red-dark); }
+  .btn-red:disabled { opacity: .7; cursor: default; }
 
-/* ─── ANIMATIONS ─── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse-ring{0%{box-shadow:0 0 0 0 var(--accent-glow)}70%{box-shadow:0 0 0 14px transparent}100%{box-shadow:0 0 0 0 transparent}}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes scan-line{0%{top:0}100%{top:100%}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes dot-blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  section.block { padding: 56px 24px 0; }
+  section.block h2 { font-size: 30px; color: var(--navy); text-align: center; margin-bottom: 8px; }
+  .sub { text-align: center; color: var(--muted); margin: 0 auto 28px; max-width: 580px; }
 
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:0.1s}
-.reveal-delay-2{transition-delay:0.2s}
-.reveal-delay-3{transition-delay:0.3s}
-.reveal-delay-4{transition-delay:0.4s}
+  /* FORM */
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 30px 28px; max-width: 560px; margin: 0 auto; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 14px; font-weight: bold; color: var(--navy); margin-bottom: 6px; }
+  .field label .req { color: var(--red); }
+  .field label .opt { color: var(--muted); font-weight: normal; font-size: 13px; }
+  .field input, .field select, .field textarea { width: 100%; font: inherit; font-size: 15px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fafbfc; color: var(--text); }
+  .field textarea { min-height: 90px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--navy); background: #fff; }
+  .help { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .form-error { display: none; font-size: 13px; color: var(--red); margin-top: 6px; }
+  .form-error.visible { display: block; }
+  .submit { width: 100%; }
+  .after { text-align: center; font-size: 13px; color: var(--muted); margin-top: 8px; }
 
-@media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
-  .reveal{opacity:1;transform:none}
-}
+  /* BREAKDOWNS */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .card .bunny { border-radius: 0; }
+  .cap { padding: 14px 16px 16px; }
+  .cap h3 { font-size: 18px; color: var(--navy); margin-bottom: 2px; }
+  .cap p { color: var(--muted); font-size: 14px; }
 
-/* ─── LAYOUT ─── */
-.container{max-width:760px;margin:0 auto;padding:0 24px}
-.container-wide{max-width:1000px;margin:0 auto;padding:0 24px}
+  /* BEFORE / AFTER */
+  .transform { display: flex; gap: 36px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .transform .vert { width: 260px; flex-shrink: 0; }
+  .transform-copy { max-width: 400px; }
+  .transform-copy h3 { font-size: 22px; color: var(--navy); margin-bottom: 10px; }
+  .transform-copy p { color: var(--muted); margin-bottom: 10px; }
+  .transform-copy .tag { color: var(--red); font-weight: bold; font-size: 14px; }
 
-/* ─── HEADER / NAV ─── */
-.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:background 0.3s var(--ease-in-out), border-color 0.3s var(--ease-in-out), backdrop-filter 0.3s}
-.site-header.scrolled{background:rgba(247,246,241,0.92);border-color:var(--border);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.logo{font-family:var(--font-head);font-weight:700;font-size:17px;color:var(--fg);text-decoration:none;letter-spacing:-0.3px}
-.logo span{color:var(--accent-ink)}
-.header-cta{font-family:var(--font-body);font-size:14px;font-weight:600;color:var(--accent-ink);text-decoration:none;letter-spacing:0.2px;transition:opacity 0.2s}
-.header-cta:hover{opacity:0.75}
+  /* TESTIMONIALS */
+  .testi-row { display: flex; gap: 28px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+  .testi-video { width: 240px; flex-shrink: 0; }
+  .testi-video p { text-align: center; font-family: Georgia, serif; color: var(--navy); margin-top: 8px; }
+  .revs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; min-width: 280px; max-width: 700px; }
+  .rev { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .stars { color: var(--red); font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
+  .rev p { font-size: 15px; color: #2b2f36; }
+  .rev b { color: var(--navy); }
+  .who { margin-top: 10px; font-size: 14px; font-weight: bold; color: var(--navy); }
+  .who span { font-weight: normal; color: var(--muted); }
 
-/* ─── HERO ─── */
-.hero{padding:160px 0 64px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle, var(--accent-dim) 0%, transparent 65%);pointer-events:none}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-ink);margin-bottom:24px;background:var(--accent-dim);border:1px solid rgba(79,105,0,0.22);padding:6px 14px;border-radius:100px}
-.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-ink);animation:dot-blink 1.8s ease-in-out infinite}
-.hero-headline{font-family:var(--font-head);font-size:clamp(36px, 7vw, 64px);font-weight:700;line-height:1.08;letter-spacing:-1.5px;color:var(--fg);max-width:700px;margin:0 auto 20px}
-.hero-headline .accent{color:var(--accent-ink);position:relative}
-.hero-sub{font-family:var(--font-body);font-size:clamp(16px, 2.5vw, 19px);font-weight:400;color:var(--muted);max-width:520px;margin:0 auto 0;line-height:1.6}
-@media(max-width:420px){.hero-break{display:none}}
+  /* STATS + CTA + FOOTER */
+  .stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; margin-top: 56px; padding: 0 24px; }
+  .stat { text-align: center; }
+  .stat b { display: block; font-family: Georgia, serif; font-weight: normal; font-size: 32px; color: var(--navy); }
+  .stat span { font-size: 13px; color: var(--muted); }
+  .cta { background: var(--navy); color: #fff; border-radius: 10px; padding: 36px 28px; text-align: center; margin: 48px 24px 0; }
+  .cta h2 { font-size: 26px; margin-bottom: 8px; }
+  .cta p { opacity: .9; margin-bottom: 20px; }
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 44px 24px 110px; }
+  footer a { text-decoration: none; }
 
-/* ─── SECTION HEADINGS ─── */
-.section{padding:56px 0}
-.section-label{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent-ink);text-align:center;margin-bottom:12px}
-.section-title{font-family:var(--font-head);font-size:clamp(24px,4.5vw,34px);font-weight:700;letter-spacing:-0.6px;color:var(--fg);text-align:center;line-height:1.1;margin-bottom:10px}
-.section-lead{font-size:15px;color:var(--muted);text-align:center;max-width:480px;margin:0 auto 36px}
+  /* sticky submit on phones */
+  .sticky { display: none; position: fixed; left: 0; right: 0; bottom: 0; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); z-index: 30; }
+  .sticky .btn { width: 100%; text-align: center; }
 
-/* ─── VIDEO FACADE (shared) ─── */
-.video-wrap{position:relative;background:var(--bg-3);border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden;transition:border-color 0.25s, box-shadow 0.25s}
-.video-wrap.landscape{aspect-ratio:16/9}
-.video-wrap.vertical{aspect-ratio:9/16}
-.video-wrap:hover{border-color:var(--accent-ink);box-shadow:0 16px 32px -16px rgba(23,23,15,0.22)}
-.video-thumb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#EFEEE5 0%,#E3E1D4 50%,#EFEEE5 100%)}
-.video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.video-thumb .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.35),rgba(0,0,0,0) 55%)}
-.play-btn{position:relative;z-index:2;width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;animation:pulse-ring 2.5s ease-out infinite, float 3s ease-in-out infinite;transition:transform 0.2s var(--ease-out)}
-.video-wrap:hover .play-btn{transform:scale(1.08)}
-.play-btn svg{width:26px;height:26px;fill:var(--accent-on);margin-left:4px}
-.video-wrap::after{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent-glow),transparent);top:0;animation:scan-line 4s linear infinite;pointer-events:none;opacity:0;transition:opacity 0.3s}
-.video-wrap:hover::after{opacity:1}
-.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-
-/* ─── TRANSFORMATION (vertical short, featured) ─── */
-.transform-row{display:flex;gap:36px;align-items:center;justify-content:center;flex-wrap:wrap}
-.short-frame{width:280px;flex-shrink:0}
-.transform-copy{max-width:380px}
-.transform-copy h3{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--fg);margin-bottom:12px;letter-spacing:-0.3px}
-.transform-copy p{font-size:15px;color:var(--muted);margin-bottom:8px}
-.transform-copy .tag{color:var(--accent-ink);font-size:13px;font-weight:600}
-@media(max-width:640px){.transform-copy{text-align:center}}
-
-/* ─── BREAKDOWN GRID ─── */
-.breakdown-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media(max-width:720px){.breakdown-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
-.breakdown-card h3{font-family:var(--font-head);font-size:16px;font-weight:600;color:var(--fg);margin-top:14px}
-.breakdown-card p{font-size:13px;color:var(--muted);margin-top:2px}
-
-/* ─── FORM ─── */
-.tally-wrap{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px 32px;position:relative;overflow:hidden;max-width:560px;margin:0 auto}
-.tally-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.form-fields{display:flex;flex-direction:column;gap:16px}
-.field-group{display:flex;flex-direction:column;gap:6px}
-.field-label{font-size:13px;font-weight:500;color:var(--fg);letter-spacing:0.2px}
-.field-input{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:13px 16px;font-family:var(--font-body);font-size:15px;color:var(--fg);outline:none;transition:border-color 0.2s, box-shadow 0.2s;width:100%;-webkit-appearance:none}
-.field-input::placeholder{color:var(--muted)}
-.field-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
-textarea.field-input{resize:vertical;min-height:90px;font-family:var(--font-body)}
-select.field-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='none' stroke='%235C5B53' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/></svg>");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;cursor:pointer}
-select.field-input:invalid{color:var(--muted)}
-.field-help{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}
-.form-error{font-size:13px;color:var(--error);margin-top:6px;display:none}
-.form-error.visible{display:block}
-.form-submit-inline{margin-top:8px}
-.btn-inline{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-on);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 36px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s}
-.btn-inline:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(23,23,15,0.35);background:#d9ff1a}
-.btn-inline:active{transform:translateY(0)}
-.btn-inline svg{width:18px;height:18px;transition:transform 0.2s var(--ease-out)}
-.btn-inline:hover svg{transform:translateX(4px)}
-.btn-sub-label{font-size:12px;font-weight:400;color:rgba(20,21,13,0.62);margin-top:4px;text-align:center}
-
-/* ─── STICKY CTA ─── */
-.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:16px 24px 20px;background:linear-gradient(to top, rgba(247,246,241,0.98) 0%, rgba(247,246,241,0.55) 100%);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;justify-content:center;border-top:1px solid var(--border);animation:fadeIn 0.5s var(--ease-out) 0.8s both}
-.btn-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--accent-on);font-family:var(--font-head);font-size:16px;font-weight:700;letter-spacing:-0.2px;padding:16px 48px;border-radius:var(--radius);border:none;cursor:pointer;width:100%;max-width:480px;transition:transform 0.15s var(--ease-out), box-shadow 0.2s, background 0.2s;animation:pulse-ring 3s ease-out infinite}
-.btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(23,23,15,0.35);background:#d9ff1a}
-.btn-submit:active{transform:translateY(0);box-shadow:none}
-.btn-submit svg{width:18px;height:18px;transition:transform 0.2s var(--ease-out)}
-.btn-submit:hover svg{transform:translateX(4px)}
-
-/* ─── DIVIDER ─── */
-.section-divider{border:none;border-top:1px solid var(--border);margin:0}
-
-/* ─── TESTIMONIALS ─── */
-.testi-anchor{display:flex;flex-direction:column;align-items:center;margin-bottom:36px}
-.testi-anchor .short-frame{width:260px}
-.testi-anchor .cap{font-size:12px;color:var(--muted);margin-top:12px;letter-spacing:0.5px}
-.testimonials{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(max-width:640px){.testimonials{grid-template-columns:1fr}}
-.testimonial-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;transition:border-color 0.25s, box-shadow 0.25s}
-.testimonial-card:hover{border-color:rgba(79,105,0,0.3);box-shadow:0 12px 24px -14px rgba(23,23,15,0.18)}
-.testimonial-stars{color:var(--accent-ink);font-size:13px;margin-bottom:10px;letter-spacing:2px}
-.testimonial-text{font-size:14px;line-height:1.6;color:var(--fg);margin-bottom:14px}
-.testimonial-text b{color:var(--accent-ink);font-weight:600}
-.testimonial-author{display:flex;align-items:center;gap:10px}
-.author-name{font-size:13px;font-weight:600;color:var(--fg)}
-.author-detail{font-size:12px;color:var(--muted)}
-
-/* ─── STATS ─── */
-.stats-row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:36px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.stat-item{text-align:center}
-.stat-number{font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--accent-ink);letter-spacing:-1px;display:block}
-.stat-label{font-size:13px;color:var(--muted);margin-top:2px}
-
-/* ─── FOOTER ─── */
-.footer{padding:48px 0 120px}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px}
-.footer-logo{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--fg);opacity:0.5}
-.footer-logo span{color:var(--accent-ink);opacity:1}
-.footer-signoff{font-family:var(--font-head);font-style:italic;color:var(--accent-ink);font-size:14px;text-align:center;margin-bottom:28px;opacity:0.9}
-.footer-legal{font-size:12px;color:var(--muted)}
-.footer-legal a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
-.footer-legal a:hover{color:var(--fg)}
-
-body{padding-bottom:80px}
+  @media (max-width: 820px) {
+    .hero h1 { font-size: 24px; }
+    .hero p.lead { font-size: 16px; }
+    .grid3, .revs { grid-template-columns: 1fr; }
+    .sticky { display: block; }
+    .hbtn { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ─── STICKY HEADER ─── -->
-<header class="site-header" id="site-header">
-  <span class="logo">Aleks <span>Coach</span></span>
-  <a href="#form" class="header-cta">Get your analysis →</a>
+<header>
+  <div class="wrap">
+    <a class="logo" href="/">Aleks <span>Coach</span></a>
+    <a class="hbtn" href="#form">Get your analysis</a>
+  </div>
 </header>
 
-<!-- ─── HERO ─── -->
+<!-- HERO: the video is the first thing they see -->
 <section class="hero">
-  <div class="container">
-    <div class="eyebrow reveal">
-      <span class="eyebrow-dot"></span>
-      8 spots left this week
-    </div>
-    <h1 class="hero-headline reveal reveal-delay-1">
-      Find out <span class="accent">exactly</span> what<br class="hero-break">is holding you back.
-    </h1>
-    <p class="hero-sub reveal reveal-delay-2">
-      Send your footage. Get a free 5 minute breakdown of the stroke you pick. You see what is going wrong, and the couple of changes that fix it.
-    </p>
+  <h1>Find out exactly what's holding you back.</h1>
+  <div class="hero-video">
+    <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/eb2ef0e1-f462-41a1-9166-ef66398e4ba3?autoplay=false&preload=true&responsive=true" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Example forehand breakdown"></iframe></div>
+    <p class="hero-cap">A real forehand breakdown. Yours looks like this.</p>
   </div>
+  <p class="lead">Send your footage. Get a free 5 minute breakdown of the stroke you pick. You see what's going wrong, and the couple of changes that fix it.</p>
+  <a class="btn btn-red go" href="#form">Get my free analysis</a>
 </section>
 
-<!-- ─── TRANSFORMATION (before/after short) ─── -->
-<section class="section">
-  <div class="container">
-    <p class="section-label reveal">Real change, two weeks</p>
-    <h2 class="section-title reveal">One change. Visible difference.</h2>
-    <div class="transform-row reveal reveal-delay-1" style="margin-top:32px">
-      <div class="short-frame">
-        <div class="video-wrap vertical"><iframe src="https://iframe.mediadelivery.net/embed/788439/195c78d9-fe63-4151-ae49-01b494a980e6?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Before and after transformation"></iframe></div>
-      </div>
-      <div class="transform-copy">
-        <h3>This is what a couple of changes looks like.</h3>
-        <p>We found the faults, then fixed one at a time and let it settle before moving to the next. Same player, two weeks apart.</p>
-        <p class="tag">No overhaul. Just the changes that mattered.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider">
-
-<!-- ─── FORM ─── -->
-<section class="section" id="form">
-  <div class="container">
-    <p class="section-label reveal">Free analysis</p>
-    <h2 class="section-title reveal">Submit your footage.</h2>
-    <p class="section-lead reveal reveal-delay-1">Fill in your details and share a link to your footage. You will receive your full analysis within 24 to 48 hours.</p>
-
-    <div class="tally-wrap reveal reveal-delay-2">
-      <form class="form-fields" id="analysis-form" novalidate>
-        <div class="field-group">
-          <label class="field-label" for="f-fname">First name <span style="color:var(--accent)">*</span></label>
-          <input class="field-input" type="text" id="f-fname" name="first_name" placeholder="Alex" autocomplete="given-name" required>
+<!-- FORM -->
+<section class="block" id="form">
+  <div class="wrap">
+    <h2>Submit your footage</h2>
+    <p class="sub">Fill in your details and share a link to your footage. Your analysis lands within 24 to 48 hours.</p>
+    <div class="form-card">
+      <form id="analysis-form" novalidate>
+        <div class="field">
+          <label for="f-fname">First name <span class="req">*</span></label>
+          <input type="text" id="f-fname" name="first_name" placeholder="Alex" autocomplete="given-name" required>
         </div>
-        <div class="field-group">
-          <label class="field-label" for="f-email">Email <span style="color:var(--accent)">*</span></label>
-          <input class="field-input" type="email" id="f-email" name="email" placeholder="you@email.com" autocomplete="email" required>
+        <div class="field">
+          <label for="f-email">Email <span class="req">*</span></label>
+          <input type="email" id="f-email" name="email" placeholder="you@email.com" autocomplete="email" required>
           <p class="form-error" id="err-email">Please enter a valid email address.</p>
         </div>
-        <div class="field-group">
-          <label class="field-label" for="f-stroke">Stroke to analyse <span style="color:var(--accent)">*</span></label>
-          <select class="field-input" id="f-stroke" name="stroke" required>
+        <div class="field">
+          <label for="f-stroke">Stroke to analyse <span class="req">*</span></label>
+          <select id="f-stroke" name="stroke" required>
             <option value="" disabled selected>Select a stroke</option>
             <option value="Forehand">Forehand</option>
             <option value="Backhand">Backhand</option>
             <option value="Serve">Serve</option>
           </select>
         </div>
-        <div class="field-group">
-          <label class="field-label" for="f-footage">Link to your footage <span style="color:var(--accent)">*</span></label>
-          <input class="field-input" type="url" id="f-footage" name="footage_link" placeholder="YouTube, Loom, or Google Drive link" required>
-          <p class="field-help">No need to film anything new. A clip already on your phone works fine, match or practice, any angle. Shaky footage is fine, I can work with it. YouTube (unlisted), Google Drive and Loom links all work.</p>
-          <p class="form-error" id="err-footage">Please paste a valid URL (YouTube, Loom, Google Drive, etc).</p>
+        <div class="field">
+          <label for="f-footage">Link to your footage <span class="req">*</span></label>
+          <input type="url" id="f-footage" name="footage_link" placeholder="YouTube, Loom or Google Drive link" required>
+          <p class="help">No need to film anything new. A clip already on your phone works fine, match or practice, any angle. Shaky footage is fine. YouTube (unlisted), Google Drive and Loom links all work.</p>
+          <p class="form-error" id="err-footage">Please paste a valid link (YouTube, Loom, Google Drive, etc).</p>
         </div>
-        <div class="field-group">
-          <label class="field-label" for="f-notes">Extra notes <span style="color:var(--muted); font-weight:400; font-size:12px;">(optional)</span></label>
-          <textarea class="field-input" id="f-notes" name="notes" placeholder="Anything specific you want me to look at? Context, court surface, injuries, playing style."></textarea>
+        <div class="field">
+          <label for="f-notes">Extra notes <span class="opt">(optional)</span></label>
+          <textarea id="f-notes" name="notes" placeholder="Anything specific you want me to look at? Context, court surface, injuries, playing style."></textarea>
         </div>
-        <div class="form-submit-inline">
-          <button type="submit" class="btn-inline">
-            Submit footage
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-          <p class="btn-sub-label">Analysis delivered within 24 to 48 hours.</p>
-        </div>
+        <button type="submit" class="btn btn-red submit">Submit footage</button>
+        <p class="after">Analysis delivered within 24 to 48 hours.</p>
       </form>
     </div>
   </div>
 </section>
 
-<hr class="section-divider">
-
-<!-- ─── EXAMPLE BREAKDOWNS ─── -->
-<section class="section" id="examples">
-  <div class="container-wide">
-    <p class="section-label reveal">See the work</p>
-    <h2 class="section-title reveal">Example breakdowns.</h2>
-    <p class="section-lead reveal reveal-delay-1">This is exactly what lands in your inbox. Pick the stroke you came to fix and watch a real analysis.</p>
-    <div class="breakdown-grid">
-      <div class="breakdown-card reveal reveal-delay-1">
-        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/eb2ef0e1-f462-41a1-9166-ef66398e4ba3?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand breakdown"></iframe></div>
-        <h3>Forehand</h3>
-        <p>A couple of changes to stop the power leaking.</p>
+<!-- MORE EXAMPLES -->
+<section class="block">
+  <div class="wrap">
+    <h2>More example breakdowns</h2>
+    <p class="sub">Pick the stroke you came to fix and watch a real analysis.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/1d2ddd55-ffdd-477c-a385-36a59afa1f94?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Backhand breakdown"></iframe></div>
+        <div class="cap"><h3>Backhand</h3><p>The two fixes that hold up under pressure.</p></div>
       </div>
-      <div class="breakdown-card reveal reveal-delay-2">
-        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/1d2ddd55-ffdd-477c-a385-36a59afa1f94?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Backhand breakdown"></iframe></div>
-        <h3>Backhand</h3>
-        <p>The two fixes that hold up under pressure.</p>
+      <div class="card">
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/ff1d4726-fcc3-4acd-8849-cec6f916a13f?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Serve breakdown"></iframe></div>
+        <div class="cap"><h3>Serve</h3><p>A couple of changes to the coil and contact point.</p></div>
       </div>
-      <div class="breakdown-card reveal reveal-delay-3">
-        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/ff1d4726-fcc3-4acd-8849-cec6f916a13f?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Serve breakdown"></iframe></div>
-        <h3>Serve</h3>
-        <p>A couple of changes to the coil and contact point.</p>
-      </div>
-      <div class="breakdown-card reveal reveal-delay-1">
-        <div class="video-wrap landscape"><iframe src="https://iframe.mediadelivery.net/embed/788439/fb4682ea-0817-496b-9f4c-89ceacb8d7cf?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Footwork breakdown"></iframe></div>
-        <h3>Footwork</h3>
-        <p>Moving earlier so every shot starts from a balanced base.</p>
+      <div class="card">
+        <div class="bunny"><iframe src="https://iframe.mediadelivery.net/embed/788439/fb4682ea-0817-496b-9f4c-89ceacb8d7cf?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Footwork breakdown"></iframe></div>
+        <div class="cap"><h3>Footwork</h3><p>Moving earlier so every shot starts from a balanced base.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="section-divider">
-
-<!-- ─── TESTIMONIALS ─── -->
-<section class="section" id="testimonials">
-  <div class="container">
-    <p class="section-label reveal">What players say</p>
-    <h2 class="section-title reveal">The analysis lands. Then it works.</h2>
-    <div style="height:32px"></div>
-
-    <div class="testi-anchor reveal">
-      <div class="short-frame">
-        <div class="video-wrap vertical"><iframe src="https://iframe.mediadelivery.net/embed/788439/67932339-c26d-4a5d-bd2a-928db146224a?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Player testimonial"></iframe></div>
-      </div>
-      <div class="cap">Hear it from a player</div>
-    </div>
-
-    <div class="testimonials">
-      <div class="testimonial-card reveal">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Wow, thank you so much! This was helpful. <b>Hadn't noticed that I wasn't using my hips properly</b>, as well as my wrist pronation occurring prior to uncoiling. Gonna try to keep those in mind."</p>
-        <div class="testimonial-author">
-          <div><div class="author-name">Luis Moore</div><div class="author-detail">Club player</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"The tips you gave me were excellent. Went to the court to work on opening my body earlier instead of all at once. <b>Felt a lot more power in my shots.</b>"</p>
-        <div class="testimonial-author">
-          <div><div class="author-name">Dimi Petrov</div><div class="author-detail">Club player</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Bro thank you for this! I already <b>watched this like 3 times</b> to take some notes. This is definitely gonna help me a ton. Thank you so much coach."</p>
-        <div class="testimonial-author">
-          <div><div class="author-name">Gavin Mens</div><div class="author-detail">Club player</div></div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-3">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"That was very detailed feedback. I have listed these points to change. <b>I will change one at a time</b> when I practice."</p>
-        <div class="testimonial-author">
-          <div><div class="author-name">Martin Gerard</div><div class="author-detail">Club player</div></div>
-        </div>
+<!-- BEFORE / AFTER -->
+<section class="block">
+  <div class="wrap">
+    <h2>One change. Visible difference.</h2>
+    <p class="sub">Same player, two weeks apart.</p>
+    <div class="transform">
+      <div class="vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/195c78d9-fe63-4151-ae49-01b494a980e6?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Forehand before and after"></iframe></div>
+      <div class="transform-copy">
+        <h3>This is what a couple of changes looks like.</h3>
+        <p>We found the faults, then fixed one at a time and let it settle before moving to the next.</p>
+        <p class="tag">No overhaul. Just the changes that mattered.</p>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="section-divider">
-
-<!-- ─── STATS + FOOTER ─── -->
-<footer class="footer">
-  <div class="container">
-    <div class="stats-row reveal">
-      <div class="stat-item"><span class="stat-number">200+</span><span class="stat-label">Players helped</span></div>
-      <div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">Tennis clubs worked with</span></div>
-      <div class="stat-item"><span class="stat-number">24-48h</span><span class="stat-label">Analysis turnaround</span></div>
-    </div>
-    <div style="height:40px"></div>
-    <div class="footer-signoff">Good luck, and enjoy your tennis.</div>
-    <div class="footer-bottom">
-      <div class="footer-logo">Aleks <span>Coach</span></div>
-      <p class="footer-legal">&copy; 2026 Aleks Coach &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></p>
+<!-- TESTIMONIALS -->
+<section class="block">
+  <div class="wrap">
+    <h2>The analysis lands. Then it works.</h2>
+    <p class="sub">What players said after their breakdown.</p>
+    <div class="testi-row">
+      <div class="testi-video">
+        <div class="vert"><iframe src="https://iframe.mediadelivery.net/embed/788439/67932339-c26d-4a5d-bd2a-928db146224a?autoplay=false&preload=false&responsive=true" loading="lazy" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Elior testimonial"></iframe></div>
+        <p>Elior</p>
+      </div>
+      <div class="revs">
+        <div class="rev"><div class="stars">★★★★★</div><p>"Wow, thank you so much! This was helpful. <b>Hadn't noticed that I wasn't using my hips properly</b>, as well as my wrist pronation occurring prior to uncoiling. Gonna try to keep those in mind."</p><div class="who">Luis Moore <span>· Club player</span></div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>"The tips you gave me were excellent. Went to the court to work on opening my body earlier instead of all at once. <b>Felt a lot more power in my shots.</b>"</p><div class="who">Dimi Petrov <span>· Club player</span></div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>"Bro thank you for this! I already <b>watched this like 3 times</b> to take some notes. This is definitely gonna help me a ton. Thank you so much coach."</p><div class="who">Gavin Mens <span>· Club player</span></div></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>"That was very detailed feedback. I have listed these points to change. <b>I will change one at a time</b> when I practice."</p><div class="who">Martin Gerard <span>· Club player</span></div></div>
+      </div>
     </div>
   </div>
-</footer>
+</section>
 
-<!-- ─── ALWAYS-VISIBLE STICKY SUBMIT ─── -->
-<div class="sticky-cta" role="complementary" aria-label="Submit your details">
-  <button type="button" class="btn-submit" onclick="scrollToForm()" aria-label="Submit your footage — scroll to form">
-    Get my analysis
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-  </button>
+<div class="stats">
+  <div class="stat"><b>200+</b><span>Players helped</span></div>
+  <div class="stat"><b>10+</b><span>Tennis clubs worked with</span></div>
+  <div class="stat"><b>24-48h</b><span>Analysis turnaround</span></div>
 </div>
 
+<div class="wrap">
+  <div class="cta">
+    <h2>Ready to see what's holding you back?</h2>
+    <p>It's free. Send a clip and I'll do the rest.</p>
+    <a class="btn btn-red" href="#form">Get my free analysis</a>
+  </div>
+</div>
+
+<footer>
+  Good luck, and enjoy your tennis.<br>
+  &copy; 2026 Aleks Coach &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a> &middot; <a href="/proof">Results</a>
+</footer>
+
+<div class="sticky"><a class="btn btn-red" href="#form" onclick="focusForm()">Get my free analysis</a></div>
+
 <script>
-// ─── Sticky header on scroll
-const header = document.getElementById('site-header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
-
-// ─── Reveal on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ─── Sticky CTA: scroll to form
-function scrollToForm() {
-  const form = document.getElementById('form');
-  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => {
-    const firstInput = form.querySelector('input[name="first_name"]');
-    if (firstInput) firstInput.focus({ preventScroll: true });
+function focusForm() {
+  setTimeout(function () {
+    var i = document.querySelector('input[name="first_name"]');
+    if (i) i.focus({ preventScroll: true });
   }, 600);
 }
 
-// ─── Client-side validation + Vercel API submission (UNCHANGED from your page)
+// Validation + Vercel API submission (same behaviour as before)
 (function(){
   const form = document.getElementById('analysis-form');
   if (!form) return;
@@ -442,11 +283,11 @@ function scrollToForm() {
   const footageInput = document.getElementById('f-footage');
   const emailError = document.getElementById('err-email');
   const footageError = document.getElementById('err-footage');
-  const submitBtn = form.querySelector('.btn-inline');
+  const submitBtn = form.querySelector('.submit');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const urlRegex = /^https?:\/\/.+\..+/i;
   function clearError(input, errorEl){ input.style.borderColor = ''; errorEl.classList.remove('visible'); }
-  function showError(input, errorEl){ input.style.borderColor = '#C1272D'; errorEl.classList.add('visible'); }
+  function showError(input, errorEl){ input.style.borderColor = '#c8102e'; errorEl.classList.add('visible'); }
   emailInput.addEventListener('input', () => clearError(emailInput, emailError));
   footageInput.addEventListener('input', () => clearError(footageInput, footageError));
   form.addEventListener('submit', async (e) => {
@@ -460,8 +301,7 @@ function scrollToForm() {
       return;
     }
     submitBtn.disabled = true;
-    const btnText = submitBtn.childNodes[0];
-    if (btnText) btnText.nodeValue = 'Sending... ';
+    submitBtn.textContent = 'Sending...';
     try {
       const formData = {
         first_name: form.querySelector('[name="first_name"]').value,
@@ -477,43 +317,21 @@ function scrollToForm() {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        // Remember the lead for the thanks page (no email in URL — privacy-safe)
         try {
           sessionStorage.setItem('aleksLead', JSON.stringify({
             email: formData.email, name: formData.first_name, stroke: formData.stroke
           }));
         } catch (e) {}
         window.location.href = '/thanks';
-      }
-      else { throw new Error('Submission failed'); }
+      } else { throw new Error('Submission failed'); }
     } catch (error) {
       console.error('Form error:', error);
       submitBtn.disabled = false;
-      if (btnText) btnText.nodeValue = 'Submit footage ';
+      submitBtn.textContent = 'Submit footage';
       alert('Something went wrong. Please try again or email contact@alekscoach.com');
     }
   });
 })();
-
-// ─── Videos: click to load YouTube embed (lazy, all videos on page)
-document.querySelectorAll('.video-wrap[data-yt]').forEach(wrap => {
-  function load() {
-    if (wrap.dataset.loaded) return;
-    wrap.dataset.loaded = '1';
-    const id = wrap.dataset.yt;
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('src', `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`);
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.setAttribute('title', 'Aleks Coach video');
-    const thumb = wrap.querySelector('.video-thumb');
-    if (thumb) thumb.replaceWith(iframe); else wrap.appendChild(iframe);
-  }
-  wrap.addEventListener('click', load);
-  wrap.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); }
-  });
-});
 </script>
 </body>
 </html>
