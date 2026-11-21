@@ -9,6 +9,9 @@ keyword: "main search phrase"
 topic: "serve"                      # serve, forehand, backhand, doubles, match-play, practice
 video: ""                           # Bunny video ID, shows at the top of the post
 videoTitle: ""                      # caption under the video
+# videoFile: "/blog/post-slug/video.mp4"   # use instead of video: if the clip is not on Bunny
+# videoPoster: "/blog/post-slug/poster.jpg"
+# videoVertical: true                       # for 9:16 phone videos
 image: ""                           # optional cover image, e.g. /blog/forehand-hit-late/cover.webp
 imageAlt: ""
 draft: true                         # true = hidden on the live site, delete the line to publish

@@ -11,12 +11,17 @@ import { bunnyEmbed } from '../lib/site'
 
 const ALLOW = 'accelerometer; gyroscope; encrypted-media; picture-in-picture; fullscreen'
 
-export function Video({ id, caption, vertical = false }) {
-  if (!id) return null
+// id = Bunny video ID. src = a video file in /public instead (e.g. /blog/slug/video.mp4).
+export function Video({ id, src, poster, caption, vertical = false }) {
+  if (!id && !src) return null
   return (
     <figure className={vertical ? 'post-video vert' : 'post-video'}>
       <div className="frame">
-        <iframe src={bunnyEmbed(id)} loading="lazy" allow={ALLOW} allowFullScreen title={caption || 'Video breakdown'} />
+        {id ? (
+          <iframe src={bunnyEmbed(id)} loading="lazy" allow={ALLOW} allowFullScreen title={caption || 'Video breakdown'} />
+        ) : (
+          <video src={src} poster={poster} controls playsInline preload="metadata" title={caption || 'Video breakdown'} />
+        )}
       </div>
       {caption && <figcaption>{caption}</figcaption>}
     </figure>

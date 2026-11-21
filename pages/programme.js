@@ -278,7 +278,6 @@ export default function Programme() {
           name="description"
           content="Six months of online tennis coaching. Full technical breakdowns, unlimited video reviews and match preparation, all through WhatsApp."
         />
-        <meta name="robots" content="noindex" />
       </Head>
 
       <main>

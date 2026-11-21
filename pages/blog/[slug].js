@@ -52,14 +52,16 @@ function buildSchema(post, url, shareImage) {
     },
   ]
 
-  if (post.video) {
+  if (post.video || post.videoFile) {
     graph.push({
       '@type': 'VideoObject',
       name: post.videoTitle || post.title,
       description: post.description || post.title,
-      thumbnailUrl: [bunnyThumb(post.video) || shareImage],
+      thumbnailUrl: [
+        (post.video && bunnyThumb(post.video)) || absolute(post.videoPoster) || shareImage,
+      ],
       uploadDate: post.date,
-      embedUrl: bunnyEmbed(post.video),
+      ...(post.video ? { embedUrl: bunnyEmbed(post.video) } : { contentUrl: absolute(post.videoFile) }),
     })
   }
 
@@ -137,7 +139,7 @@ export default function BlogPost({ post, mdxSource, related }) {
         .acb .post-video { margin: 0 0 24px; }
         .acb .post-video .frame { position: relative; aspect-ratio: 16 / 9; background: #08162b; border-radius: 10px; overflow: hidden; }
         .acb .post-video.vert .frame { aspect-ratio: 9 / 16; max-width: 340px; margin: 0 auto; }
-        .acb .post-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .acb .post-video iframe, .acb .post-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: contain; background: #08162b; }
         .acb figcaption { font-size: 14px; color: var(--muted); text-align: center; margin-top: 8px; }
         .acb .post-img { margin: 22px 0; }
         .acb .post-img img { width: 100%; height: auto; border-radius: 8px; display: block; }
@@ -208,7 +210,9 @@ export default function BlogPost({ post, mdxSource, related }) {
         <div className="wrap layout">
           <div>
             <article className="article">
-              {post.video && <Video id={post.video} caption={post.videoTitle} />}
+              {(post.video || post.videoFile) && (
+                <Video id={post.video} src={post.videoFile} poster={post.videoPoster} caption={post.videoTitle} vertical={post.videoVertical} />
+              )}
               <MDXRemote {...mdxSource} components={mdxComponents} />
               <FreeAnalysis />
             </article>

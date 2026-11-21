@@ -1,11 +1,11 @@
 // pages/sitemap.xml.js
 // Builds alekscoach.com/sitemap.xml automatically. New blog posts are added on every deploy.
-// /programme, /welcome, /c/ and /v/ pages are left out on purpose (they are set to noindex).
+// /welcome, /c/ and /v/ pages are left out on purpose (they are set to noindex).
 
 import { getAllPosts } from '../lib/posts'
 import { SITE_URL } from '../lib/site'
 
-const STATIC_PAGES = ['/', '/freeanalysis', '/offers', '/proof', '/blog']
+const STATIC_PAGES = ['/', '/programme', '/freeanalysis', '/offers', '/proof', '/blog']
 
 function buildXml(posts) {
   const today = new Date().toISOString().slice(0, 10)
