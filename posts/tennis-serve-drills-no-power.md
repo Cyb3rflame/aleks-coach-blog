@@ -3,6 +3,7 @@ title: "Tennis Serve Drills: Why You Have No Power and How to Fix It"
 date: "2026-04-07"
 description: "No power on your tennis serve? These serve drills fix the root mechanical cause, not the symptoms. Used with real players at 4.0 to 5.0 UTR level."
 keyword: "tennis serve drills"
+topic: "serve"
 ---
 
 ## The Problem
@@ -56,6 +57,8 @@ Two things, in this order.
 ⚡ When the leg drive is vertical, the rotation of your shoulders generates the forward power automatically. You will feel significantly less arm strain because the arm is no longer doing all the work alone.
 
 ---
+
+<FreeAnalysis title="Not sure which link is broken on your serve?" text="Send me a clip of your serve. I will send back a free 5 minute breakdown showing exactly where the power is leaking." />
 
 ## The Drills
 
